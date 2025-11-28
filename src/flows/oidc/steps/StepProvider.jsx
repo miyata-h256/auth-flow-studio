@@ -1,0 +1,57 @@
+import Layout from '../../../components/Layout.jsx';
+import ActionPanel from '../../../components/ActionPanel.jsx';
+import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
+
+export default function StepProvider({ onNext, onPrev }) {
+  return (
+    <Layout>
+      <ActionPanel title='Authorization Server (Provider)'>
+        <p>
+          ここは Google や Azure AD
+          などの認可サーバー側の画面をイメージしています。
+        </p>
+
+        <div className='mock-box'>
+          <p style={{ marginBottom: 8 }}>ログインフォーム（擬似）</p>
+          <input
+            className='mock-input'
+            placeholder='email@example.com'
+          />
+          <input
+            className='mock-input'
+            type='password'
+            placeholder='password'
+          />
+          <button
+            className='primary-button'
+            onClick={onNext}
+          >
+            ログイン & 同意する
+          </button>
+        </div>
+
+        <div style={{ marginTop: 12 }}>
+          <button
+            className='secondary-button'
+            onClick={onPrev}
+          >
+            ← 前のステップへ
+          </button>
+        </div>
+      </ActionPanel>
+
+      <ExplanationPanel title='Behind the Scenes'>
+        <ul>
+          <li>
+            ユーザーは Provider で認証されます（ID/Password や MFA など）。
+          </li>
+          <li>クライアントが要求した scope に対して、ユーザーが同意します。</li>
+          <li>
+            同意後、Authorization Code を付与して <code>redirect_uri</code>{' '}
+            にリダイレクトします。
+          </li>
+        </ul>
+      </ExplanationPanel>
+    </Layout>
+  );
+}
