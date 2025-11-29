@@ -62,20 +62,18 @@ export default function OidcFlow({ onBack }) {
         </button>
       </header>
 
+      {/* OIDCアニメーション付きフロー図 */}
+      <OidcFlowDiagram step={step} />
+
       <div
         style={{
           display: 'flex',
-          gap: '32px',
-          marginTop: '24px',
+          // gap: '32px',
+          // marginTop: '24px',
         }}
       >
-        {/* 左側：ステップUI */}
+        {/* ステップUI */}
         <div style={{ flex: 1 }}>{screens[step]}</div>
-
-        {/* 右側：OIDCアニメーション付きフロー図 */}
-        <div style={{ flex: 1 }}>
-          <OidcFlowDiagram step={step} />
-        </div>
       </div>
 
       <StepIndicator
