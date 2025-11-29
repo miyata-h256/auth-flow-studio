@@ -8,6 +8,7 @@ import StepRedirect from './steps/StepRedirect.jsx';
 import StepToken from './steps/StepToken.jsx';
 import StepSuccess from './steps/StepSuccess.jsx';
 import { OidcFlowDiagram } from './OidcFlowDiagram.jsx';
+import styles from '../styles/Flow.module.css';
 const STEP_LABELS = [
   'Client: 認証リクエスト作成',
   'Provider: ログイン / 同意',
@@ -40,8 +41,8 @@ export default function OidcFlow({ onBack }) {
   ];
 
   return (
-    <div className='flow-root'>
-      <header className='flow-header'>
+    <div className={styles['flow-root']}>
+      <header className={styles['flow-header']}>
         <button
           className='back-button'
           onClick={onBack}
@@ -50,7 +51,7 @@ export default function OidcFlow({ onBack }) {
         </button>
         <div>
           <h1>OIDC Code Flow</h1>
-          <p className='flow-subtitle'>
+          <p className={styles['flow-subtitle']}>
             OAuth2 / OIDC の典型的なコードフローを、画面と裏側の動きで追体験
           </p>
         </div>
@@ -68,8 +69,6 @@ export default function OidcFlow({ onBack }) {
       <div
         style={{
           display: 'flex',
-          // gap: '32px',
-          // marginTop: '24px',
         }}
       >
         {/* ステップUI */}

@@ -4,6 +4,7 @@ import StepIndicator from '../../components/StepIndicator.jsx';
 import StepRegister from './steps/StepRegister.jsx';
 import StepAuth from './steps/StepAuth.jsx';
 import StepDone from './steps/StepDone.jsx';
+import styles from '../styles/Flow.module.css';
 
 const STEP_LABELS = ['Passkey 登録', 'Passkey 認証', 'ログイン完了'];
 
@@ -23,8 +24,8 @@ export default function PasskeyFlow({ onBack }) {
   ];
 
   return (
-    <div className='flow-root'>
-      <header className='flow-header'>
+    <div className={styles['flow-root']}>
+      <header className={styles['flow-header']}>
         <button
           className='back-button'
           onClick={onBack}
@@ -33,7 +34,7 @@ export default function PasskeyFlow({ onBack }) {
         </button>
         <div>
           <h1>Passkey (WebAuthn)</h1>
-          <p className='flow-subtitle'>
+          <p className={styles['flow-subtitle']}>
             公開鍵暗号をベースにしたパスワードレス認証の流れをざっくり理解する
           </p>
         </div>

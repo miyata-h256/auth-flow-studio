@@ -5,6 +5,7 @@ import StepIndicator from '../../components/StepIndicator.jsx';
 import StepInput from './steps/StepInput.jsx';
 import StepInbox from './steps/StepInbox.jsx';
 import StepDone from './steps/StepDone.jsx';
+import styles from '../styles/Flow.module.css';
 
 const STEP_LABELS = ['メール送信', 'メール内リンクをクリック', 'ログイン完了'];
 
@@ -33,8 +34,8 @@ export default function MagicFlow({ onBack }) {
   ];
 
   return (
-    <div className='flow-root'>
-      <header className='flow-header'>
+    <div className={styles['flow-root']}>
+      <header className={styles['flow-header']}>
         <button
           className='back-button'
           onClick={onBack}
@@ -43,7 +44,7 @@ export default function MagicFlow({ onBack }) {
         </button>
         <div>
           <h1>Magic Link Login</h1>
-          <p className='flow-subtitle'>
+          <p className={styles['flow-subtitle']}>
             メールのワンタイムリンクでログインするフローを、擬似的に追体験
           </p>
         </div>
