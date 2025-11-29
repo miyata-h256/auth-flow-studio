@@ -7,7 +7,7 @@ import StepProvider from './steps/StepProvider.jsx';
 import StepRedirect from './steps/StepRedirect.jsx';
 import StepToken from './steps/StepToken.jsx';
 import StepSuccess from './steps/StepSuccess.jsx';
-import OidcFlowDiagram from './OidcFlowDiagram.jsx';
+import { OidcFlowDiagram } from './OidcFlowDiagram.jsx';
 const STEP_LABELS = [
   'Client: 認証リクエスト作成',
   'Provider: ログイン / 同意',

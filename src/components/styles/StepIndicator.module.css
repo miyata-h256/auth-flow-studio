@@ -1,0 +1,37 @@
+.step-indicator {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 16px;
+  font-size: 12px;
+}
+
+.step-indicator-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #6b7280;
+}
+
+.step-indicator-item--active {
+  color: #d1d5db;
+}
+
+.step-indicator-item--done {
+  color: #22c55e;
+}
+
+.step-indicator-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: #4b5563;
+}
+
+.step-indicator-item--active .step-indicator-dot {
+  background: #3b82f6;
+}
+
+.step-indicator-item--done .step-indicator-dot {
+  background: #22c55e;
+}

@@ -1,7 +1,7 @@
 import { AuthFlowSvg } from '../../components/AuthFlowSvg';
 import { AnimatedArrow } from '../../components/AnimatedArrow';
 
-export default function OidcFlowDiagram({ step }) {
+export function OidcFlowDiagram({ step }) {
   return (
     <AuthFlowSvg>
       <AnimatedArrow

@@ -1,0 +1,24 @@
+.panel {
+  border-radius: 12px;
+  border: 1px solid #1f2937;
+  padding: 16px;
+  background: #020617;
+}
+
+.panelAction {
+  background: radial-gradient(circle at top left, #111827, #020617);
+}
+
+.panelExplanation {
+  background: radial-gradient(circle at top right, #020617, #020617);
+}
+
+.panelTitle {
+  margin: 0 0 8px;
+  font-size: 16px;
+}
+
+.panelBody {
+  font-size: 14px;
+  color: #d1d5db;
+}

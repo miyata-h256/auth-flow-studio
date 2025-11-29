@@ -2,6 +2,7 @@ import { useState } from 'react';
 import OidcFlow from './flows/oidc/OidcFlow.jsx';
 import PasskeyFlow from './flows/passkey/PasskeyFlow.jsx';
 import MagicFlow from './flows/magic/MagicFlow.jsx';
+import './App.css';
 
 export default function App() {
   const [flow, setFlow] = useState(null);
