@@ -7,8 +7,8 @@ import StepProvider from './steps/StepProvider.jsx';
 import StepRedirect from './steps/StepRedirect.jsx';
 import StepToken from './steps/StepToken.jsx';
 import StepSuccess from './steps/StepSuccess.jsx';
-import { OidcFlowDiagram } from './OidcFlowDiagram.jsx';
 import styles from '../styles/Flow.module.css';
+import OidcFlowSvg from './OidcFlowSvg.jsx';
 const STEP_LABELS = [
   'Client: 認証リクエスト作成',
   'Provider: ログイン / 同意',
@@ -64,7 +64,7 @@ export default function OidcFlow({ onBack }) {
       </header>
 
       {/* OIDCアニメーション付きフロー図 */}
-      <OidcFlowDiagram step={step} />
+      <OidcFlowSvg activeStep={step + 6} />
 
       <div
         style={{
