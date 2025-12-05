@@ -1,6 +1,7 @@
 import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
+import styles from '../styles/StepProvider.module.css';
 
 export default function StepProvider({ onNext, onPrev }) {
   return (
@@ -11,14 +12,14 @@ export default function StepProvider({ onNext, onPrev }) {
           などの認可サーバー側の画面をイメージしています。
         </p>
 
-        <div className='mock-box'>
+        <div className={styles['mock-provider-login-form']}>
           <p style={{ marginBottom: 8 }}>ログインフォーム（擬似）</p>
           <input
-            className='mock-input'
+            className={styles['mock-email-input']}
             placeholder='email@example.com'
           />
           <input
-            className='mock-input'
+            className={styles['mock-password-input']}
             type='password'
             placeholder='password'
           />

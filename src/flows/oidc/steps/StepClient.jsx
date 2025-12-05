@@ -2,6 +2,7 @@ import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import { buildAuthRequest } from '../../../utils/oidcMock.js';
+import styles from '../styles/StepClient.module.css';
 
 const authReq = buildAuthRequest();
 
@@ -17,21 +18,26 @@ export default function StepClient({ onNext }) {
           Login with OIDC
         </button>
 
-        <div style={{ marginTop: 16 }}>
+        <div
+          style={{
+            marginTop: 16,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
           <h4>送信されるパラメータ（一部）</h4>
-          <code className='code-block'>
-            response_type=code
-            <br />
-            client_id={authReq.client_id}
-            <br />
-            redirect_uri={authReq.redirect_uri}
-            <br />
-            scope={authReq.scope}
-            <br />
-            state={authReq.state}
-            <br />
-            nonce={authReq.nonce}
-          </code>
+          <pre className={styles['code-block']}>
+            {`
+              {
+                response_type=code,
+                client_id=${authReq.client_id},
+                redirect_uri=${authReq.redirect_uri},
+                scope=${authReq.scope},
+                state=${authReq.state},
+                nonce=${authReq.nonce}
+              }`}
+          </pre>
         </div>
       </ActionPanel>
 

@@ -64,7 +64,7 @@ export default function OidcFlow({ onBack }) {
       </header>
 
       {/* OIDCアニメーション付きフロー図 */}
-      <OidcFlowSvg activeStep={step + 6} />
+      <OidcFlowSvg activeStep={step + 1} />
 
       <div
         style={{
