@@ -1,6 +1,7 @@
 import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
+import styles from '../styles/StepSuccess.module.css';
 
 export default function StepSuccess({ onNext, onPrev }) {
   return (
@@ -10,9 +11,9 @@ export default function StepSuccess({ onNext, onPrev }) {
           アプリケーション側では、ここで初めて「ログイン済みユーザー」として扱われます。
         </p>
 
-        <div className='mock-box'>
+        <div className={styles['mock-box']}>
           <p>ログイン状態（サンプル）</p>
-          <pre className='code-block'>
+          <pre className={styles['code-block']}>
             {JSON.stringify(
               {
                 isAuthenticated: true,

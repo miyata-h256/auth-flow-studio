@@ -7,27 +7,13 @@ import { decodeJwt } from '../../../utils/jwtDecode.js';
 const tokens = issueTokens();
 const decodedIdToken = decodeJwt(tokens.idToken);
 
-export default function StepToken({ onNext, onPrev }) {
+export default function StepTokenResponse({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='Token Endpoint'>
         <p>
-          バックエンドが Authorization Code を使って Token Endpoint
-          に問い合わせます。
+          Authentication ServerからアクセストークンとIDトークンが返されます。
         </p>
-
-        <div className='mock-box'>
-          <p>POST /token</p>
-          <code className='code-block'>
-            grant_type=authorization_code
-            <br />
-            code=AUTH_CODE_123
-            <br />
-            redirect_uri=https://app.example.com/callback
-            <br />
-            client_id=demo-client
-          </code>
-        </div>
 
         <div style={{ marginTop: 16 }}>
           <h4>レスポンス（サンプル）</h4>

@@ -5,15 +5,23 @@ import StepIndicator from '../../components/StepIndicator.jsx';
 import StepClient from './steps/StepClient.jsx';
 import StepProvider from './steps/StepProvider.jsx';
 import StepRedirect from './steps/StepRedirect.jsx';
-import StepToken from './steps/StepToken.jsx';
+import StepTokenRequest from './steps/StepTokenRequest.jsx';
+import StepTokenResponse from './steps/StepTokenResponse.jsx';
 import StepSuccess from './steps/StepSuccess.jsx';
 import styles from '../styles/Flow.module.css';
 import OidcFlowSvg from './OidcFlowSvg.jsx';
+import StepAuthorizationCodeRequest from './steps/StepAuthorizationCodeRequest.jsx';
+import StepRedirectToLogin from './steps/StepRedirectToLogin.jsx';
+import StepValidateAuthorizationCode from './steps/StepValidateAuthorizationCode.jsx';
 const STEP_LABELS = [
-  'Client: 認証リクエスト作成',
+  'User: OIDCログイン開始',
+  'Authorization Code Request: 認可コード要求',
+  'Redirect to Login: ログイン画面へリダイレクト',
   'Provider: ログイン / 同意',
   'Redirect: Code 受け取り',
-  'Token: トークン交換',
+  'Token Request: トークン要求',
+  'Validate Authorization Code: 認可コード検証',
+  'Token Response: Token取得',
   'App: ログイン完了',
 ];
 
@@ -22,6 +30,14 @@ export default function OidcFlow({ onBack }) {
 
   const screens = [
     <StepClient onNext={next} />,
+    <StepAuthorizationCodeRequest
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepRedirectToLogin
+      onNext={next}
+      onPrev={prev}
+    />,
     <StepProvider
       onNext={next}
       onPrev={prev}
@@ -30,7 +46,15 @@ export default function OidcFlow({ onBack }) {
       onNext={next}
       onPrev={prev}
     />,
-    <StepToken
+    <StepTokenRequest
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepValidateAuthorizationCode
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepTokenResponse
       onNext={next}
       onPrev={prev}
     />,
