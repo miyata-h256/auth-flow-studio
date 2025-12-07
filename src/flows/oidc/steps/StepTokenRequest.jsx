@@ -3,7 +3,7 @@ import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import { issueTokens } from '../../../utils/oidcMock.js';
 import { decodeJwt } from '../../../utils/jwtDecode.js';
-
+import styles from '../styles/StepTokenRequest.module.css';
 const tokens = issueTokens();
 const decodedIdToken = decodeJwt(tokens.idToken);
 
@@ -16,16 +16,19 @@ export default function StepTokenRequest({ onNext, onPrev }) {
           に問い合わせます。
         </p>
 
-        <div className='mock-box'>
+        <div className={styles['mock-box']}>
           <p>POST /token</p>
-          <code className='code-block'>
-            grant_type=authorization_code
-            <br />
-            code=AUTH_CODE_123
-            <br />
-            redirect_uri=https://app.example.com/callback
-            <br />
-            client_id=demo-client
+          <code className={styles['code-block']}>
+            {JSON.stringify(
+              {
+                grant_type: 'authorization_code',
+                code: 'AUTH_CODE_123',
+                redirect_uri: 'https://app.example.com/callback',
+                client_id: 'demo-client',
+              },
+              null,
+              2
+            )}
           </code>
         </div>
 
