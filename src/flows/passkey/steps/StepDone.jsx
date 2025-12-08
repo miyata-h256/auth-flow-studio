@@ -1,7 +1,7 @@
 import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
-
+import styles from '../styles/PasskeyFlow.module.css';
 export default function StepDone({ onNext, onPrev }) {
   return (
     <Layout>
@@ -10,9 +10,9 @@ export default function StepDone({ onNext, onPrev }) {
           署名の検証が成功すると、そのユーザーとしてログイン完了となります。
         </p>
 
-        <div className='mock-box'>
+        <div className={styles['mock-box']}>
           <p>ログイン状態（サンプル）</p>
-          <pre className='code-block'>
+          <pre className={styles['code-block']}>
             {JSON.stringify(
               {
                 isAuthenticated: true,

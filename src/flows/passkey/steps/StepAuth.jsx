@@ -2,7 +2,7 @@ import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import { signChallenge } from '../../../utils/passkeyMock.js';
-
+import styles from '../styles/PasskeyFlow.module.css';
 const signed = signChallenge();
 
 export default function StepAuth({ onNext, onPrev }) {
@@ -21,9 +21,14 @@ export default function StepAuth({ onNext, onPrev }) {
           </button>
         </div>
 
-        <div style={{ marginTop: 16 }}>
+        <div
+          className={styles['mock-box']}
+          style={{ marginTop: 16 }}
+        >
           <h4>サインされた challenge のイメージ</h4>
-          <pre className='code-block'>{JSON.stringify(signed, null, 2)}</pre>
+          <pre className={styles['code-block']}>
+            {JSON.stringify(signed, null, 2)}
+          </pre>
         </div>
 
         <div style={{ marginTop: 12 }}>
