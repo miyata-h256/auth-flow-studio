@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep.js';
 import StepIndicator from '../../components/StepIndicator.jsx';
 
@@ -9,6 +10,8 @@ import styles from '../styles/Flow.module.css';
 const STEP_LABELS = ['Passkey 登録', 'Passkey 認証', 'ログイン完了'];
 
 export default function PasskeyFlow({ onBack }) {
+  const navigate = useNavigate();
+  const handleBack = onBack || (() => navigate('/home'));
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
@@ -28,7 +31,7 @@ export default function PasskeyFlow({ onBack }) {
       <header className={styles['flow-header']}>
         <button
           className='back-button'
-          onClick={onBack}
+          onClick={handleBack}
         >
           ← 戻る
         </button>

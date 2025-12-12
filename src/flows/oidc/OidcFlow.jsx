@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep.js';
 
 import StepIndicator from '../../components/StepIndicator.jsx';
@@ -26,6 +27,8 @@ const STEP_LABELS = [
 ];
 
 export default function OidcFlow({ onBack }) {
+  const navigate = useNavigate();
+  const handleBack = onBack || (() => navigate('/home'));
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
@@ -69,7 +72,7 @@ export default function OidcFlow({ onBack }) {
       <header className={styles['flow-header']}>
         <button
           className='back-button'
-          onClick={onBack}
+          onClick={handleBack}
         >
           ← 戻る
         </button>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep.js';
 import StepIndicator from '../../components/StepIndicator.jsx';
 
@@ -10,6 +11,8 @@ import styles from '../styles/Flow.module.css';
 const STEP_LABELS = ['メール送信', 'メール内リンクをクリック', 'ログイン完了'];
 
 export default function MagicFlow({ onBack }) {
+  const navigate = useNavigate();
+  const handleBack = onBack || (() => navigate('/home'));
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
   const [email, setEmail] = useState('user@example.com');
   const [link, setLink] = useState('');
@@ -38,7 +41,7 @@ export default function MagicFlow({ onBack }) {
       <header className={styles['flow-header']}>
         <button
           className='back-button'
-          onClick={onBack}
+          onClick={handleBack}
         >
           ← 戻る
         </button>
