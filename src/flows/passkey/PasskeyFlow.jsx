@@ -6,6 +6,7 @@ import StepRegister from './steps/StepRegister.jsx';
 import StepAuth from './steps/StepAuth.jsx';
 import StepDone from './steps/StepDone.jsx';
 import styles from '../styles/Flow.module.css';
+import PasskeyFlowSvg from './PasskeyFlowSvg.jsx';
 
 const STEP_LABELS = ['Passkey 登録', 'Passkey 認証', 'ログイン完了'];
 
@@ -48,6 +49,8 @@ export default function PasskeyFlow({ onBack }) {
           リセット
         </button>
       </header>
+
+      <PasskeyFlowSvg activeStep={step + 1} />
 
       {screens[step]}
 
