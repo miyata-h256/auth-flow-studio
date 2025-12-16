@@ -2,7 +2,8 @@
 import styles from './styles/PasskeyFlowSvg.module.css';
 
 /**
- * Passkey フロー図（簡略SVG版）
+ * Passkey フロー図（SVG版）
+ * PasskeyFlow のステップ: 1-14
  *
  * props:
  *  - activeStep: ステップ番号（1-14）
@@ -15,7 +16,10 @@ export default function PasskeyFlowSvg({ activeStep }) {
       xmlns='http://www.w3.org/2000/svg'
     >
       <g>
-        {/* === 上段のノード群 ================================================== */}
+        {/* ====================================================================== */}
+        {/* ノード（参加者） */}
+        {/* ====================================================================== */}
+
         {/* User (top) */}
         <g>
           <rect
@@ -103,7 +107,6 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* === 下段のノード群 ================================================== */}
         {/* User (bottom) */}
         <g>
           <rect
@@ -191,7 +194,9 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* === Lifeline 的な縦線 ================================================ */}
+        {/* ====================================================================== */}
+        {/* Lifeline（縦線） */}
+        {/* ====================================================================== */}
         <line
           x1='70'
           y1='70'
@@ -222,10 +227,10 @@ export default function PasskeyFlowSvg({ activeStep }) {
         />
 
         {/* ====================================================================== */}
-        {/* ステップ矢印（Passkey登録フロー）                                     */}
+        {/* ステップ矢印 */}
         {/* ====================================================================== */}
 
-        {/* Step 1: User → Frontend (Click Register) */}
+        {/* Step 1: User → Frontend (「パスキーでログイン」クリック) */}
         <g
           data-step-arrow='1'
           className={`${styles.arrowGroup} ${
@@ -244,7 +249,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             y='115'
             className={styles.arrowLabel}
           >
-            Click Register
+            Click Login
           </text>
           <polygon
             className={styles.arrowHead}
@@ -252,7 +257,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           />
         </g>
 
-        {/* Step 2: Frontend → Backend (Registration Request) */}
+        {/* Step 2: Frontend → Backend (POST /webauthn/authenticate/begin) */}
         <g
           data-step-arrow='2'
           className={`${styles.arrowGroup} ${
@@ -271,7 +276,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             y='165'
             className={styles.arrowLabel}
           >
-            Registration Request
+            Authentication Begin
           </text>
           <polygon
             className={styles.arrowHead}
@@ -279,61 +284,61 @@ export default function PasskeyFlowSvg({ activeStep }) {
           />
         </g>
 
-        {/* Step 3: Backend → Authenticator (Create Passkey) */}
+        {/* Step 3: Backend → Frontend (PublicKeyCredentialRequestOptions) */}
         <g
           data-step-arrow='3'
           className={`${styles.arrowGroup} ${
-            activeStep === 3 ? styles.arrowRightActive : ''
+            activeStep === 3 ? styles.arrowLeftActive : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='745'
+            x1='660'
             y1='230'
-            x2='920'
+            x2='315'
             y2='230'
           />
           <text
-            x='832'
+            x='487'
             y='215'
             className={styles.arrowLabel}
           >
-            Create Passkey
+            Challenge Options
           </text>
           <polygon
             className={styles.arrowHead}
-            points='930,230 910,235 913,230 910,225'
+            points='305,230 325,225 322,230 325,235'
           />
         </g>
 
-        {/* Step 4: Authenticator → Backend (Public Key) */}
+        {/* Step 4: Frontend → Authenticator (credentials.get) */}
         <g
           data-step-arrow='4'
           className={`${styles.arrowGroup} ${
-            activeStep === 4 ? styles.arrowLeftActive : ''
+            activeStep === 4 ? styles.arrowRightActive : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='920'
+            x1='315'
             y1='280'
-            x2='745'
+            x2='920'
             y2='280'
           />
           <text
-            x='832'
+            x='617'
             y='265'
             className={styles.arrowLabel}
           >
-            Public Key
+            credentials.get()
           </text>
           <polygon
             className={styles.arrowHead}
-            points='735,280 755,275 752,280 755,285'
+            points='930,280 910,285 913,280 910,275'
           />
         </g>
 
-        {/* Step 5: Backend → Frontend (Registration Complete) */}
+        {/* Step 5: Authenticator → User (生体認証 / PIN 要求) */}
         <g
           data-step-arrow='5'
           className={`${styles.arrowGroup} ${
@@ -342,79 +347,79 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='660'
+            x1='920'
             y1='330'
-            x2='315'
+            x2='85'
             y2='330'
           />
           <text
-            x='487'
+            x='502'
             y='315'
             className={styles.arrowLabel}
           >
-            Registration Complete
+            Biometric / PIN Request
           </text>
           <polygon
             className={styles.arrowHead}
-            points='305,330 325,325 322,330 325,335'
+            points='75,330 95,325 92,330 95,335'
           />
         </g>
 
-        {/* Step 6: Frontend → User (Show Login Option) */}
+        {/* Step 6: User → Authenticator (認証OK) */}
         <g
           data-step-arrow='6'
           className={`${styles.arrowGroup} ${
-            activeStep === 6 ? styles.arrowLeftActive : ''
-          }`}
-        >
-          <line
-            className={styles.arrow}
-            x1='270'
-            y1='380'
-            x2='85'
-            y2='380'
-          />
-          <text
-            x='177'
-            y='365'
-            className={styles.arrowLabel}
-          >
-            Show Login Option
-          </text>
-          <polygon
-            className={styles.arrowHead}
-            points='75,380 95,375 92,380 95,385'
-          />
-        </g>
-
-        {/* Step 7: User → Frontend (Authenticate with Passkey) */}
-        <g
-          data-step-arrow='7'
-          className={`${styles.arrowGroup} ${
-            activeStep === 7 ? styles.arrowRightActive : ''
+            activeStep === 6 ? styles.arrowRightActive : ''
           }`}
         >
           <line
             className={styles.arrow}
             x1='85'
-            y1='580'
-            x2='270'
-            y2='580'
+            y1='380'
+            x2='920'
+            y2='380'
           />
           <text
-            x='177'
-            y='565'
+            x='502'
+            y='365'
             className={styles.arrowLabel}
           >
-            Authenticate
+            Authentication OK
           </text>
           <polygon
             className={styles.arrowHead}
-            points='280,580 260,585 263,580 260,575'
+            points='930,380 910,385 913,380 910,375'
           />
         </g>
 
-        {/* Step 8: Frontend → Backend (Verify Signature) */}
+        {/* Step 7: Authenticator → Frontend (assertion) */}
+        <g
+          data-step-arrow='7'
+          className={`${styles.arrowGroup} ${
+            activeStep === 7 ? styles.arrowLeftActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='920'
+            y1='430'
+            x2='315'
+            y2='430'
+          />
+          <text
+            x='617'
+            y='415'
+            className={styles.arrowLabel}
+          >
+            Assertion
+          </text>
+          <polygon
+            className={styles.arrowHead}
+            points='305,430 325,425 322,430 325,435'
+          />
+        </g>
+
+        {/* Step 8: Frontend → Backend (POST /webauthn/authenticate/complete) */}
         <g
           data-step-arrow='8'
           className={`${styles.arrowGroup} ${
@@ -424,28 +429,181 @@ export default function PasskeyFlowSvg({ activeStep }) {
           <line
             className={styles.arrow}
             x1='315'
-            y1='630'
+            y1='480'
             x2='660'
-            y2='630'
+            y2='480'
           />
           <text
             x='487'
-            y='615'
+            y='465'
+            className={styles.arrowLabel}
+          >
+            Authentication Complete
+          </text>
+          <polygon
+            className={styles.arrowHead}
+            points='670,480 650,485 653,480 650,475'
+          />
+        </g>
+
+        {/* Step 9: Backend → Backend (challenge 検証) */}
+        <g
+          data-step-arrow='9'
+          className={`${styles.arrowGroup} ${
+            activeStep === 9 ? styles.arrowRightActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='730'
+            y1='530'
+            x2='730'
+            y2='530'
+            strokeDasharray='5,5'
+          />
+          <text
+            x='765'
+            y='520'
+            className={styles.arrowLabel}
+          >
+            Verify Challenge
+          </text>
+        </g>
+
+        {/* Step 10: Backend → Backend (publicKey 検証) */}
+        <g
+          data-step-arrow='10'
+          className={`${styles.arrowGroup} ${
+            activeStep === 10 ? styles.arrowRightActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='730'
+            y1='575'
+            x2='730'
+            y2='575'
+            strokeDasharray='5,5'
+          />
+          <text
+            x='765'
+            y='565'
             className={styles.arrowLabel}
           >
             Verify Signature
           </text>
+        </g>
+
+        {/* Step 11: Backend → Backend (signCount チェック) */}
+        <g
+          data-step-arrow='11'
+          className={`${styles.arrowGroup} ${
+            activeStep === 11 ? styles.arrowRightActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='730'
+            y1='620'
+            x2='730'
+            y2='620'
+            strokeDasharray='5,5'
+          />
+          <text
+            x='765'
+            y='610'
+            className={styles.arrowLabel}
+          >
+            Check signCount
+          </text>
+        </g>
+
+        {/* Step 12: Backend → Frontend (認証成功 + セッション) */}
+        <g
+          data-step-arrow='12'
+          className={`${styles.arrowGroup} ${
+            activeStep === 12 ? styles.arrowLeftActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='660'
+            y1='680'
+            x2='315'
+            y2='680'
+          />
+          <text
+            x='487'
+            y='665'
+            className={styles.arrowLabel}
+          >
+            Session Token
+          </text>
           <polygon
             className={styles.arrowHead}
-            points='670,630 650,635 653,630 650,625'
+            points='305,680 325,675 322,680 325,685'
+          />
+        </g>
+
+        {/* Step 13: Frontend → User (ログイン完了画面) */}
+        <g
+          data-step-arrow='13'
+          className={`${styles.arrowGroup} ${
+            activeStep === 13 ? styles.arrowLeftActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='270'
+            y1='730'
+            x2='85'
+            y2='730'
+          />
+          <text
+            x='177'
+            y='715'
+            className={styles.arrowLabel}
+          >
+            Authenticated
+          </text>
+          <polygon
+            className={styles.arrowHead}
+            points='75,730 95,725 92,730 95,735'
+          />
+        </g>
+
+        {/* Step 14: Frontend → User (ログイン完了) */}
+        <g
+          data-step-arrow='14'
+          className={`${styles.arrowGroup} ${
+            activeStep === 14 ? styles.arrowRightActive : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='85'
+            y1='1000'
+            x2='270'
+            y2='1000'
+          />
+          <text
+            x='177'
+            y='985'
+            className={styles.arrowLabel}
+          >
+            Login Complete
+          </text>
+          <polygon
+            className={styles.arrowHead}
+            points='280,1000 260,1005 263,1000 260,995'
           />
         </g>
 
         {/* ====================================================================== */}
-        {/* ステップノード（番号サークル）                                         */}
+        {/* ステップノード（番号サークル） */}
         {/* ====================================================================== */}
 
-        {/* Step 1 circle */}
+        {/* Step 1 */}
         <g
           data-step-node='1'
           className={`${styles.stepGroup} ${
@@ -467,7 +625,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* Step 2 circle */}
+        {/* Step 2 */}
         <g
           data-step-node='2'
           className={`${styles.stepGroup} ${
@@ -489,7 +647,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* Step 3 circle */}
+        {/* Step 3 */}
         <g
           data-step-node='3'
           className={`${styles.stepGroup} ${
@@ -511,7 +669,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* Step 4 circle */}
+        {/* Step 4 */}
         <g
           data-step-node='4'
           className={`${styles.stepGroup} ${
@@ -520,20 +678,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='960'
+            cx='300'
             cy='280'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='960'
+            x='300'
             y='280'
           >
             4
           </text>
         </g>
 
-        {/* Step 5 circle */}
+        {/* Step 5 */}
         <g
           data-step-node='5'
           className={`${styles.stepGroup} ${
@@ -542,20 +700,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
+            cx='960'
             cy='330'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
+            x='960'
             y='330'
           >
             5
           </text>
         </g>
 
-        {/* Step 6 circle */}
+        {/* Step 6 */}
         <g
           data-step-node='6'
           className={`${styles.stepGroup} ${
@@ -564,20 +722,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
+            cx='70'
             cy='380'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
+            x='70'
             y='380'
           >
             6
           </text>
         </g>
 
-        {/* Step 7 circle */}
+        {/* Step 7 */}
         <g
           data-step-node='7'
           className={`${styles.stepGroup} ${
@@ -586,20 +744,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70'
-            cy='580'
+            cx='960'
+            cy='430'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70'
-            y='580'
+            x='960'
+            y='430'
           >
             7
           </text>
         </g>
 
-        {/* Step 8 circle */}
+        {/* Step 8 */}
         <g
           data-step-node='8'
           className={`${styles.stepGroup} ${
@@ -609,19 +767,19 @@ export default function PasskeyFlowSvg({ activeStep }) {
           <circle
             className={styles.stepCircle}
             cx='300'
-            cy='630'
+            cy='480'
             r='15'
           />
           <text
             className={styles.stepLabel}
             x='300'
-            y='630'
+            y='480'
           >
             8
           </text>
         </g>
 
-        {/* Step 9 circle */}
+        {/* Step 9 */}
         <g
           data-step-node='9'
           className={`${styles.stepGroup} ${
@@ -630,20 +788,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='655'
+            cx='730'
+            cy='530'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='655'
+            x='730'
+            y='530'
           >
             9
           </text>
         </g>
 
-        {/* Step 10 circle */}
+        {/* Step 10 */}
         <g
           data-step-node='10'
           className={`${styles.stepGroup} ${
@@ -653,19 +811,19 @@ export default function PasskeyFlowSvg({ activeStep }) {
           <circle
             className={styles.stepCircle}
             cx='730'
-            cy='725'
+            cy='575'
             r='15'
           />
           <text
             className={styles.stepLabel}
             x='730'
-            y='725'
+            y='575'
           >
             10
           </text>
         </g>
 
-        {/* Step 11 circle */}
+        {/* Step 11 */}
         <g
           data-step-node='11'
           className={`${styles.stepGroup} ${
@@ -675,19 +833,19 @@ export default function PasskeyFlowSvg({ activeStep }) {
           <circle
             className={styles.stepCircle}
             cx='730'
-            cy='815'
+            cy='620'
             r='15'
           />
           <text
             className={styles.stepLabel}
             x='730'
-            y='815'
+            y='620'
           >
             11
           </text>
         </g>
 
-        {/* Step 12 circle */}
+        {/* Step 12 */}
         <g
           data-step-node='12'
           className={`${styles.stepGroup} ${
@@ -697,19 +855,19 @@ export default function PasskeyFlowSvg({ activeStep }) {
           <circle
             className={styles.stepCircle}
             cx='730'
-            cy='905'
+            cy='680'
             r='15'
           />
           <text
             className={styles.stepLabel}
             x='730'
-            y='905'
+            y='680'
           >
             12
           </text>
         </g>
 
-        {/* Step 13 circle */}
+        {/* Step 13 */}
         <g
           data-step-node='13'
           className={`${styles.stepGroup} ${
@@ -718,20 +876,20 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='1005'
+            cx='300'
+            cy='730'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='1005'
+            x='300'
+            y='730'
           >
             13
           </text>
         </g>
 
-        {/* Step 14 circle */}
+        {/* Step 14 */}
         <g
           data-step-node='14'
           className={`${styles.stepGroup} ${
@@ -740,14 +898,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='1065'
+            cx='70'
+            cy='1000'
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='1065'
+            x='70'
+            y='1000'
           >
             14
           </text>
