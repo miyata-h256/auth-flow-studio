@@ -241,7 +241,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='85'
             y1='130'
-            x2='270'
+            x2='290'
             y2='130'
           />
           <text
@@ -253,7 +253,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='280,130 260,135 263,130 260,125'
+            points='300,130 277,135 280,130 277,125'
           />
         </g>
 
@@ -268,7 +268,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='315'
             y1='180'
-            x2='660'
+            x2='710'
             y2='180'
           />
           <text
@@ -280,7 +280,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='670,180 650,185 653,180 650,175'
+            points='730,180 710,185 713,180 710,175'
           />
         </g>
 
@@ -293,7 +293,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='660'
+            x1='715'
             y1='230'
             x2='315'
             y2='230'
@@ -307,7 +307,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='305,230 325,225 322,230 325,235'
+            points='300,230 320,225 317,230 320,235'
           />
         </g>
 
@@ -322,7 +322,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='315'
             y1='280'
-            x2='920'
+            x2='950'
             y2='280'
           />
           <text
@@ -334,7 +334,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='930,280 910,285 913,280 910,275'
+            points='960,280 940,285 943,280 940,275'
           />
         </g>
 
@@ -347,7 +347,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='920'
+            x1='945'
             y1='330'
             x2='85'
             y2='330'
@@ -361,7 +361,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='75,330 95,325 92,330 95,335'
+            points='70,330 90,325 87,330 90,335'
           />
         </g>
 
@@ -376,7 +376,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='85'
             y1='380'
-            x2='920'
+            x2='950'
             y2='380'
           />
           <text
@@ -388,7 +388,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='930,380 910,385 913,380 910,375'
+            points='960,380 940,385 943,380 940,375'
           />
         </g>
 
@@ -401,7 +401,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='920'
+            x1='945'
             y1='430'
             x2='315'
             y2='430'
@@ -415,7 +415,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='305,430 325,425 322,430 325,435'
+            points='300,430 320,425 318,430 320,435'
           />
         </g>
 
@@ -430,7 +430,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='315'
             y1='480'
-            x2='660'
+            x2='720'
             y2='480'
           />
           <text
@@ -442,7 +442,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='670,480 650,485 653,480 650,475'
+            points='730,480 705,485 710,480 705,475'
           />
         </g>
 
@@ -527,7 +527,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='660'
+            x1='715'
             y1='680'
             x2='315'
             y2='680'
@@ -541,7 +541,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='305,680 325,675 322,680 325,685'
+            points='300,680 320,675 317,680 320,685'
           />
         </g>
 
@@ -554,7 +554,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='270'
+            x1='285'
             y1='730'
             x2='85'
             y2='730'
@@ -568,7 +568,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='75,730 95,725 92,730 95,735'
+            points='70,730 90,725 87,730 90,735'
           />
         </g>
 
@@ -583,7 +583,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1='85'
             y1='1000'
-            x2='270'
+            x2='285'
             y2='1000'
           />
           <text
@@ -595,7 +595,7 @@ export default function PasskeyFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points='280,1000 260,1005 263,1000 260,995'
+            points='300,1000 280,1005 285,1000 280,995'
           />
         </g>
 
