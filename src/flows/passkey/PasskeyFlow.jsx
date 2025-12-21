@@ -3,12 +3,40 @@ import { useFlowStep } from '../../hooks/useFlowStep.js';
 import StepIndicator from '../../components/StepIndicator.jsx';
 
 import StepRegister from './steps/StepRegister.jsx';
-import StepAuth from './steps/StepAuth.jsx';
-import StepDone from './steps/StepDone.jsx';
+import Step1LoginClick from './steps/Step1LoginClick.jsx';
+import Step2AuthBegin from './steps/Step2AuthBegin.jsx';
+import Step3ChallengeOptions from './steps/Step3ChallengeOptions.jsx';
+import Step4CredentialsGet from './steps/Step4CredentialsGet.jsx';
+import Step5BiometricRequest from './steps/Step5BiometricRequest.jsx';
+import Step6AuthenticationOK from './steps/Step6AuthenticationOK.jsx';
+import Step7Assertion from './steps/Step7Assertion.jsx';
+import Step8AuthComplete from './steps/Step8AuthComplete.jsx';
+import Step9VerifyChallenge from './steps/Step9VerifyChallenge.jsx';
+import Step10VerifySignature from './steps/Step10VerifySignature.jsx';
+import Step11CheckSignCount from './steps/Step11CheckSignCount.jsx';
+import Step12SessionToken from './steps/Step12SessionToken.jsx';
+import Step13Authenticated from './steps/Step13Authenticated.jsx';
+import Step14LoginComplete from './steps/Step14LoginComplete.jsx';
 import styles from '../styles/Flow.module.css';
 import PasskeyFlowSvg from './PasskeyFlowSvg.jsx';
 
-const STEP_LABELS = ['Passkey 登録', 'Passkey 認証', 'ログイン完了'];
+const STEP_LABELS = [
+  'Passkey 登録',
+  'ログインクリック',
+  '認証開始',
+  'チャレンジ',
+  'credentials.get',
+  '生体認証',
+  '認証確認',
+  'Assertion',
+  '認証送信',
+  'チャレンジ検証',
+  '署名検証',
+  'signCount確認',
+  'トークン返却',
+  '認証確立',
+  'ログイン完了',
+];
 
 export default function PasskeyFlow({ onBack }) {
   const navigate = useNavigate();
@@ -17,12 +45,21 @@ export default function PasskeyFlow({ onBack }) {
 
   const screens = [
     <StepRegister onNext={next} />,
-    <StepAuth
-      onNext={next}
-      onPrev={prev}
-    />,
-    <StepDone
-      onNext={onBack}
+    <Step1LoginClick onNext={next} />,
+    <Step2AuthBegin onNext={next} />,
+    <Step3ChallengeOptions onNext={next} />,
+    <Step4CredentialsGet onNext={next} />,
+    <Step5BiometricRequest onNext={next} />,
+    <Step6AuthenticationOK onNext={next} />,
+    <Step7Assertion onNext={next} />,
+    <Step8AuthComplete onNext={next} />,
+    <Step9VerifyChallenge onNext={next} />,
+    <Step10VerifySignature onNext={next} />,
+    <Step11CheckSignCount onNext={next} />,
+    <Step12SessionToken onNext={next} />,
+    <Step13Authenticated onNext={next} />,
+    <Step14LoginComplete
+      onNext={handleBack}
       onPrev={prev}
     />,
   ];

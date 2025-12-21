@@ -1,0 +1,56 @@
+import Layout from '../../../components/Layout.jsx';
+import ActionPanel from '../../../components/ActionPanel.jsx';
+import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
+import styles from '../styles/PasskeyFlow.module.css';
+
+export default function Step13Authenticated({ onNext }) {
+  return (
+    <Layout>
+      <ActionPanel title='ステップ 13: 認証状態確立'>
+      <p>
+        フロントエンドがセッショントークンを保存し、
+        ユーザーが認証状態にあることを確認します。
+      </p>
+
+        <div className={styles['mock-box']}>
+          <h4>フロントエンドの状態</h4>
+          <pre className={styles['code-block']}>
+            {JSON.stringify(
+              {
+                isAuthenticated: true,
+                sessionToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6Ik...',
+                storedAt: 'localStorage',
+              },
+              null,
+              2
+            )}
+          </pre>
+        </div>
+      </ActionPanel>
+
+      <ExplanationPanel title='このステップで起こること'>
+        <ul>
+          <li>
+            フロントエンドがセッショントークンをローカルストレージなどに保存します。
+          </li>
+          <li>
+            今後のすべてのリクエストにこのトークンを含めることで、
+            認証状態を保つことができます。
+          </li>
+          <li>
+            ページをリロードしても、トークンを使って認証状態が復元されます。
+          </li>
+        </ul>
+      </ExplanationPanel>
+
+      <div style={{ marginTop: 12 }}>
+        <button
+          className='primary-button'
+          onClick={onNext}
+        >
+          次へ →
+        </button>
+      </div>
+    </Layout>
+  );
+}
