@@ -8,8 +8,8 @@ export default function Step7Assertion({ onNext }) {
     <Layout>
       <ActionPanel title='ステップ 7: Assertion（主張）の返却'>
         <p>
-          オーセンティケーターがチャレンジに署名した{' '}
-          <strong>Assertion</strong> をフロントエンドに返します。
+          オーセンティケーターがチャレンジに署名した <strong>Assertion</strong>{' '}
+          をフロントエンドに返します。
         </p>
 
         <div className={styles['mock-box']}>
@@ -41,11 +41,10 @@ export default function Step7Assertion({ onNext }) {
             <strong>authenticatorData</strong>: デバイス側の認証情報
           </li>
           <li>
-            <strong>clientDataJSON</strong>: クライアント側の情報（origin, challenge など）
+            <strong>clientDataJSON</strong>: クライアント側の情報（origin,
+            challenge など）
           </li>
-          <li>
-            この Assertion がサーバでの署名検証に使われます。
-          </li>
+          <li>この Assertion がサーバでの署名検証に使われます。</li>
         </ul>
       </ExplanationPanel>
 

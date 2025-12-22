@@ -7,10 +7,10 @@ export default function Step11CheckSignCount({ onNext }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 11: signCount チェック'>
-      <p>
-        バックエンドがオーセンティケーターの <strong>signCount</strong> を
-        確認し、複製品でないことを検証します。
-      </p>
+        <p>
+          バックエンドがオーセンティケーターの <strong>signCount</strong> を
+          確認し、複製品でないことを検証します。
+        </p>
 
         <div className={styles['mock-box']}>
           <h4>検証内容</h4>
@@ -33,7 +33,8 @@ export default function Step11CheckSignCount({ onNext }) {
       <ExplanationPanel title='このステップで起こること'>
         <ul>
           <li>
-            各オーセンティケーターは <strong>signCount</strong>（署名回数）を記録します。
+            各オーセンティケーターは <strong>signCount</strong>
+            （署名回数）を記録します。
           </li>
           <li>
             サーバが保存した signCount より大きければ、正規のデバイスです。

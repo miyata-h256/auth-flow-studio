@@ -38,15 +38,9 @@ export default function Step8AuthComplete({ onNext }) {
 
       <ExplanationPanel title='このステップで起こること'>
         <ul>
-          <li>
-            フロントエンドが Assertion をバックエンドに送ります。
-          </li>
-          <li>
-            バックエンドはこれから署名を検証し、ユーザーを認証します。
-          </li>
-          <li>
-            クライアント側の処理はここでほぼ完了です。
-          </li>
+          <li>フロントエンドが Assertion をバックエンドに送ります。</li>
+          <li>バックエンドはこれから署名を検証し、ユーザーを認証します。</li>
+          <li>クライアント側の処理はここでほぼ完了です。</li>
         </ul>
       </ExplanationPanel>
 

@@ -29,8 +29,8 @@ export default function Step6AuthenticationOK({ onNext }) {
           <li>デバイスは認証を確認しました。</li>
           <li>秘密鍵を使ってチャレンジに署名する準備ができました。</li>
           <li>
-            <strong>秘密鍵はデバイスから出ません</strong>
-            — デバイス内で署名が生成されます。
+            <strong>秘密鍵はデバイスから出ません</strong>—
+            デバイス内で署名が生成されます。
           </li>
         </ul>
       </ExplanationPanel>

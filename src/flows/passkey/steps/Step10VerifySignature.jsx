@@ -7,10 +7,10 @@ export default function Step10VerifySignature({ onNext }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 10: 署名検証'>
-      <p>
-        バックエンドが登録済みの <strong>公開鍵</strong> を使って
-        署名を検証します。
-      </p>
+        <p>
+          バックエンドが登録済みの <strong>公開鍵</strong> を使って
+          署名を検証します。
+        </p>
 
         <div className={styles['mock-box']}>
           <h4>検証内容</h4>

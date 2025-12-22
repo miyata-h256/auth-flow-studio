@@ -20,7 +20,9 @@ export default function Step1LoginClick({ onNext }) {
 
       <ExplanationPanel title='このステップで起こること'>
         <ul>
-          <li>フロントエンドアプリケーションがユーザーの操作を受け取ります。</li>
+          <li>
+            フロントエンドアプリケーションがユーザーの操作を受け取ります。
+          </li>
           <li>バックエンドに認証開始のリクエストを送る準備をします。</li>
         </ul>
       </ExplanationPanel>

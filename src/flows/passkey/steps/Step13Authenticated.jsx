@@ -7,10 +7,10 @@ export default function Step13Authenticated({ onNext }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 13: 認証状態確立'>
-      <p>
-        フロントエンドがセッショントークンを保存し、
-        ユーザーが認証状態にあることを確認します。
-      </p>
+        <p>
+          フロントエンドがセッショントークンを保存し、
+          ユーザーが認証状態にあることを確認します。
+        </p>
 
         <div className={styles['mock-box']}>
           <h4>フロントエンドの状態</h4>

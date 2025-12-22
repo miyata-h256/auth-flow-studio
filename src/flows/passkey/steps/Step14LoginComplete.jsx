@@ -7,10 +7,9 @@ export default function Step14LoginComplete({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 14: ログイン完了'>
-      <p>
-        パスキー認証フローが完了し、ユーザーが
-        ログインした状態になります。
-      </p>
+        <p>
+          パスキー認証フローが完了し、ユーザーが ログインした状態になります。
+        </p>
 
         <div className={styles['mock-box']}>
           <h4>ログイン完了状態</h4>
@@ -53,16 +52,11 @@ export default function Step14LoginComplete({ onNext, onPrev }) {
           <li>
             <strong>パスワードは一度も送信されていません。</strong>
           </li>
+          <li>秘密鍵は端末から出ません —署名のみが送られます。</li>
+          <li>公開鍵暗号により、非常に安全な認証が実現されています。</li>
           <li>
-            秘密鍵は端末から出ません —署名のみが送られます。
-          </li>
-          <li>
-            公開鍵暗号により、非常に安全な認証が実現されています。
-          </li>
-          <li>
-            複数のセキュリティチェック
-            (チャレンジ検証、署名検証、signCount チェック)
-            により、スプーフィング攻撃が防止されます。
+            複数のセキュリティチェック (チャレンジ検証、署名検証、signCount
+            チェック) により、スプーフィング攻撃が防止されます。
           </li>
         </ul>
       </ExplanationPanel>

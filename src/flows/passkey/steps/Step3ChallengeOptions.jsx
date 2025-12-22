@@ -39,7 +39,8 @@ export default function Step3ChallengeOptions({ onNext }) {
       <ExplanationPanel title='このステップで起こること'>
         <ul>
           <li>
-            バックエンドが生成した <strong>challenge</strong> がフロントエンドに送られます。
+            バックエンドが生成した <strong>challenge</strong>{' '}
+            がフロントエンドに送られます。
           </li>
           <li>
             <strong>challenge</strong> は一時的で、署名検証時に使われます。

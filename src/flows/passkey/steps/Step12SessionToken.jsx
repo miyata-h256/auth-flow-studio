@@ -7,10 +7,10 @@ export default function Step12SessionToken({ onNext }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 12: セッショントークン返却'>
-      <p>
-        すべての検証に成功しました。バックエンドがセッショントークン（JWT など）
-        をフロントエンドに返します。
-      </p>
+        <p>
+          すべての検証に成功しました。バックエンドがセッショントークン（JWT
+          など） をフロントエンドに返します。
+        </p>
 
         <div className={styles['mock-box']}>
           <h4>返却されるトークン</h4>
@@ -33,12 +33,8 @@ export default function Step12SessionToken({ onNext }) {
 
       <ExplanationPanel title='このステップで起こること'>
         <ul>
-          <li>
-            認証が成功し、ユーザーが確定されました。
-          </li>
-          <li>
-            セッショントークンがフロントエンドに返されます。
-          </li>
+          <li>認証が成功し、ユーザーが確定されました。</li>
+          <li>セッショントークンがフロントエンドに返されます。</li>
           <li>
             以降のリクエストでこのトークンを使い、認証状態を保つことができます。
           </li>

@@ -2,7 +2,6 @@ import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep.js';
 import StepIndicator from '../../components/StepIndicator.jsx';
 
-import StepRegister from './steps/StepRegister.jsx';
 import Step1LoginClick from './steps/Step1LoginClick.jsx';
 import Step2AuthBegin from './steps/Step2AuthBegin.jsx';
 import Step3ChallengeOptions from './steps/Step3ChallengeOptions.jsx';
@@ -21,7 +20,6 @@ import styles from '../styles/Flow.module.css';
 import PasskeyFlowSvg from './PasskeyFlowSvg.jsx';
 
 const STEP_LABELS = [
-  'Passkey 登録',
   'ログインクリック',
   '認証開始',
   'チャレンジ',
@@ -44,7 +42,6 @@ export default function PasskeyFlow({ onBack }) {
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
-    <StepRegister onNext={next} />,
     <Step1LoginClick onNext={next} />,
     <Step2AuthBegin onNext={next} />,
     <Step3ChallengeOptions onNext={next} />,
