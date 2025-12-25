@@ -1,0 +1,134 @@
+/* Step共通スタイル */
+
+.code-block {
+  display: block;
+  text-align: left;
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #1e1b4b;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #c4b5fd;
+  border: 1px solid #4c1d95;
+}
+
+.mock-box {
+  background: #1f1a2e;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.mock-box p {
+  margin: 0 0 8px 0;
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+.email-display {
+  display: inline-block;
+  background: #4c1d95;
+  color: #c4b5fd;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-family: monospace;
+}
+
+.token-display {
+  background: #1e293b;
+  border: 1px solid #475569;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-family: monospace;
+  font-size: 11px;
+  color: #94a3b8;
+  word-break: break-all;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.status-badge.success {
+  background: #064e3b;
+  color: #6ee7b7;
+}
+
+.status-badge.pending {
+  background: #713f12;
+  color: #fcd34d;
+}
+
+.status-badge.error {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.param-list {
+  list-style: none;
+  padding: 0;
+  margin: 8px 0;
+}
+
+.param-list li {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 4px;
+  font-size: 13px;
+}
+
+.param-key {
+  color: #a78bfa;
+  font-weight: 600;
+  min-width: 100px;
+}
+
+.param-value {
+  color: #e5e7eb;
+  word-break: break-all;
+}
+
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0;
+  color: #7c3aed;
+  font-size: 24px;
+}
+
+.endpoint-display {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.method-badge {
+  background: #7c3aed;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.method-badge.get {
+  background: #059669;
+}
+
+.method-badge.post {
+  background: #7c3aed;
+}
+
+.endpoint-url {
+  font-family: monospace;
+  font-size: 12px;
+  color: #c4b5fd;
+}
