@@ -3,11 +3,11 @@ import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import { issueTokens } from '../../../utils/oidcMock.js';
 import { decodeJwt } from '../../../utils/jwtDecode.js';
-
+import styles from '../styles/StepTokenRequest.module.css';
 const tokens = issueTokens();
 const decodedIdToken = decodeJwt(tokens.idToken);
 
-export default function StepToken({ onNext, onPrev }) {
+export default function StepTokenRequest({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='Token Endpoint'>
@@ -16,27 +16,19 @@ export default function StepToken({ onNext, onPrev }) {
           に問い合わせます。
         </p>
 
-        <div className='mock-box'>
+        <div className={styles['mock-box']}>
           <p>POST /token</p>
-          <code className='code-block'>
-            grant_type=authorization_code
-            <br />
-            code=AUTH_CODE_123
-            <br />
-            redirect_uri=https://app.example.com/callback
-            <br />
-            client_id=demo-client
-          </code>
-        </div>
-
-        <div style={{ marginTop: 16 }}>
-          <h4>レスポンス（サンプル）</h4>
-          <code className='code-block'>
-            access_token: {tokens.accessToken}
-            <br />
-            id_token: {tokens.idToken.slice(0, 40)}...
-            <br />
-            refresh_token: {tokens.refreshToken}
+          <code className={styles['code-block']}>
+            {JSON.stringify(
+              {
+                grant_type: 'authorization_code',
+                code: 'AUTH_CODE_123',
+                redirect_uri: 'https://app.example.com/callback',
+                client_id: 'demo-client',
+              },
+              null,
+              2
+            )}
           </code>
         </div>
 
@@ -51,7 +43,7 @@ export default function StepToken({ onNext, onPrev }) {
             className='primary-button'
             onClick={onNext}
           >
-            ログイン完了へ →
+            Authorization Code検証へ →
           </button>
         </div>
       </ActionPanel>

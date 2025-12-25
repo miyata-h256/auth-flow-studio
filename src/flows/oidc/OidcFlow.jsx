@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep.js';
 
 import StepIndicator from '../../components/StepIndicator.jsx';
@@ -5,22 +6,41 @@ import StepIndicator from '../../components/StepIndicator.jsx';
 import StepClient from './steps/StepClient.jsx';
 import StepProvider from './steps/StepProvider.jsx';
 import StepRedirect from './steps/StepRedirect.jsx';
-import StepToken from './steps/StepToken.jsx';
+import StepTokenRequest from './steps/StepTokenRequest.jsx';
+import StepTokenResponse from './steps/StepTokenResponse.jsx';
 import StepSuccess from './steps/StepSuccess.jsx';
-import { OidcFlowDiagram } from './OidcFlowDiagram.jsx';
+import styles from '../styles/Flow.module.css';
+import OidcFlowSvg from './OidcFlowSvg.jsx';
+import StepAuthorizationCodeRequest from './steps/StepAuthorizationCodeRequest.jsx';
+import StepRedirectToLogin from './steps/StepRedirectToLogin.jsx';
+import StepValidateAuthorizationCode from './steps/StepValidateAuthorizationCode.jsx';
 const STEP_LABELS = [
-  'Client: 認証リクエスト作成',
+  'User: OIDCログイン開始',
+  'Authorization Code Request: 認可コード要求',
+  'Redirect to Login: ログイン画面へリダイレクト',
   'Provider: ログイン / 同意',
   'Redirect: Code 受け取り',
-  'Token: トークン交換',
+  'Token Request: トークン要求',
+  'Validate Authorization Code: 認可コード検証',
+  'Token Response: Token取得',
   'App: ログイン完了',
 ];
 
-export default function OidcFlow({ onBack }) {
+export default function OidcFlow() {
+  const navigate = useNavigate();
+  const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
     <StepClient onNext={next} />,
+    <StepAuthorizationCodeRequest
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepRedirectToLogin
+      onNext={next}
+      onPrev={prev}
+    />,
     <StepProvider
       onNext={next}
       onPrev={prev}
@@ -29,28 +49,36 @@ export default function OidcFlow({ onBack }) {
       onNext={next}
       onPrev={prev}
     />,
-    <StepToken
+    <StepTokenRequest
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepValidateAuthorizationCode
+      onNext={next}
+      onPrev={prev}
+    />,
+    <StepTokenResponse
       onNext={next}
       onPrev={prev}
     />,
     <StepSuccess
-      onNext={onBack}
+      onNext={handleBack}
       onPrev={prev}
     />,
   ];
 
   return (
-    <div className='flow-root'>
-      <header className='flow-header'>
+    <div className={styles['flow-root']}>
+      <header className={styles['flow-header']}>
         <button
           className='back-button'
-          onClick={onBack}
+          onClick={handleBack}
         >
           ← 戻る
         </button>
         <div>
           <h1>OIDC Code Flow</h1>
-          <p className='flow-subtitle'>
+          <p className={styles['flow-subtitle']}>
             OAuth2 / OIDC の典型的なコードフローを、画面と裏側の動きで追体験
           </p>
         </div>
@@ -62,20 +90,16 @@ export default function OidcFlow({ onBack }) {
         </button>
       </header>
 
+      {/* OIDCアニメーション付きフロー図 */}
+      <OidcFlowSvg activeStep={step + 1} />
+
       <div
         style={{
           display: 'flex',
-          gap: '32px',
-          marginTop: '24px',
         }}
       >
-        {/* 左側：ステップUI */}
+        {/* ステップUI */}
         <div style={{ flex: 1 }}>{screens[step]}</div>
-
-        {/* 右側：OIDCアニメーション付きフロー図 */}
-        <div style={{ flex: 1 }}>
-          <OidcFlowDiagram step={step} />
-        </div>
       </div>
 
       <StepIndicator

@@ -2,7 +2,7 @@ import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import { generatePasskey } from '../../../utils/passkeyMock.js';
-
+import styles from '../styles/PasskeyFlow.module.css';
 const passkey = generatePasskey();
 
 export default function StepRegister({ onNext }) {
@@ -21,9 +21,14 @@ export default function StepRegister({ onNext }) {
           </button>
         </div>
 
-        <div style={{ marginTop: 16 }}>
+        <div
+          className={styles['mock-box']}
+          style={{ marginTop: 16 }}
+        >
           <h4>生成された情報（サンプル）</h4>
-          <pre className='code-block'>{JSON.stringify(passkey, null, 2)}</pre>
+          <pre className={styles['code-block']}>
+            {JSON.stringify(passkey, null, 2)}
+          </pre>
         </div>
       </ActionPanel>
 

@@ -1,0 +1,5 @@
+.code-block {
+  display: block;
+  text-align: left;
+  white-space: pre-wrap; /* 改行を維持しつつ折り返し可能 */
+}

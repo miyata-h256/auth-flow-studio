@@ -1,0 +1,146 @@
+/* Passkey Flow SVG Styles */
+
+.svgRoot {
+  width: 100%;
+  max-width: 1032px;
+  height: auto;
+  padding-top: 10px;
+}
+
+/* ノード（User / Frontend / Backend / Authenticator） */
+
+.nodeRect {
+  fill: #1f1a2e; /* ダークパープル */
+  stroke: #7c3aed; /* 薄い紫 */
+  stroke-width: 1.5;
+}
+
+.arrowLabel {
+  fill: #9ca3af; /* 中間のグレー */
+  font-size: 12px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.nodeLabel {
+  fill: #e5e7eb; /* 明るいグレー */
+  font-size: 14px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+/* Lifeline（縦線） */
+
+.lifeline {
+  stroke: #4b5563;
+  stroke-dasharray: 4 4;
+  stroke-width: 1;
+  opacity: 1;
+}
+
+/* 矢印関連 */
+
+.arrowGroup {
+  opacity: 0.4;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.arrow {
+  stroke: #7c3aed;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-width 0.25s ease, stroke 0.25s ease;
+}
+
+.arrowHead {
+  fill: #7c3aed;
+  transition: fill 0.25s ease;
+}
+
+/* ========================= */
+/* 一方向アニメーション      */
+/* ========================= */
+
+/* ---- 右向き（→）に流れる ---- */
+@keyframes arrowFlowRight {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+.arrowRightActive {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.arrowRightActive .arrow {
+  stroke: #c4b5fd;
+  stroke-width: 3;
+  stroke-dasharray: 8 4;
+  animation: arrowFlowRight 5s linear infinite;
+  filter: drop-shadow(0 0 6px #c084fc);
+}
+
+.arrowRightActive .arrowHead {
+  fill: #c4b5fd;
+}
+
+/* ---- 左向き（←）に流れる ---- */
+@keyframes arrowFlowLeft {
+  from {
+    stroke-dashoffset: 120;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.arrowLeftActive {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.arrowLeftActive .arrow {
+  stroke: #c4b5fd;
+  stroke-width: 3;
+  stroke-dasharray: 8 4;
+  animation: arrowFlowLeft 5s linear infinite;
+  filter: drop-shadow(0 0 6px #c084fc);
+}
+
+.arrowLeftActive .arrowHead {
+  fill: #c4b5fd;
+}
+
+/* ステップ番号の丸 */
+
+.stepGroup {
+  opacity: 0.6;
+  transform-origin: center;
+  transform-box: fill-box;
+  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+}
+
+.stepGroupActive {
+  opacity: 1;
+  transform: scale(1.15);
+  filter: drop-shadow(0 0 8px rgba(196, 181, 253, 0.9));
+}
+
+.stepCircle {
+  fill: #020617; /* ほぼ黒に近い背景 */
+  stroke: #7c3aed;
+  stroke-width: 1.5;
+}
+
+.stepLabel {
+  fill: #e5e7eb;
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
