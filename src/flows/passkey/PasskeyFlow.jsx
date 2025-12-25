@@ -36,9 +36,9 @@ const STEP_LABELS = [
   'ログイン完了',
 ];
 
-export default function PasskeyFlow({ onBack }) {
+export default function PasskeyFlow() {
   const navigate = useNavigate();
-  const handleBack = onBack || (() => navigate('/home'));
+  const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [

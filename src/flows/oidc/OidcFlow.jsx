@@ -26,9 +26,9 @@ const STEP_LABELS = [
   'App: ログイン完了',
 ];
 
-export default function OidcFlow({ onBack }) {
+export default function OidcFlow() {
   const navigate = useNavigate();
-  const handleBack = onBack || (() => navigate('/home'));
+  const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
@@ -62,7 +62,7 @@ export default function OidcFlow({ onBack }) {
       onPrev={prev}
     />,
     <StepSuccess
-      onNext={onBack}
+      onNext={handleBack}
       onPrev={prev}
     />,
   ];
