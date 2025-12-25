@@ -1,3 +1,7 @@
+/**
+ * @deprecated このコンポーネントは現在使用されていません。
+ * 将来的にPasskey登録フローを実装する際に使用される可能性があります。
+ */
 import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';

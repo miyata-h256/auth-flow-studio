@@ -1,6 +1,12 @@
-// import { motion } from 'motion/react';
+import { motion } from 'motion/react';
 
-export function AnimatedArrow({ d, active }) {
+/**
+ * アニメーション付き矢印コンポーネント
+ * @param {Object} props
+ * @param {string} props.d - SVGパスデータ
+ * @param {boolean} [props.active=false] - アクティブ状態
+ */
+export function AnimatedArrow({ d, active = false }) {
   return (
     <motion.path
       d={d}

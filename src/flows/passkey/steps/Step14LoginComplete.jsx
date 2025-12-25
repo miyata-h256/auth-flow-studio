@@ -3,6 +3,9 @@ import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import styles from '../styles/PasskeyFlow.module.css';
 
+// 固定のサンプル日時を使用（レンダリングごとに変わらないように）
+const SAMPLE_LOGIN_TIME = '2025-12-26T12:00:00.000Z';
+
 export default function Step14LoginComplete({ onNext, onPrev }) {
   return (
     <Layout>
@@ -23,7 +26,7 @@ export default function Step14LoginComplete({ onNext, onPrev }) {
                   email: 'user@example.com',
                   displayName: 'Passkey User',
                 },
-                loginTime: new Date().toISOString(),
+                loginTime: SAMPLE_LOGIN_TIME,
               },
               null,
               2
