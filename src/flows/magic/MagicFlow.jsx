@@ -43,9 +43,9 @@ const STEP_LABELS = [
   '⑰ ログイン完了',
 ];
 
-export default function MagicFlow({ onBack }) {
+export default function MagicFlow() {
   const navigate = useNavigate();
-  const handleBack = onBack || (() => navigate('/home'));
+  const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
   const [email, setEmail] = useState('user@example.com');
   const [link, setLink] = useState('');
