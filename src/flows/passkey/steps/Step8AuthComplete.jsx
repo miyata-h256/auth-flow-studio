@@ -34,6 +34,15 @@ export default function Step8AuthComplete({ onNext }) {
             )}
           </pre>
         </div>
+
+        <div style={{ marginTop: 12 }}>
+          <button
+            className='primary-button'
+            onClick={onNext}
+          >
+            次へ →
+          </button>
+        </div>
       </ActionPanel>
 
       <ExplanationPanel title='このステップで起こること'>
@@ -43,15 +52,6 @@ export default function Step8AuthComplete({ onNext }) {
           <li>クライアント側の処理はここでほぼ完了です。</li>
         </ul>
       </ExplanationPanel>
-
-      <div style={{ marginTop: 12 }}>
-        <button
-          className='primary-button'
-          onClick={onNext}
-        >
-          次へ →
-        </button>
-      </div>
     </Layout>
   );
 }

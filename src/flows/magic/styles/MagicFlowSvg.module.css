@@ -60,15 +60,6 @@
   transition: stroke-width 0.25s ease, stroke 0.25s ease;
 }
 
-.arrowDashed {
-  stroke: #7c3aed;
-  stroke-width: 2;
-  stroke-dasharray: 6 3;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  transition: stroke-width 0.25s ease, stroke 0.25s ease;
-}
-
 .arrowHead {
   fill: #7c3aed;
   transition: fill 0.25s ease;
@@ -233,5 +224,56 @@
 }
 
 .arrowLoopActive .arrowHead {
+  fill: #c4b5fd;
+}
+
+/* ================================================= */
+/* 双方向ループアニメーション（内部処理用）          */
+/* ================================================= */
+
+/* 上段：右向き（→）に流れる線（矢印なし） */
+.arrowLoopUp {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.arrowLoopUp .arrow,
+.arrowLoopUp .arrowDashed {
+  stroke-dasharray: 10 6;
+  animation: arrowFlowRightLoop 5s linear infinite;
+  stroke: #c4b5fd;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px #c084fc);
+}
+
+.arrowLoopUp .arrowHead {
+  fill: #c4b5fd;
+}
+
+/* 下段：左向き（←）に流れる線（矢印付き） */
+@keyframes arrowFlowLeftLoop {
+  from {
+    stroke-dashoffset: 0;
+  }
+  to {
+    stroke-dashoffset: 140;
+  }
+}
+
+.arrowLoopDown {
+  opacity: 1;
+  transform: translateY(0px);
+}
+
+.arrowLoopDown .arrow,
+.arrowLoopDown .arrowDashed {
+  stroke: #c4b5fd;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 6px #c084fc);
+  stroke-dasharray: 10 6;
+  animation: arrowFlowLeftLoop 5s linear infinite;
+}
+
+.arrowLoopDown .arrowHead {
   fill: #c4b5fd;
 }

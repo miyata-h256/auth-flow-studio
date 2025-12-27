@@ -1,13 +1,46 @@
-// src/components/AuthFlowSvg.jsx
+// src/flows/oidc/OidcFlowSvg.jsx
 import styles from './styles/OidcFlowSvg.module.css';
 
 /**
- * OIDC フロー図（簡略SVG版）
+ * OIDC フロー図（SVG版）
  *
  * props:
- *  - activeStep: 1〜10（それ以外なら全部非アクティブ）
+ *  - activeStep: 1〜8（それ以外なら全部非アクティブ）
+ *
+ * Participants (3):
+ *  - USER: User
+ *  - CLIENT: Client
+ *  - AUTH: Authentication Server
  */
 export default function OidcFlowSvg({ activeStep }) {
+  // X座標（各participantの中心）
+  const X = {
+    USER: 70.5, // User
+    CLIENT: 328, // Client
+    AUTH: 635, // Authentication Server
+  };
+
+  // ノードの幅・高さ
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 70;
+
+  // Y座標のベース
+  const Y_TOP = 0;
+  const Y_BOTTOM = 550;
+  const Y_LIFELINE_START = 70;
+
+  // ステップのY座標
+  const stepY = {
+    1: 125, // User → Client: Click oidc-login link
+    2: 165, // Client → Auth: Authorization Code Request
+    3: 215, // Auth → User: Redirect to login page
+    4: 265, // User → Auth: Authentication and Consent
+    5: 315, // Auth → Client: Authorization Code
+    6: 355, // Client → Auth: Code + Client Credentials
+    7: 405, // Auth internal: Validate Code + Credentials
+    8: 485, // Auth → Client: ID Token & Access Token
+  };
+
   return (
     <svg
       className={styles.svgRoot}
@@ -20,17 +53,17 @@ export default function OidcFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='0.5'
-            y='0'
-            width='140'
-            height='70'
+            x={X.USER - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='70.5'
-            y='37'
+            x={X.USER}
+            y={Y_TOP + 37}
           >
             User
           </text>
@@ -40,17 +73,17 @@ export default function OidcFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='258'
-            y='0'
-            width='140'
-            height='70'
+            x={X.CLIENT - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='328'
-            y='37'
+            x={X.CLIENT}
+            y={Y_TOP + 37}
           >
             Client
           </text>
@@ -60,45 +93,45 @@ export default function OidcFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='565'
-            y='0'
-            width='140'
-            height='70'
+            x={X.AUTH - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='635'
-            y='32'
+            x={X.AUTH}
+            y={Y_TOP + 32}
           >
             Authentication
           </text>
           <text
             className={styles.nodeLabel}
-            x='635'
-            y='48'
+            x={X.AUTH}
+            y={Y_TOP + 48}
           >
             Server
           </text>
         </g>
 
-        {/* === 下段のノード群（元SVGに合わせて） =============================== */}
+        {/* === 下段のノード群 ================================================== */}
         {/* User (bottom) */}
         <g>
           <rect
             className={styles.nodeRect}
-            x='0.5'
-            y='550'
-            width='140'
-            height='70'
+            x={X.USER - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='70.5'
-            y='587'
+            x={X.USER}
+            y={Y_BOTTOM + 37}
           >
             User
           </text>
@@ -108,17 +141,17 @@ export default function OidcFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='258'
-            y='550'
-            width='140'
-            height='70'
+            x={X.CLIENT - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='328'
-            y='587'
+            x={X.CLIENT}
+            y={Y_BOTTOM + 37}
           >
             Client
           </text>
@@ -128,54 +161,54 @@ export default function OidcFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='565'
-            y='550'
-            width='140'
-            height='70'
+            x={X.AUTH - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='635'
-            y='582'
+            x={X.AUTH}
+            y={Y_BOTTOM + 32}
           >
             Authentication
           </text>
           <text
             className={styles.nodeLabel}
-            x='635'
-            y='598'
+            x={X.AUTH}
+            y={Y_BOTTOM + 48}
           >
             Server
           </text>
         </g>
 
-        {/* === Lifeline 的な縦線（省略してもいいけど雰囲気用） ================= */}
+        {/* === Lifeline（縦線） =============================================== */}
         <line
-          x1='70.5'
-          y1='70'
-          x2='70.5'
-          y2='550'
+          x1={X.USER}
+          y1={Y_LIFELINE_START}
+          x2={X.USER}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
         <line
-          x1='328'
-          y1='70'
-          x2='328'
-          y2='550'
+          x1={X.CLIENT}
+          y1={Y_LIFELINE_START}
+          x2={X.CLIENT}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
         <line
-          x1='635'
-          y1='70'
-          x2='635'
-          y2='550'
+          x1={X.AUTH}
+          y1={Y_LIFELINE_START}
+          x2={X.AUTH}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
 
         {/* ====================================================================== */}
-        {/* 1〜10 の矢印（元SVGの座標をベースにした簡略版）                      */}
+        {/* ステップ矢印                                                           */}
         {/* ====================================================================== */}
 
         {/* Step 1: User → Client (Click oidc-login link) */}
@@ -187,21 +220,23 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='85'
-            y1='125'
-            x2='320'
-            y2='125'
+            x1={X.USER + 15}
+            y1={stepY[1]}
+            x2={X.CLIENT - 8}
+            y2={stepY[1]}
           />
           <text
-            x='199'
-            y='115'
+            x={(X.USER + X.CLIENT) / 2 - 2}
+            y={stepY[1] - 10}
             className={styles.arrowLabel}
           >
             Click oidc-login link
           </text>
           <polygon
             className={styles.arrowHead}
-            points='330,125 304,129 306,125 304,121'
+            points={`${X.CLIENT + 2},${stepY[1]} ${X.CLIENT - 24},${
+              stepY[1] + 4
+            } ${X.CLIENT - 22},${stepY[1]} ${X.CLIENT - 24},${stepY[1] - 4}`}
           />
         </g>
 
@@ -214,21 +249,23 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='343'
-            y1='165'
-            x2='625'
-            y2='165'
+            x1={X.CLIENT + 15}
+            y1={stepY[2]}
+            x2={X.AUTH - 10}
+            y2={stepY[2]}
           />
           <text
-            x='484'
-            y='155'
+            x={(X.CLIENT + X.AUTH) / 2 + 3}
+            y={stepY[2] - 10}
             className={styles.arrowLabel}
           >
             Authorization Code Request
           </text>
           <polygon
             className={styles.arrowHead}
-            points='635,165 611,169 613,165 611,161'
+            points={`${X.AUTH},${stepY[2]} ${X.AUTH - 24},${stepY[2] + 4} ${
+              X.AUTH - 22
+            },${stepY[2]} ${X.AUTH - 24},${stepY[2] - 4}`}
           />
         </g>
 
@@ -241,21 +278,23 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='620'
-            y1='215'
-            x2='95'
-            y2='215'
+            x1={X.AUTH - 15}
+            y1={stepY[3]}
+            x2={X.USER + 25}
+            y2={stepY[3]}
           />
           <text
-            x='352'
-            y='205'
+            x={(X.USER + X.AUTH) / 2}
+            y={stepY[3] - 10}
             className={styles.arrowLabel}
           >
             Redirect to login page
           </text>
           <polygon
             className={styles.arrowHead}
-            points='70,215 94,211 92,215 94,219'
+            points={`${X.USER},${stepY[3]} ${X.USER + 24},${stepY[3] - 4} ${
+              X.USER + 22
+            },${stepY[3]} ${X.USER + 24},${stepY[3] + 4}`}
           />
         </g>
 
@@ -268,21 +307,23 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='85'
-            y1='265'
-            x2='620'
-            y2='265'
+            x1={X.USER + 15}
+            y1={stepY[4]}
+            x2={X.AUTH - 15}
+            y2={stepY[4]}
           />
           <text
-            x='352'
-            y='255'
+            x={(X.USER + X.AUTH) / 2}
+            y={stepY[4] - 10}
             className={styles.arrowLabel}
           >
             Authentication and Consent
           </text>
           <polygon
             className={styles.arrowHead}
-            points='635,265 611,269 613,265 611,261'
+            points={`${X.AUTH},${stepY[4]} ${X.AUTH - 24},${stepY[4] + 4} ${
+              X.AUTH - 22
+            },${stepY[4]} ${X.AUTH - 24},${stepY[4] - 4}`}
           />
         </g>
 
@@ -295,21 +336,23 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='620'
-            y1='315'
-            x2='343'
-            y2='315'
+            x1={X.AUTH - 15}
+            y1={stepY[5]}
+            x2={X.CLIENT + 15}
+            y2={stepY[5]}
           />
           <text
-            x='484'
-            y='305'
+            x={(X.CLIENT + X.AUTH) / 2 + 3}
+            y={stepY[5] - 10}
             className={styles.arrowLabel}
           >
             Authorization Code
           </text>
           <polygon
             className={styles.arrowHead}
-            points='330,315 352,311 350,315 352,319'
+            points={`${X.CLIENT + 2},${stepY[5]} ${X.CLIENT + 24},${
+              stepY[5] - 4
+            } ${X.CLIENT + 22},${stepY[5]} ${X.CLIENT + 24},${stepY[5] + 4}`}
           />
         </g>
 
@@ -322,25 +365,28 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='343'
-            y1='355'
-            x2='620'
-            y2='355'
+            x1={X.CLIENT + 15}
+            y1={stepY[6]}
+            x2={X.AUTH - 15}
+            y2={stepY[6]}
           />
           <text
-            x='484'
-            y='345'
+            x={(X.CLIENT + X.AUTH) / 2 + 3}
+            y={stepY[6] - 10}
             className={styles.arrowLabel}
           >
             Authorizatioon Code for Application Credentials
           </text>
           <polygon
             className={styles.arrowHead}
-            points='635,355 611,359 613,355 611,351'
+            points={`${X.AUTH},${stepY[6]} ${X.AUTH - 24},${stepY[6] + 4} ${
+              X.AUTH - 22
+            },${stepY[6]} ${X.AUTH - 24},${stepY[6] - 4}`}
           />
         </g>
 
         {/* Step 7: Auth Server 内の検証 (Validate Code + Credentials) */}
+        {/* 上段：右向きの線 */}
         <g
           data-step-arrow='7'
           className={`${styles.arrowGroup} ${
@@ -349,16 +395,17 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='580'
-            y1='388'
-            x2='635'
-            y2='388'
+            x1={X.AUTH - 55}
+            y1={stepY[7] - 17}
+            x2={X.AUTH}
+            y2={stepY[7] - 17}
           />
 
+          {/* 内部処理ボックス */}
           <rect
             className={styles.nodeRect}
-            x='547'
-            y='380'
+            x={X.AUTH - 88}
+            y={stepY[7] - 25}
             width='30'
             height='50'
             rx='5.5'
@@ -367,23 +414,23 @@ export default function OidcFlowSvg({ activeStep }) {
 
           <text
             className={styles.arrowLabel}
-            x='450'
-            y='390'
+            x={X.AUTH - 185}
+            y={stepY[7] - 15}
           >
             <tspan
-              x='450'
+              x={X.AUTH - 185}
               dy='0'
             >
               Validatet Authorizatioon Code
             </tspan>
             <tspan
-              x='450'
+              x={X.AUTH - 185}
               dy='16'
             >
               +
             </tspan>
             <tspan
-              x='450'
+              x={X.AUTH - 185}
               dy='16'
             >
               Client Credentials
@@ -391,7 +438,7 @@ export default function OidcFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* 下段：左向きのループ */}
+        {/* 下段：左向きの矢印 */}
         <g
           data-step-arrow='7'
           className={`${styles.arrowGroup} ${
@@ -400,14 +447,16 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='585'
-            y1='423'
-            x2='635'
-            y2='423'
+            x1={X.AUTH - 50}
+            y1={stepY[7] + 18}
+            x2={X.AUTH}
+            y2={stepY[7] + 18}
           />
           <polygon
             className={styles.arrowHead}
-            points='580,423 589,427 587,423 589,419'
+            points={`${X.AUTH - 55},${stepY[7] + 18} ${X.AUTH - 46},${
+              stepY[7] + 22
+            } ${X.AUTH - 48},${stepY[7] + 18} ${X.AUTH - 46},${stepY[7] + 14}`}
           />
         </g>
 
@@ -420,26 +469,28 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='620'
-            y1='485'
-            x2='343'
-            y2='485'
+            x1={X.AUTH - 15}
+            y1={stepY[8]}
+            x2={X.CLIENT + 15}
+            y2={stepY[8]}
           />
           <text
-            x='484'
-            y='475'
+            x={(X.CLIENT + X.AUTH) / 2 + 3}
+            y={stepY[8] - 10}
             className={styles.arrowLabel}
           >
             ID Token & Access Token
           </text>
           <polygon
             className={styles.arrowHead}
-            points='330,485 352,481 350,485 352,489'
+            points={`${X.CLIENT + 2},${stepY[8]} ${X.CLIENT + 24},${
+              stepY[8] - 4
+            } ${X.CLIENT + 22},${stepY[8]} ${X.CLIENT + 24},${stepY[8] + 4}`}
           />
         </g>
 
         {/* ====================================================================== */}
-        {/* 1〜8 の番号ノード                                                      */}
+        {/* ステップノード（番号サークル）                                          */}
         {/* ====================================================================== */}
 
         {/* Step 1 circle */}
@@ -451,14 +502,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70.5'
-            cy='125'
+            cx={X.USER}
+            cy={stepY[1]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70.5'
-            y='125'
+            x={X.USER}
+            y={stepY[1]}
           >
             1
           </text>
@@ -473,14 +524,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='328'
-            cy='165'
+            cx={X.CLIENT}
+            cy={stepY[2]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='328'
-            y='165'
+            x={X.CLIENT}
+            y={stepY[2]}
           >
             2
           </text>
@@ -495,14 +546,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='635'
-            cy='215'
+            cx={X.AUTH}
+            cy={stepY[3]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='635'
-            y='215'
+            x={X.AUTH}
+            y={stepY[3]}
           >
             3
           </text>
@@ -517,14 +568,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70.5'
-            cy='265'
+            cx={X.USER}
+            cy={stepY[4]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70.5'
-            y='265'
+            x={X.USER}
+            y={stepY[4]}
           >
             4
           </text>
@@ -539,14 +590,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='635'
-            cy='315'
+            cx={X.AUTH}
+            cy={stepY[5]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='635'
-            y='315'
+            x={X.AUTH}
+            y={stepY[5]}
           >
             5
           </text>
@@ -561,14 +612,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='328'
-            cy='355'
+            cx={X.CLIENT}
+            cy={stepY[6]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='328'
-            y='355'
+            x={X.CLIENT}
+            y={stepY[6]}
           >
             6
           </text>
@@ -583,14 +634,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='635'
-            cy='405'
+            cx={X.AUTH}
+            cy={stepY[7]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='635'
-            y='405'
+            x={X.AUTH}
+            y={stepY[7]}
           >
             7
           </text>
@@ -605,14 +656,14 @@ export default function OidcFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='635'
-            cy='485'
+            cx={X.AUTH}
+            cy={stepY[8]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='635'
-            y='485'
+            x={X.AUTH}
+            y={stepY[8]}
           >
             8
           </text>

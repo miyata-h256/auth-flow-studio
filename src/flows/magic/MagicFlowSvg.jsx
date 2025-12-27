@@ -19,13 +19,12 @@ import styles from './styles/MagicFlowSvg.module.css';
 export default function MagicFlowSvg({ activeStep }) {
   // X座標（各participantの中心）
   const X = {
-    U: 70, // User
-    FE: 190, // Frontend
-    API: 330, // API
-    DB: 470, // User DB
-    MAIL: 610, // Email Service
-    S: 750, // Token Store
-    APP: 890, // App
+    U: 140, // User
+    FE: 260, // Frontend
+    API: 400, // API
+    DB: 570, // User DB
+    MAIL: 680, // Email Service
+    S: 820, // Token Store
   };
 
   // Y座標のベース
@@ -217,33 +216,6 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* App */}
-        <g>
-          <rect
-            className={styles.nodeRect}
-            x={X.APP - 50}
-            y={Y_TOP}
-            width='100'
-            height='60'
-            rx='8'
-            ry='8'
-          />
-          <text
-            className={styles.nodeLabel}
-            x={X.APP}
-            y={Y_TOP + 25}
-          >
-            App
-          </text>
-          <text
-            className={styles.nodeLabelSmall}
-            x={X.APP}
-            y={Y_TOP + 42}
-          >
-            (JWT Issuer)
-          </text>
-        </g>
-
         {/* === 下段のノード群 ================================================== */}
 
         {/* User (bottom) */}
@@ -366,26 +338,6 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
         </g>
 
-        {/* App (bottom) */}
-        <g>
-          <rect
-            className={styles.nodeRect}
-            x={X.APP - 50}
-            y={Y_BOTTOM}
-            width='100'
-            height='35'
-            rx='8'
-            ry='8'
-          />
-          <text
-            className={styles.nodeLabel}
-            x={X.APP}
-            y={Y_BOTTOM + 20}
-          >
-            App
-          </text>
-        </g>
-
         {/* === Lifeline（縦線） =============================================== */}
         <line
           x1={X.U}
@@ -429,13 +381,6 @@ export default function MagicFlowSvg({ activeStep }) {
           y2={Y_BOTTOM}
           className={styles.lifeline}
         />
-        <line
-          x1={X.APP}
-          y1={Y_LIFELINE_START}
-          x2={X.APP}
-          y2={Y_BOTTOM}
-          className={styles.lifeline}
-        />
 
         {/* === Note: ① メールアドレス入力 ===================================== */}
         <g>
@@ -470,7 +415,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.U + 15}
             y1={stepY[1]}
-            x2={X.FE - 15}
+            x2={X.FE - 10}
             y2={stepY[1]}
           />
           <text
@@ -482,9 +427,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.FE - 10},${stepY[1]} ${X.FE - 22},${stepY[1] - 4} ${
-              X.FE - 20
-            },${stepY[1]} ${X.FE - 22},${stepY[1] + 4}`}
+            points={`${X.FE - 2},${stepY[1]} ${X.FE - 14},${stepY[1] - 4} ${
+              X.FE - 12
+            },${stepY[1]} ${X.FE - 14},${stepY[1] + 4}`}
           />
         </g>
 
@@ -501,7 +446,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.FE + 15}
             y1={stepY[2]}
-            x2={X.API - 15}
+            x2={X.API - 10}
             y2={stepY[2]}
           />
           <text
@@ -513,9 +458,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API - 10},${stepY[2]} ${X.API - 22},${stepY[2] - 4} ${
-              X.API - 20
-            },${stepY[2]} ${X.API - 22},${stepY[2] + 4}`}
+            points={`${X.API - 2},${stepY[2]} ${X.API - 14},${stepY[2] - 4} ${
+              X.API - 12
+            },${stepY[2]} ${X.API - 14},${stepY[2] + 4}`}
           />
         </g>
 
@@ -532,7 +477,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.API + 15}
             y1={stepY[3]}
-            x2={X.DB - 15}
+            x2={X.DB - 10}
             y2={stepY[3]}
           />
           <text
@@ -544,9 +489,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.DB - 10},${stepY[3]} ${X.DB - 22},${stepY[3] - 4} ${
-              X.DB - 20
-            },${stepY[3]} ${X.DB - 22},${stepY[3] + 4}`}
+            points={`${X.DB - 2},${stepY[3]} ${X.DB - 14},${stepY[3] - 4} ${
+              X.DB - 12
+            },${stepY[3]} ${X.DB - 14},${stepY[3] + 4}`}
           />
         </g>
 
@@ -560,10 +505,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.DB - 15}
             y1={stepY[4]}
-            x2={X.API + 15}
+            x2={X.API + 10}
             y2={stepY[4]}
           />
           <text
@@ -575,9 +520,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API + 10},${stepY[4]} ${X.API + 22},${stepY[4] - 4} ${
-              X.API + 20
-            },${stepY[4]} ${X.API + 22},${stepY[4] + 4}`}
+            points={`${X.API + 2},${stepY[4]} ${X.API + 14},${stepY[4] - 4} ${
+              X.API + 12
+            },${stepY[4]} ${X.API + 14},${stepY[4] + 4}`}
           />
         </g>
 
@@ -614,7 +559,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.API + 15}
             y1={stepY[5]}
-            x2={X.S - 15}
+            x2={X.S - 10}
             y2={stepY[5]}
           />
           <text
@@ -626,9 +571,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.S - 10},${stepY[5]} ${X.S - 22},${stepY[5] - 4} ${
-              X.S - 20
-            },${stepY[5]} ${X.S - 22},${stepY[5] + 4}`}
+            points={`${X.S - 2},${stepY[5]} ${X.S - 14},${stepY[5] - 4} ${
+              X.S - 12
+            },${stepY[5]} ${X.S - 14},${stepY[5] + 4}`}
           />
         </g>
 
@@ -642,10 +587,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.S - 15}
             y1={stepY[6]}
-            x2={X.API + 15}
+            x2={X.API + 10}
             y2={stepY[6]}
           />
           <text
@@ -657,9 +602,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API + 10},${stepY[6]} ${X.API + 22},${stepY[6] - 4} ${
-              X.API + 20
-            },${stepY[6]} ${X.API + 22},${stepY[6] + 4}`}
+            points={`${X.API + 2},${stepY[6]} ${X.API + 14},${stepY[6] - 4} ${
+              X.API + 12
+            },${stepY[6]} ${X.API + 14},${stepY[6] + 4}`}
           />
         </g>
 
@@ -696,7 +641,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.API + 15}
             y1={stepY[7]}
-            x2={X.MAIL - 15}
+            x2={X.MAIL - 10}
             y2={stepY[7]}
           />
           <text
@@ -708,9 +653,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.MAIL - 10},${stepY[7]} ${X.MAIL - 22},${
-              stepY[7] - 4
-            } ${X.MAIL - 20},${stepY[7]} ${X.MAIL - 22},${stepY[7] + 4}`}
+            points={`${X.MAIL - 2},${stepY[7]} ${X.MAIL - 14},${stepY[7] - 4} ${
+              X.MAIL - 12
+            },${stepY[7]} ${X.MAIL - 14},${stepY[7] + 4}`}
           />
         </g>
 
@@ -724,10 +669,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.MAIL - 15}
             y1={stepY[8]}
-            x2={X.API + 15}
+            x2={X.API + 10}
             y2={stepY[8]}
           />
           <text
@@ -739,9 +684,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API + 10},${stepY[8]} ${X.API + 22},${stepY[8] - 4} ${
-              X.API + 20
-            },${stepY[8]} ${X.API + 22},${stepY[8] + 4}`}
+            points={`${X.API + 2},${stepY[8]} ${X.API + 14},${stepY[8] - 4} ${
+              X.API + 12
+            },${stepY[8]} ${X.API + 14},${stepY[8] + 4}`}
           />
         </g>
 
@@ -755,10 +700,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.API - 15}
             y1={stepY[9]}
-            x2={X.FE + 15}
+            x2={X.FE + 10}
             y2={stepY[9]}
           />
           <text
@@ -770,9 +715,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.FE + 10},${stepY[9]} ${X.FE + 22},${stepY[9] - 4} ${
-              X.FE + 20
-            },${stepY[9]} ${X.FE + 22},${stepY[9] + 4}`}
+            points={`${X.FE + 2},${stepY[9]} ${X.FE + 14},${stepY[9] - 4} ${
+              X.FE + 12
+            },${stepY[9]} ${X.FE + 14},${stepY[9] + 4}`}
           />
         </g>
 
@@ -786,10 +731,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.FE - 15}
             y1={stepY[10]}
-            x2={X.U + 15}
+            x2={X.U + 10}
             y2={stepY[10]}
           />
           <text
@@ -801,9 +746,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.U + 10},${stepY[10]} ${X.U + 22},${stepY[10] - 4} ${
-              X.U + 20
-            },${stepY[10]} ${X.U + 22},${stepY[10] + 4}`}
+            points={`${X.U + 2},${stepY[10]} ${X.U + 14},${stepY[10] - 4} ${
+              X.U + 12
+            },${stepY[10]} ${X.U + 14},${stepY[10] + 4}`}
           />
         </g>
 
@@ -840,7 +785,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.U + 15}
             y1={stepY[11]}
-            x2={X.MAIL - 15}
+            x2={X.MAIL - 10}
             y2={stepY[11]}
           />
           <text
@@ -852,9 +797,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.MAIL - 10},${stepY[11]} ${X.MAIL - 22},${
+            points={`${X.MAIL - 2},${stepY[11]} ${X.MAIL - 14},${
               stepY[11] - 4
-            } ${X.MAIL - 20},${stepY[11]} ${X.MAIL - 22},${stepY[11] + 4}`}
+            } ${X.MAIL - 12},${stepY[11]} ${X.MAIL - 14},${stepY[11] + 4}`}
           />
         </g>
 
@@ -871,7 +816,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.U + 15}
             y1={stepY[12]}
-            x2={X.FE - 15}
+            x2={X.FE - 10}
             y2={stepY[12]}
           />
           <text
@@ -883,9 +828,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.FE - 10},${stepY[12]} ${X.FE - 22},${stepY[12] - 4} ${
-              X.FE - 20
-            },${stepY[12]} ${X.FE - 22},${stepY[12] + 4}`}
+            points={`${X.FE - 2},${stepY[12]} ${X.FE - 14},${stepY[12] - 4} ${
+              X.FE - 12
+            },${stepY[12]} ${X.FE - 14},${stepY[12] + 4}`}
           />
         </g>
 
@@ -922,7 +867,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.FE + 15}
             y1={stepY[13]}
-            x2={X.API - 15}
+            x2={X.API - 10}
             y2={stepY[13]}
           />
           <text
@@ -934,9 +879,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API - 10},${stepY[13]} ${X.API - 22},${
-              stepY[13] - 4
-            } ${X.API - 20},${stepY[13]} ${X.API - 22},${stepY[13] + 4}`}
+            points={`${X.API - 2},${stepY[13]} ${X.API - 14},${stepY[13] - 4} ${
+              X.API - 12
+            },${stepY[13]} ${X.API - 14},${stepY[13] + 4}`}
           />
         </g>
 
@@ -953,7 +898,7 @@ export default function MagicFlowSvg({ activeStep }) {
             className={styles.arrow}
             x1={X.API + 15}
             y1={stepY[14]}
-            x2={X.S - 15}
+            x2={X.S - 10}
             y2={stepY[14]}
           />
           <text
@@ -965,9 +910,9 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.S - 10},${stepY[14]} ${X.S - 22},${stepY[14] - 4} ${
-              X.S - 20
-            },${stepY[14]} ${X.S - 22},${stepY[14] + 4}`}
+            points={`${X.S - 2},${stepY[14]} ${X.S - 14},${stepY[14] - 4} ${
+              X.S - 12
+            },${stepY[14]} ${X.S - 14},${stepY[14] + 4}`}
           />
         </g>
 
@@ -981,10 +926,10 @@ export default function MagicFlowSvg({ activeStep }) {
           }`}
         >
           <line
-            className={styles.arrowDashed}
+            className={styles.arrow}
             x1={X.S - 15}
             y1={stepY[15]}
-            x2={X.API + 15}
+            x2={X.API + 10}
             y2={stepY[15]}
           />
           <text
@@ -996,52 +941,78 @@ export default function MagicFlowSvg({ activeStep }) {
           </text>
           <polygon
             className={styles.arrowHead}
-            points={`${X.API + 10},${stepY[15]} ${X.API + 22},${
-              stepY[15] - 4
-            } ${X.API + 20},${stepY[15]} ${X.API + 22},${stepY[15] + 4}`}
+            points={`${X.API + 2},${stepY[15]} ${X.API + 14},${stepY[15] - 4} ${
+              X.API + 12
+            },${stepY[15]} ${X.API + 14},${stepY[15] + 4}`}
           />
         </g>
 
         {/* ====================================================================== */}
         {/* Step 16: API internal (hash検証 / 期限確認 / used確認)                */}
         {/* ====================================================================== */}
+
+        {/* 上段：右向きの線（API → 内部処理ボックス） */}
         <g
           data-step-arrow='16'
           className={`${styles.arrowGroup} ${
-            activeStep === 16 ? styles.arrowLoopActive : ''
+            activeStep === 16 ? styles.arrowLoopUp : ''
           }`}
         >
-          {/* Self-referencing arrow for API internal processing */}
+          <line
+            className={styles.arrow}
+            x1={X.API - 40}
+            y1={stepY[16] - 13}
+            x2={X.API}
+            y2={stepY[16] - 13}
+          />
+
+          {/* 内部処理ボックス */}
           <rect
             className={styles.nodeRect}
-            x={X.API - 30}
-            y={stepY[16] - 12}
+            x={X.API - 65}
+            y={stepY[16] - 18}
             width='25'
-            height='40'
+            height='36'
             rx='4'
             ry='4'
           />
-          <line
-            className={styles.arrow}
-            x1={X.API - 10}
-            y1={stepY[16]}
-            x2={X.API + 10}
-            y2={stepY[16]}
-          />
+
           <text
             x={X.API + 90}
-            y={stepY[16]}
+            y={stepY[16] - 4}
             className={styles.arrowLabel}
           >
             hash(token)一致確認
           </text>
           <text
             x={X.API + 90}
-            y={stepY[16] + 12}
+            y={stepY[16] + 10}
             className={styles.arrowLabel}
           >
             期限確認 / used=false確認
           </text>
+        </g>
+
+        {/* 下段：左向きの矢印（内部処理ボックス → API） */}
+        <g
+          data-step-arrow='16'
+          className={`${styles.arrowGroup} ${
+            activeStep === 16 ? styles.arrowLoopDown : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1={X.API - 35}
+            y1={stepY[16] + 13}
+            x2={X.API}
+            y2={stepY[16] + 13}
+          />
+          <polygon
+            className={styles.arrowHead}
+            points={`${X.API - 40},${stepY[16] + 13} ${X.API - 31},${
+              stepY[16] + 17
+            } ${X.API - 33},${stepY[16] + 13} ${X.API - 31},${stepY[16] + 9}`}
+          />
         </g>
 
         {/* ====================================================================== */}

@@ -25,6 +25,15 @@ export default function Step4CredentialsGet({ onNext }) {
 })`}
           </pre>
         </div>
+
+        <div style={{ marginTop: 12 }}>
+          <button
+            className='primary-button'
+            onClick={onNext}
+          >
+            次へ →
+          </button>
+        </div>
       </ActionPanel>
 
       <ExplanationPanel title='このステップで起こること'>
@@ -39,15 +48,6 @@ export default function Step4CredentialsGet({ onNext }) {
           <li>この API は非同期で、ユーザーの操作を待ちます。</li>
         </ul>
       </ExplanationPanel>
-
-      <div style={{ marginTop: 12 }}>
-        <button
-          className='primary-button'
-          onClick={onNext}
-        >
-          次へ →
-        </button>
-      </div>
     </Layout>
   );
 }

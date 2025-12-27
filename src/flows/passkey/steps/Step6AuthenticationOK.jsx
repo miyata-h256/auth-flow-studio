@@ -22,6 +22,15 @@ export default function Step6AuthenticationOK({ onNext }) {
             )}
           </pre>
         </div>
+
+        <div style={{ marginTop: 12 }}>
+          <button
+            className='primary-button'
+            onClick={onNext}
+          >
+            次へ →
+          </button>
+        </div>
       </ActionPanel>
 
       <ExplanationPanel title='このステップで起こること'>
@@ -34,15 +43,6 @@ export default function Step6AuthenticationOK({ onNext }) {
           </li>
         </ul>
       </ExplanationPanel>
-
-      <div style={{ marginTop: 12 }}>
-        <button
-          className='primary-button'
-          onClick={onNext}
-        >
-          次へ →
-        </button>
-      </div>
     </Layout>
   );
 }

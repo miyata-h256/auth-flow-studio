@@ -3,12 +3,52 @@ import styles from './styles/PasskeyFlowSvg.module.css';
 
 /**
  * Passkey フロー図（SVG版）
- * PasskeyFlow のステップ: 1-14
  *
  * props:
- *  - activeStep: ステップ番号（1-14）
+ *  - activeStep: 1〜14（それ以外なら全部非アクティブ）
+ *
+ * Participants (4):
+ *  - USER: User
+ *  - FE: Frontend (Client)
+ *  - BE: Backend
+ *  - AUTH: Authenticator
  */
 export default function PasskeyFlowSvg({ activeStep }) {
+  // X座標（各participantの中心）
+  const X = {
+    USER: 70, // User
+    FE: 300, // Frontend (Client)
+    BE: 730, // Backend
+    AUTH: 960, // Authenticator
+  };
+
+  // ノードの幅・高さ
+  const NODE_WIDTH = 140;
+  const NODE_HEIGHT = 70;
+
+  // Y座標のベース
+  const Y_TOP = 0;
+  const Y_BOTTOM = 1110;
+  const Y_LIFELINE_START = 70;
+
+  // ステップのY座標
+  const stepY = {
+    1: 130, // User → FE: Click Login
+    2: 180, // FE → BE: Authentication Begin
+    3: 230, // BE → FE: Challenge Options
+    4: 280, // FE → AUTH: credentials.get()
+    5: 330, // AUTH → User: Biometric / PIN Request
+    6: 380, // User → AUTH: Authentication OK
+    7: 430, // AUTH → FE: Assertion
+    8: 480, // FE → BE: Authentication Complete
+    9: 530, // BE internal: Verify Challenge
+    10: 575, // BE internal: Verify Signature
+    11: 620, // BE internal: Check signCount
+    12: 680, // BE → FE: Session Token
+    13: 730, // FE → User: Authenticated
+    14: 1000, // User → FE: Login Complete
+  };
+
   return (
     <svg
       className={styles.svgRoot}
@@ -24,17 +64,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='0'
-            y='0'
-            width='140'
-            height='70'
+            x={X.USER - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='70'
-            y='37'
+            x={X.USER}
+            y={Y_TOP + 37}
           >
             User
           </text>
@@ -44,24 +84,24 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='230'
-            y='0'
-            width='140'
-            height='70'
+            x={X.FE - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='300'
-            y='25'
+            x={X.FE}
+            y={Y_TOP + 25}
           >
             Frontend
           </text>
           <text
             className={styles.nodeLabel}
-            x='300'
-            y='45'
+            x={X.FE}
+            y={Y_TOP + 45}
           >
             (Client)
           </text>
@@ -71,17 +111,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='660'
-            y='0'
-            width='140'
-            height='70'
+            x={X.BE - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='730'
-            y='37'
+            x={X.BE}
+            y={Y_TOP + 37}
           >
             Backend
           </text>
@@ -91,17 +131,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='890'
-            y='0'
-            width='140'
-            height='70'
+            x={X.AUTH - NODE_WIDTH / 2}
+            y={Y_TOP}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='960'
-            y='37'
+            x={X.AUTH}
+            y={Y_TOP + 37}
           >
             Authenticator
           </text>
@@ -111,17 +151,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='0'
-            y='1110'
-            width='140'
-            height='70'
+            x={X.USER - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='70'
-            y='1147'
+            x={X.USER}
+            y={Y_BOTTOM + 37}
           >
             User
           </text>
@@ -131,24 +171,24 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='230'
-            y='1110'
-            width='140'
-            height='70'
+            x={X.FE - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='300'
-            y='1135'
+            x={X.FE}
+            y={Y_BOTTOM + 25}
           >
             Frontend
           </text>
           <text
             className={styles.nodeLabel}
-            x='300'
-            y='1155'
+            x={X.FE}
+            y={Y_BOTTOM + 45}
           >
             (Client)
           </text>
@@ -158,17 +198,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='660'
-            y='1110'
-            width='140'
-            height='70'
+            x={X.BE - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='730'
-            y='1147'
+            x={X.BE}
+            y={Y_BOTTOM + 37}
           >
             Backend
           </text>
@@ -178,17 +218,17 @@ export default function PasskeyFlowSvg({ activeStep }) {
         <g>
           <rect
             className={styles.nodeRect}
-            x='890'
-            y='1110'
-            width='140'
-            height='70'
+            x={X.AUTH - NODE_WIDTH / 2}
+            y={Y_BOTTOM}
+            width={NODE_WIDTH}
+            height={NODE_HEIGHT}
             rx='10.5'
             ry='10.5'
           />
           <text
             className={styles.nodeLabel}
-            x='960'
-            y='1147'
+            x={X.AUTH}
+            y={Y_BOTTOM + 37}
           >
             Authenticator
           </text>
@@ -198,31 +238,31 @@ export default function PasskeyFlowSvg({ activeStep }) {
         {/* Lifeline（縦線） */}
         {/* ====================================================================== */}
         <line
-          x1='70'
-          y1='70'
-          x2='70'
-          y2='1110'
+          x1={X.USER}
+          y1={Y_LIFELINE_START}
+          x2={X.USER}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
         <line
-          x1='300'
-          y1='70'
-          x2='300'
-          y2='1110'
+          x1={X.FE}
+          y1={Y_LIFELINE_START}
+          x2={X.FE}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
         <line
-          x1='730'
-          y1='70'
-          x2='730'
-          y2='1110'
+          x1={X.BE}
+          y1={Y_LIFELINE_START}
+          x2={X.BE}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
         <line
-          x1='960'
-          y1='70'
-          x2='960'
-          y2='1110'
+          x1={X.AUTH}
+          y1={Y_LIFELINE_START}
+          x2={X.AUTH}
+          y2={Y_BOTTOM}
           className={styles.lifeline}
         />
 
@@ -239,21 +279,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='85'
-            y1='130'
-            x2='290'
-            y2='130'
+            x1={X.USER + 15}
+            y1={stepY[1]}
+            x2={X.FE - 10}
+            y2={stepY[1]}
           />
           <text
-            x='177'
-            y='115'
+            x={(X.USER + X.FE) / 2 - 8}
+            y={stepY[1] - 15}
             className={styles.arrowLabel}
           >
             Click Login
           </text>
           <polygon
             className={styles.arrowHead}
-            points='300,130 277,135 280,130 277,125'
+            points={`${X.FE},${stepY[1]} ${X.FE - 23},${stepY[1] + 5} ${
+              X.FE - 20
+            },${stepY[1]} ${X.FE - 23},${stepY[1] - 5}`}
           />
         </g>
 
@@ -266,21 +308,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='315'
-            y1='180'
-            x2='710'
-            y2='180'
+            x1={X.FE + 15}
+            y1={stepY[2]}
+            x2={X.BE - 20}
+            y2={stepY[2]}
           />
           <text
-            x='487'
-            y='165'
+            x={(X.FE + X.BE) / 2 - 28}
+            y={stepY[2] - 15}
             className={styles.arrowLabel}
           >
             Authentication Begin
           </text>
           <polygon
             className={styles.arrowHead}
-            points='730,180 710,185 713,180 710,175'
+            points={`${X.BE},${stepY[2]} ${X.BE - 20},${stepY[2] + 5} ${
+              X.BE - 17
+            },${stepY[2]} ${X.BE - 20},${stepY[2] - 5}`}
           />
         </g>
 
@@ -293,21 +337,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='715'
-            y1='230'
-            x2='315'
-            y2='230'
+            x1={X.BE - 15}
+            y1={stepY[3]}
+            x2={X.FE + 15}
+            y2={stepY[3]}
           />
           <text
-            x='487'
-            y='215'
+            x={(X.FE + X.BE) / 2 - 28}
+            y={stepY[3] - 15}
             className={styles.arrowLabel}
           >
             Challenge Options
           </text>
           <polygon
             className={styles.arrowHead}
-            points='300,230 320,225 317,230 320,235'
+            points={`${X.FE},${stepY[3]} ${X.FE + 20},${stepY[3] - 5} ${
+              X.FE + 17
+            },${stepY[3]} ${X.FE + 20},${stepY[3] + 5}`}
           />
         </g>
 
@@ -320,21 +366,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='315'
-            y1='280'
-            x2='950'
-            y2='280'
+            x1={X.FE + 15}
+            y1={stepY[4]}
+            x2={X.AUTH - 10}
+            y2={stepY[4]}
           />
           <text
-            x='617'
-            y='265'
+            x={(X.FE + X.AUTH) / 2 - 17}
+            y={stepY[4] - 15}
             className={styles.arrowLabel}
           >
             credentials.get()
           </text>
           <polygon
             className={styles.arrowHead}
-            points='960,280 940,285 943,280 940,275'
+            points={`${X.AUTH},${stepY[4]} ${X.AUTH - 20},${stepY[4] + 5} ${
+              X.AUTH - 17
+            },${stepY[4]} ${X.AUTH - 20},${stepY[4] - 5}`}
           />
         </g>
 
@@ -347,21 +395,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='945'
-            y1='330'
-            x2='85'
-            y2='330'
+            x1={X.AUTH - 15}
+            y1={stepY[5]}
+            x2={X.USER + 15}
+            y2={stepY[5]}
           />
           <text
-            x='502'
-            y='315'
+            x={(X.USER + X.AUTH) / 2 - 12}
+            y={stepY[5] - 15}
             className={styles.arrowLabel}
           >
             Biometric / PIN Request
           </text>
           <polygon
             className={styles.arrowHead}
-            points='70,330 90,325 87,330 90,335'
+            points={`${X.USER},${stepY[5]} ${X.USER + 20},${stepY[5] - 5} ${
+              X.USER + 17
+            },${stepY[5]} ${X.USER + 20},${stepY[5] + 5}`}
           />
         </g>
 
@@ -374,21 +424,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='85'
-            y1='380'
-            x2='950'
-            y2='380'
+            x1={X.USER + 15}
+            y1={stepY[6]}
+            x2={X.AUTH - 10}
+            y2={stepY[6]}
           />
           <text
-            x='502'
-            y='365'
+            x={(X.USER + X.AUTH) / 2 - 12}
+            y={stepY[6] - 15}
             className={styles.arrowLabel}
           >
             Authentication OK
           </text>
           <polygon
             className={styles.arrowHead}
-            points='960,380 940,385 943,380 940,375'
+            points={`${X.AUTH},${stepY[6]} ${X.AUTH - 20},${stepY[6] + 5} ${
+              X.AUTH - 17
+            },${stepY[6]} ${X.AUTH - 20},${stepY[6] - 5}`}
           />
         </g>
 
@@ -401,21 +453,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='945'
-            y1='430'
-            x2='315'
-            y2='430'
+            x1={X.AUTH - 15}
+            y1={stepY[7]}
+            x2={X.FE + 15}
+            y2={stepY[7]}
           />
           <text
-            x='617'
-            y='415'
+            x={(X.FE + X.AUTH) / 2 - 17}
+            y={stepY[7] - 15}
             className={styles.arrowLabel}
           >
             Assertion
           </text>
           <polygon
             className={styles.arrowHead}
-            points='300,430 320,425 318,430 320,435'
+            points={`${X.FE},${stepY[7]} ${X.FE + 20},${stepY[7] - 5} ${
+              X.FE + 18
+            },${stepY[7]} ${X.FE + 20},${stepY[7] + 5}`}
           />
         </g>
 
@@ -428,94 +482,198 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='315'
-            y1='480'
-            x2='720'
-            y2='480'
+            x1={X.FE + 15}
+            y1={stepY[8]}
+            x2={X.BE - 10}
+            y2={stepY[8]}
           />
           <text
-            x='487'
-            y='465'
+            x={(X.FE + X.BE) / 2 - 28}
+            y={stepY[8] - 15}
             className={styles.arrowLabel}
           >
             Authentication Complete
           </text>
           <polygon
             className={styles.arrowHead}
-            points='730,480 705,485 710,480 705,475'
+            points={`${X.BE},${stepY[8]} ${X.BE - 25},${stepY[8] + 5} ${
+              X.BE - 20
+            },${stepY[8]} ${X.BE - 25},${stepY[8] - 5}`}
           />
         </g>
 
         {/* Step 9: Backend → Backend (challenge 検証) */}
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
         <g
           data-step-arrow='9'
           className={`${styles.arrowGroup} ${
-            activeStep === 9 ? styles.arrowRightActive : ''
+            activeStep === 9 ? styles.arrowLoopUp : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='530'
-            x2='730'
-            y2='530'
-            strokeDasharray='5,5'
+            x1={X.BE - 50}
+            y1={stepY[9] - 15}
+            x2={X.BE}
+            y2={stepY[9] - 15}
           />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x={X.BE - 75}
+            y={stepY[9] - 18}
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='520'
+            x={X.BE + 70}
+            y={stepY[9]}
             className={styles.arrowLabel}
           >
             Verify Challenge
           </text>
         </g>
 
-        {/* Step 10: Backend → Backend (publicKey 検証) */}
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
         <g
-          data-step-arrow='10'
+          data-step-arrow='9'
           className={`${styles.arrowGroup} ${
-            activeStep === 10 ? styles.arrowRightActive : ''
+            activeStep === 9 ? styles.arrowLoopDown : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='575'
-            x2='730'
-            y2='575'
-            strokeDasharray='5,5'
+            x1={X.BE - 45}
+            y1={stepY[9] + 15}
+            x2={X.BE}
+            y2={stepY[9] + 15}
           />
+          <polygon
+            className={styles.arrowHead}
+            points={`${X.BE - 51},${stepY[9] + 15} ${X.BE - 42},${
+              stepY[9] + 19
+            } ${X.BE - 44},${stepY[9] + 15} ${X.BE - 42},${stepY[9] + 11}`}
+          />
+        </g>
+
+        {/* Step 10: Backend → Backend (publicKey 検証) */}
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
+        <g
+          data-step-arrow='10'
+          className={`${styles.arrowGroup} ${
+            activeStep === 10 ? styles.arrowLoopUp : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1={X.BE - 50}
+            y1={stepY[10] - 15}
+            x2={X.BE}
+            y2={stepY[10] - 15}
+          />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x={X.BE - 75}
+            y={stepY[10] - 18}
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='565'
+            x={X.BE + 70}
+            y={stepY[10]}
             className={styles.arrowLabel}
           >
             Verify Signature
           </text>
         </g>
 
-        {/* Step 11: Backend → Backend (signCount チェック) */}
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
         <g
-          data-step-arrow='11'
+          data-step-arrow='10'
           className={`${styles.arrowGroup} ${
-            activeStep === 11 ? styles.arrowRightActive : ''
+            activeStep === 10 ? styles.arrowLoopDown : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='620'
-            x2='730'
-            y2='620'
-            strokeDasharray='5,5'
+            x1={X.BE - 45}
+            y1={stepY[10] + 15}
+            x2={X.BE}
+            y2={stepY[10] + 15}
           />
+          <polygon
+            className={styles.arrowHead}
+            points={`${X.BE - 51},${stepY[10] + 15} ${X.BE - 42},${
+              stepY[10] + 19
+            } ${X.BE - 44},${stepY[10] + 15} ${X.BE - 42},${stepY[10] + 11}`}
+          />
+        </g>
+
+        {/* Step 11: Backend → Backend (signCount チェック) */}
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
+        <g
+          data-step-arrow='11'
+          className={`${styles.arrowGroup} ${
+            activeStep === 11 ? styles.arrowLoopUp : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1={X.BE - 50}
+            y1={stepY[11] - 15}
+            x2={X.BE}
+            y2={stepY[11] - 15}
+          />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x={X.BE - 75}
+            y={stepY[11] - 18}
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='610'
+            x={X.BE + 70}
+            y={stepY[11]}
             className={styles.arrowLabel}
           >
             Check signCount
           </text>
+        </g>
+
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
+        <g
+          data-step-arrow='11'
+          className={`${styles.arrowGroup} ${
+            activeStep === 11 ? styles.arrowLoopDown : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1={X.BE - 45}
+            y1={stepY[11] + 15}
+            x2={X.BE}
+            y2={stepY[11] + 15}
+          />
+          <polygon
+            className={styles.arrowHead}
+            points={`${X.BE - 50},${stepY[11] + 15} ${X.BE - 41},${
+              stepY[11] + 19
+            } ${X.BE - 43},${stepY[11] + 15} ${X.BE - 41},${stepY[11] + 11}`}
+          />
         </g>
 
         {/* Step 12: Backend → Frontend (認証成功 + セッション) */}
@@ -527,21 +685,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='715'
-            y1='680'
-            x2='315'
-            y2='680'
+            x1={X.BE - 15}
+            y1={stepY[12]}
+            x2={X.FE + 15}
+            y2={stepY[12]}
           />
           <text
-            x='487'
-            y='665'
+            x={(X.FE + X.BE) / 2 - 28}
+            y={stepY[12] - 15}
             className={styles.arrowLabel}
           >
             Session Token
           </text>
           <polygon
             className={styles.arrowHead}
-            points='300,680 320,675 317,680 320,685'
+            points={`${X.FE},${stepY[12]} ${X.FE + 20},${stepY[12] - 5} ${
+              X.FE + 17
+            },${stepY[12]} ${X.FE + 20},${stepY[12] + 5}`}
           />
         </g>
 
@@ -554,21 +714,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='285'
-            y1='730'
-            x2='85'
-            y2='730'
+            x1={X.FE - 15}
+            y1={stepY[13]}
+            x2={X.USER + 15}
+            y2={stepY[13]}
           />
           <text
-            x='177'
-            y='715'
+            x={(X.USER + X.FE) / 2 - 8}
+            y={stepY[13] - 15}
             className={styles.arrowLabel}
           >
             Authenticated
           </text>
           <polygon
             className={styles.arrowHead}
-            points='70,730 90,725 87,730 90,735'
+            points={`${X.USER},${stepY[13]} ${X.USER + 20},${stepY[13] - 5} ${
+              X.USER + 17
+            },${stepY[13]} ${X.USER + 20},${stepY[13] + 5}`}
           />
         </g>
 
@@ -581,21 +743,23 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <line
             className={styles.arrow}
-            x1='85'
-            y1='1000'
-            x2='285'
-            y2='1000'
+            x1={X.USER + 15}
+            y1={stepY[14]}
+            x2={X.FE - 15}
+            y2={stepY[14]}
           />
           <text
-            x='177'
-            y='985'
+            x={(X.USER + X.FE) / 2 - 8}
+            y={stepY[14] - 15}
             className={styles.arrowLabel}
           >
             Login Complete
           </text>
           <polygon
             className={styles.arrowHead}
-            points='300,1000 280,1005 285,1000 280,995'
+            points={`${X.FE},${stepY[14]} ${X.FE - 20},${stepY[14] + 5} ${
+              X.FE - 15
+            },${stepY[14]} ${X.FE - 20},${stepY[14] - 5}`}
           />
         </g>
 
@@ -612,14 +776,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70'
-            cy='130'
+            cx={X.USER}
+            cy={stepY[1]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70'
-            y='130'
+            x={X.USER}
+            y={stepY[1]}
           >
             1
           </text>
@@ -634,14 +798,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='180'
+            cx={X.FE}
+            cy={stepY[2]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='180'
+            x={X.FE}
+            y={stepY[2]}
           >
             2
           </text>
@@ -656,14 +820,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='230'
+            cx={X.BE}
+            cy={stepY[3]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='230'
+            x={X.BE}
+            y={stepY[3]}
           >
             3
           </text>
@@ -678,14 +842,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='280'
+            cx={X.FE}
+            cy={stepY[4]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='280'
+            x={X.FE}
+            y={stepY[4]}
           >
             4
           </text>
@@ -700,14 +864,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='960'
-            cy='330'
+            cx={X.AUTH}
+            cy={stepY[5]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='960'
-            y='330'
+            x={X.AUTH}
+            y={stepY[5]}
           >
             5
           </text>
@@ -722,14 +886,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70'
-            cy='380'
+            cx={X.USER}
+            cy={stepY[6]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70'
-            y='380'
+            x={X.USER}
+            y={stepY[6]}
           >
             6
           </text>
@@ -744,14 +908,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='960'
-            cy='430'
+            cx={X.AUTH}
+            cy={stepY[7]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='960'
-            y='430'
+            x={X.AUTH}
+            y={stepY[7]}
           >
             7
           </text>
@@ -766,14 +930,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='480'
+            cx={X.FE}
+            cy={stepY[8]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='480'
+            x={X.FE}
+            y={stepY[8]}
           >
             8
           </text>
@@ -788,14 +952,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='530'
+            cx={X.BE}
+            cy={stepY[9]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='530'
+            x={X.BE}
+            y={stepY[9]}
           >
             9
           </text>
@@ -810,14 +974,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='575'
+            cx={X.BE}
+            cy={stepY[10]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='575'
+            x={X.BE}
+            y={stepY[10]}
           >
             10
           </text>
@@ -832,14 +996,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='620'
+            cx={X.BE}
+            cy={stepY[11]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='620'
+            x={X.BE}
+            y={stepY[11]}
           >
             11
           </text>
@@ -854,14 +1018,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='730'
-            cy='680'
+            cx={X.BE}
+            cy={stepY[12]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='730'
-            y='680'
+            x={X.BE}
+            y={stepY[12]}
           >
             12
           </text>
@@ -876,14 +1040,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='300'
-            cy='730'
+            cx={X.FE}
+            cy={stepY[13]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='300'
-            y='730'
+            x={X.FE}
+            y={stepY[13]}
           >
             13
           </text>
@@ -898,14 +1062,14 @@ export default function PasskeyFlowSvg({ activeStep }) {
         >
           <circle
             className={styles.stepCircle}
-            cx='70'
-            cy='1000'
+            cx={X.USER}
+            cy={stepY[14]}
             r='15'
           />
           <text
             className={styles.stepLabel}
-            x='70'
-            y='1000'
+            x={X.USER}
+            y={stepY[14]}
           >
             14
           </text>

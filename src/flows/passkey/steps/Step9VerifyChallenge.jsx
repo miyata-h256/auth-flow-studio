@@ -27,6 +27,15 @@ export default function Step9VerifyChallenge({ onNext }) {
             )}
           </pre>
         </div>
+
+        <div style={{ marginTop: 12 }}>
+          <button
+            className='primary-button'
+            onClick={onNext}
+          >
+            次へ →
+          </button>
+        </div>
       </ActionPanel>
 
       <ExplanationPanel title='このステップで起こること'>
@@ -38,15 +47,6 @@ export default function Step9VerifyChallenge({ onNext }) {
           <li>チャレンジは通常 1 回限りで、複数回使用はできません。</li>
         </ul>
       </ExplanationPanel>
-
-      <div style={{ marginTop: 12 }}>
-        <button
-          className='primary-button'
-          onClick={onNext}
-        >
-          次へ →
-        </button>
-      </div>
     </Layout>
   );
 }
