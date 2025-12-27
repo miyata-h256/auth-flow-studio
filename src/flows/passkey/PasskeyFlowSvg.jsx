@@ -447,75 +447,174 @@ export default function PasskeyFlowSvg({ activeStep }) {
         </g>
 
         {/* Step 9: Backend → Backend (challenge 検証) */}
+
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
         <g
           data-step-arrow='9'
           className={`${styles.arrowGroup} ${
-            activeStep === 9 ? styles.arrowRightActive : ''
+            activeStep === 9 ? styles.arrowLoopUp : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='530'
+            x1='680'
+            y1='515'
             x2='730'
-            y2='530'
-            strokeDasharray='5,5'
+            y2='515'
           />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x='655'
+            y='512'
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='520'
+            x='800'
+            y='530'
             className={styles.arrowLabel}
           >
             Verify Challenge
           </text>
         </g>
 
-        {/* Step 10: Backend → Backend (publicKey 検証) */}
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
         <g
-          data-step-arrow='10'
+          data-step-arrow='9'
           className={`${styles.arrowGroup} ${
-            activeStep === 10 ? styles.arrowRightActive : ''
+            activeStep === 9 ? styles.arrowLoopDown : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='575'
+            x1='685'
+            y1='545'
             x2='730'
-            y2='575'
-            strokeDasharray='5,5'
+            y2='545'
           />
+          <polygon
+            className={styles.arrowHead}
+            points='679,545 688,549 686,545 688,541'
+          />
+        </g>
+
+        {/* Step 10: Backend → Backend (publicKey 検証) */}
+
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
+        <g
+          data-step-arrow='10'
+          className={`${styles.arrowGroup} ${
+            activeStep === 10 ? styles.arrowLoopUp : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='680'
+            y1='560'
+            x2='730'
+            y2='560'
+          />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x='655'
+            y='557'
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='565'
+            x='800'
+            y='575'
             className={styles.arrowLabel}
           >
             Verify Signature
           </text>
         </g>
 
-        {/* Step 11: Backend → Backend (signCount チェック) */}
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
         <g
-          data-step-arrow='11'
+          data-step-arrow='10'
           className={`${styles.arrowGroup} ${
-            activeStep === 11 ? styles.arrowRightActive : ''
+            activeStep === 10 ? styles.arrowLoopDown : ''
           }`}
         >
           <line
             className={styles.arrow}
-            x1='730'
-            y1='620'
+            x1='685'
+            y1='590'
             x2='730'
-            y2='620'
-            strokeDasharray='5,5'
+            y2='590'
           />
+          <polygon
+            className={styles.arrowHead}
+            points='679,590 688,594 686,590 688,586'
+          />
+        </g>
+
+        {/* Step 11: Backend → Backend (signCount チェック) */}
+
+        {/* 上段：右向きの線（Backend → 内部処理ボックス） */}
+        <g
+          data-step-arrow='11'
+          className={`${styles.arrowGroup} ${
+            activeStep === 11 ? styles.arrowLoopUp : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='680'
+            y1='605'
+            x2='730'
+            y2='605'
+          />
+
+          {/* 内部処理ボックス */}
+          <rect
+            className={styles.nodeRect}
+            x='655'
+            y='602'
+            width='25'
+            height='36'
+            rx='4'
+            ry='4'
+          />
+
           <text
-            x='765'
-            y='610'
+            x='800'
+            y='620'
             className={styles.arrowLabel}
           >
             Check signCount
           </text>
+        </g>
+
+        {/* 下段：左向きの矢印（内部処理ボックス → Backend） */}
+        <g
+          data-step-arrow='11'
+          className={`${styles.arrowGroup} ${
+            activeStep === 11 ? styles.arrowLoopDown : ''
+          }`}
+        >
+          <line
+            className={styles.arrow}
+            x1='685'
+            y1='635'
+            x2='730'
+            y2='635'
+          />
+          <polygon
+            className={styles.arrowHead}
+            points='680,635 689,639 687,635 689,631'
+          />
         </g>
 
         {/* Step 12: Backend → Frontend (認証成功 + セッション) */}
