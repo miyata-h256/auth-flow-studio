@@ -3,7 +3,7 @@ import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import styles from '../styles/PasskeyFlow.module.css';
 
-export default function Step6AuthenticationOK({ onNext }) {
+export default function Step6AuthenticationOK({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 6: 認証成功'>
@@ -24,6 +24,12 @@ export default function Step6AuthenticationOK({ onNext }) {
         </div>
 
         <div style={{ marginTop: 12 }}>
+          <button
+            className='secondary-button'
+            onClick={onPrev}
+          >
+            ← 戻る
+          </button>{' '}
           <button
             className='primary-button'
             onClick={onNext}
