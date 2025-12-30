@@ -3,7 +3,7 @@ import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 import styles from '../styles/PasskeyFlow.module.css';
 
-export default function Step8AuthComplete({ onNext }) {
+export default function Step8AuthComplete({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 8: 認証完了リクエスト'>
@@ -36,6 +36,12 @@ export default function Step8AuthComplete({ onNext }) {
         </div>
 
         <div style={{ marginTop: 12 }}>
+          <button
+            className='secondary-button'
+            onClick={onPrev}
+          >
+            ← 戻る
+          </button>{' '}
           <button
             className='primary-button'
             onClick={onNext}

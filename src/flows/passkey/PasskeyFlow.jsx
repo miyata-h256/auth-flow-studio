@@ -42,19 +42,58 @@ export default function PasskeyFlow() {
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
   const screens = [
-    <Step1LoginClick onNext={next} />,
-    <Step2AuthBegin onNext={next} />,
-    <Step3ChallengeOptions onNext={next} />,
-    <Step4CredentialsGet onNext={next} />,
-    <Step5BiometricRequest onNext={next} />,
-    <Step6AuthenticationOK onNext={next} />,
-    <Step7Assertion onNext={next} />,
-    <Step8AuthComplete onNext={next} />,
-    <Step9VerifyChallenge onNext={next} />,
-    <Step10VerifySignature onNext={next} />,
-    <Step11CheckSignCount onNext={next} />,
-    <Step12SessionToken onNext={next} />,
-    <Step13Authenticated onNext={next} />,
+    <Step1LoginClick
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step2AuthBegin
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step3ChallengeOptions
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step4CredentialsGet
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step5BiometricRequest
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step6AuthenticationOK
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step7Assertion
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step8AuthComplete
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step9VerifyChallenge
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step10VerifySignature
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step11CheckSignCount
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step12SessionToken
+      onNext={next}
+      onPrev={prev}
+    />,
+    <Step13Authenticated
+      onNext={next}
+      onPrev={prev}
+    />,
     <Step14LoginComplete
       onNext={handleBack}
       onPrev={prev}

@@ -2,7 +2,7 @@ import Layout from '../../../components/Layout.jsx';
 import ActionPanel from '../../../components/ActionPanel.jsx';
 import ExplanationPanel from '../../../components/ExplanationPanel.jsx';
 
-export default function Step5BiometricRequest({ onNext }) {
+export default function Step5BiometricRequest({ onNext, onPrev }) {
   return (
     <Layout>
       <ActionPanel title='ステップ 5: 生体認証リクエスト'>
@@ -13,6 +13,13 @@ export default function Step5BiometricRequest({ onNext }) {
           <p style={{ marginTop: 8, fontSize: 12, color: '#666' }}>
             例: Touch ID / Face ID / Windows Hello
           </p>
+          <button
+            className='secondary-button'
+            style={{ marginTop: 12 }}
+            onClick={onPrev}
+          >
+            ← 戻る
+          </button>{' '}
           <button
             className='primary-button'
             style={{ marginTop: 12 }}
