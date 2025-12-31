@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import '../Home.css';
+import './styles/Home.css';
 
 export default function Home() {
   const navigate = useNavigate();
@@ -38,6 +38,14 @@ export default function Home() {
             <h2>Magic Link</h2>
             <p>メールのワンタイムリンクでログインする仕組みを理解する</p>
           </button>
+          <div style={{ marginTop: 12 }}>
+            <button
+              className='card'
+              onClick={() => navigate('/compare')}
+            >
+              Compare Flows
+            </button>
+          </div>
         </div>
       </main>
     </div>
