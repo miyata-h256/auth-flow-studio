@@ -204,3 +204,28 @@
 .arrowLoopDown .arrowHead {
   fill: #c4b5fd;
 }
+
+/* ================================================= */
+/* クリック可能なステップノード                      */
+/* ================================================= */
+
+.clickable {
+  cursor: pointer;
+  outline: none;
+}
+
+.clickable:hover .stepCircle {
+  stroke: #a78bfa;
+  stroke-width: 2.5;
+  filter: drop-shadow(0 0 6px rgba(167, 139, 250, 0.6));
+}
+
+.clickable:focus-visible .stepCircle {
+  stroke: #c4b5fd;
+  stroke-width: 3;
+  filter: drop-shadow(0 0 8px rgba(196, 181, 253, 0.8));
+}
+
+.clickable:active .stepCircle {
+  transform: scale(0.95);
+}

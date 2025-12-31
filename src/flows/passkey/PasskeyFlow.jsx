@@ -36,7 +36,7 @@ const STEP_LABELS = [
   'ログイン完了',
 ];
 
-export default function PasskeyFlow() {
+export default function PasskeyFlow({ onStepSelect }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -103,12 +103,7 @@ export default function PasskeyFlow() {
   return (
     <div className={styles['flow-root']}>
       <header className={styles['flow-header']}>
-        <button
-          className='back-button'
-          onClick={handleBack}
-        >
-          ← 戻る
-        </button>
+        <div></div>
         <div>
           <h1>Passkey (WebAuthn)</h1>
           <p className={styles['flow-subtitle']}>
@@ -123,7 +118,10 @@ export default function PasskeyFlow() {
         </button>
       </header>
 
-      <PasskeyFlowSvg activeStep={step + 1} />
+      <PasskeyFlowSvg
+        activeStep={step + 1}
+        onStepClick={onStepSelect}
+      />
 
       {screens[step]}
 

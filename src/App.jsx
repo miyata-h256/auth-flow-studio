@@ -4,6 +4,7 @@ import OidcFlow from './flows/oidc/OidcFlow';
 import PasskeyFlow from './flows/passkey/PasskeyFlow';
 import MagicFlow from './flows/magic/MagicFlow';
 import NotFound from './pages/NotFound';
+import ComparePage from './pages/ComparePage.jsx';
 
 export default function App() {
   return (
@@ -32,6 +33,10 @@ export default function App() {
       <Route
         path='/magic-flow'
         element={<MagicFlow />}
+      />
+      <Route
+        path='/compare'
+        element={<ComparePage />}
       />
       <Route
         path='*'

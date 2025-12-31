@@ -1,0 +1,185 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.header {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.hint {
+  font-size: 12px;
+  opacity: 0.7;
+  margin-top: 6px;
+}
+
+.body {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  gap: 10px;
+  padding: 10px;
+  overflow: auto;
+  min-height: 0;
+}
+
+.card {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
+  padding: 10px;
+  min-height: 0;
+  overflow: auto;
+}
+
+.cardTitle {
+  font-weight: 800;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.empty {
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+/* ステップ詳細表示 */
+
+.stepDetail {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.stepHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.stepNumber {
+  background: linear-gradient(135deg, #7c3aed 0%, #a78bfa 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.stepLabel {
+  font-weight: 600;
+  font-size: 14px;
+  color: #e5e7eb;
+}
+
+.stepFlow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+}
+
+.participant {
+  background: rgba(124, 58, 237, 0.2);
+  color: #c4b5fd;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.flowArrow {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.stepDescription {
+  color: #d1d5db;
+  margin: 0 0 10px 0;
+  font-size: 13px;
+}
+
+.stepDetailText {
+  color: #9ca3af;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.stepDetailText p {
+  margin: 4px 0;
+}
+
+.httpInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.httpMethod {
+  font-weight: 700;
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+.httpMethod.get {
+  background: #065f46;
+  color: #6ee7b7;
+}
+
+.httpMethod.post {
+  background: #7c2d12;
+  color: #fdba74;
+}
+
+.httpMethod.put {
+  background: #1e3a8a;
+  color: #93c5fd;
+}
+
+.httpMethod.delete {
+  background: #7f1d1d;
+  color: #fca5a5;
+}
+
+.endpoint {
+  font-family: 'Fira Code', 'Monaco', monospace;
+  font-size: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 2px 6px;
+  border-radius: 3px;
+  color: #a5f3fc;
+}
+
+.payloadSection {
+  margin-top: 8px;
+}
+
+.payloadLabel {
+  font-size: 11px;
+  font-weight: 600;
+  color: #9ca3af;
+  margin-bottom: 4px;
+}
+
+.payload {
+  font-family: 'Fira Code', 'Monaco', monospace;
+  font-size: 11px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 8px;
+  margin: 0;
+  overflow: auto;
+  max-height: 150px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: #d1d5db;
+}

@@ -1,18 +1,30 @@
 // src/flows/oidc/OidcFlowSvg.jsx
 import styles from './styles/OidcFlowSvg.module.css';
+import { OIDC_STEPS } from './oidcSteps.js';
 
 /**
  * OIDC フロー図（SVG版）
  *
  * props:
- *  - activeStep: 1〜8（それ以外なら全部非アクティブ）
+ *  - activeStep: 1〜9（それ以外なら全部非アクティブ）
+ *  - onStepClick: (stepData) => void - ステップクリック時のコールバック
  *
  * Participants (3):
  *  - USER: User
  *  - CLIENT: Client
  *  - AUTH: Authentication Server
  */
-export default function OidcFlowSvg({ activeStep }) {
+export default function OidcFlowSvg({ activeStep, onStepClick }) {
+  // ステップノードクリック時のハンドラ
+  const handleStepClick = (e) => {
+    const stepId = parseInt(e.currentTarget.dataset.step, 10);
+    if (stepId && onStepClick) {
+      const stepData = OIDC_STEPS[stepId];
+      if (stepData) {
+        onStepClick({ ...stepData, flowType: 'oidc' });
+      }
+    }
+  };
   // X座標（各participantの中心）
   const X = {
     USER: 70.5, // User
@@ -495,10 +507,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 1 circle */}
         <g
+          data-step='1'
           data-step-node='1'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 1 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -517,10 +534,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 2 circle */}
         <g
+          data-step='2'
           data-step-node='2'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 2 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -539,10 +561,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 3 circle */}
         <g
+          data-step='3'
           data-step-node='3'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 3 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -561,10 +588,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 4 circle */}
         <g
+          data-step='4'
           data-step-node='4'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 4 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -583,10 +615,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 5 circle */}
         <g
+          data-step='5'
           data-step-node='5'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 5 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -605,10 +642,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 6 circle */}
         <g
+          data-step='6'
           data-step-node='6'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 6 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -627,10 +669,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 7 circle */}
         <g
+          data-step='7'
           data-step-node='7'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 7 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -649,10 +696,15 @@ export default function OidcFlowSvg({ activeStep }) {
 
         {/* Step 8 circle */}
         <g
+          data-step='8'
           data-step-node='8'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 8 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -666,6 +718,33 @@ export default function OidcFlowSvg({ activeStep }) {
             y={stepY[8]}
           >
             8
+          </text>
+        </g>
+
+        {/* Step 9 circle - Login Complete */}
+        <g
+          data-step='9'
+          data-step-node='9'
+          className={`${styles.stepGroup} ${styles.clickable} ${
+            activeStep === 9 ? styles.stepGroupActive : ''
+          }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
+        >
+          <circle
+            className={styles.stepCircle}
+            cx={X.CLIENT}
+            cy={stepY[8] + 40}
+            r='15'
+          />
+          <text
+            className={styles.stepLabel}
+            x={X.CLIENT}
+            y={stepY[8] + 40}
+          >
+            9
           </text>
         </g>
       </g>

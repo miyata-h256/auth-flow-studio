@@ -1,11 +1,13 @@
 // src/flows/passkey/PasskeyFlowSvg.jsx
 import styles from './styles/PasskeyFlowSvg.module.css';
+import { PASSKEY_STEPS } from './passkeySteps.js';
 
 /**
  * Passkey フロー図（SVG版）
  *
  * props:
  *  - activeStep: 1〜14（それ以外なら全部非アクティブ）
+ *  - onStepClick: (stepData) => void - ステップクリック時のコールバック
  *
  * Participants (4):
  *  - USER: User
@@ -13,7 +15,17 @@ import styles from './styles/PasskeyFlowSvg.module.css';
  *  - BE: Backend
  *  - AUTH: Authenticator
  */
-export default function PasskeyFlowSvg({ activeStep }) {
+export default function PasskeyFlowSvg({ activeStep, onStepClick }) {
+  // ステップノードクリック時のハンドラ
+  const handleStepClick = (e) => {
+    const stepId = parseInt(e.currentTarget.dataset.step, 10);
+    if (stepId && onStepClick) {
+      const stepData = PASSKEY_STEPS[stepId];
+      if (stepData) {
+        onStepClick({ ...stepData, flowType: 'passkey' });
+      }
+    }
+  };
   // X座標（各participantの中心）
   const X = {
     USER: 70, // User
@@ -769,10 +781,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 1 */}
         <g
+          data-step='1'
           data-step-node='1'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 1 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -791,10 +808,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 2 */}
         <g
+          data-step='2'
           data-step-node='2'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 2 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -813,10 +835,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 3 */}
         <g
+          data-step='3'
           data-step-node='3'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 3 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -835,10 +862,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 4 */}
         <g
+          data-step='4'
           data-step-node='4'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 4 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -857,10 +889,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 5 */}
         <g
+          data-step='5'
           data-step-node='5'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 5 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -879,10 +916,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 6 */}
         <g
+          data-step='6'
           data-step-node='6'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 6 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -901,10 +943,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 7 */}
         <g
+          data-step='7'
           data-step-node='7'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 7 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -923,10 +970,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 8 */}
         <g
+          data-step='8'
           data-step-node='8'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 8 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -945,10 +997,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 9 */}
         <g
+          data-step='9'
           data-step-node='9'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 9 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -967,10 +1024,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 10 */}
         <g
+          data-step='10'
           data-step-node='10'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 10 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -989,10 +1051,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 11 */}
         <g
+          data-step='11'
           data-step-node='11'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 11 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -1011,10 +1078,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 12 */}
         <g
+          data-step='12'
           data-step-node='12'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 12 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -1033,10 +1105,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 13 */}
         <g
+          data-step='13'
           data-step-node='13'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 13 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}
@@ -1055,10 +1132,15 @@ export default function PasskeyFlowSvg({ activeStep }) {
 
         {/* Step 14 */}
         <g
+          data-step='14'
           data-step-node='14'
-          className={`${styles.stepGroup} ${
+          className={`${styles.stepGroup} ${styles.clickable} ${
             activeStep === 14 ? styles.stepGroupActive : ''
           }`}
+          onClick={handleStepClick}
+          role='button'
+          tabIndex={0}
+          onKeyDown={(e) => e.key === 'Enter' && handleStepClick(e)}
         >
           <circle
             className={styles.stepCircle}

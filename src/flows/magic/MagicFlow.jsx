@@ -43,7 +43,7 @@ const STEP_LABELS = [
   '⑰ ログイン完了',
 ];
 
-export default function MagicFlow() {
+export default function MagicFlow({ onStepSelect }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -136,12 +136,7 @@ export default function MagicFlow() {
   return (
     <div className={styles['flow-root']}>
       <header className={styles['flow-header']}>
-        <button
-          className='back-button'
-          onClick={handleBack}
-        >
-          ← 戻る
-        </button>
+        <div></div>
         <div>
           <h1>Magic Link Login</h1>
           <p className={styles['flow-subtitle']}>
@@ -157,7 +152,10 @@ export default function MagicFlow() {
       </header>
 
       {/* Magic Link フロー図 */}
-      <MagicFlowSvg activeStep={step + 1} />
+      <MagicFlowSvg
+        activeStep={step + 1}
+        onStepClick={onStepSelect}
+      />
 
       {screens[step]}
 

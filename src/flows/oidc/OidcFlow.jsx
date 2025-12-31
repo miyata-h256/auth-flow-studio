@@ -26,7 +26,7 @@ const STEP_LABELS = [
   'App: ログイン完了',
 ];
 
-export default function OidcFlow() {
+export default function OidcFlow({ onStepSelect }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -70,12 +70,7 @@ export default function OidcFlow() {
   return (
     <div className={styles['flow-root']}>
       <header className={styles['flow-header']}>
-        <button
-          className='back-button'
-          onClick={handleBack}
-        >
-          ← 戻る
-        </button>
+        <div></div>
         <div>
           <h1>OIDC Code Flow</h1>
           <p className={styles['flow-subtitle']}>
@@ -91,7 +86,10 @@ export default function OidcFlow() {
       </header>
 
       {/* OIDCアニメーション付きフロー図 */}
-      <OidcFlowSvg activeStep={step + 1} />
+      <OidcFlowSvg
+        activeStep={step + 1}
+        onStepClick={onStepSelect}
+      />
 
       <div
         style={{
