@@ -25,6 +25,19 @@
   margin-top: 32px;
 }
 
+.section {
+  margin-bottom: 32px;
+}
+
+.section-title {
+  text-align: left;
+  font-size: 16px;
+  color: #9ca3af;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #374151;
+}
+
 .card-grid {
   display: grid;
   gap: 16px;
@@ -47,7 +60,8 @@
   color: inherit;
 }
 
-.card h2 {
+.card h2,
+.card h3 {
   margin: 0 0 8px;
   font-size: 18px;
 }

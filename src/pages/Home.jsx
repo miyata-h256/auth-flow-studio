@@ -14,39 +14,47 @@ export default function Home() {
       </header>
 
       <main className='app-main'>
-        <div className='card-grid'>
-          <button
-            className='card'
-            onClick={() => navigate('/oidc-flow')}
-          >
-            <h2>OIDC Code Flow</h2>
-            <p>OAuth2 / OIDC の典型的な認証フローをステップごとに可視化</p>
-          </button>
+        <section className='section'>
+          <h2 className='section-title'>認証フロー</h2>
+          <div className='card-grid'>
+            <button
+              className='card'
+              onClick={() => navigate('/oidc-flow')}
+            >
+              <h3>OIDC Code Flow</h3>
+              <p>OAuth2 / OIDC の典型的な認証フローをステップごとに可視化</p>
+            </button>
 
-          <button
-            className='card'
-            onClick={() => navigate('/passkey-flow')}
-          >
-            <h2>Passkey (WebAuthn)</h2>
-            <p>パスワードレスな認証がどう動いているかをざっくり追体験</p>
-          </button>
+            <button
+              className='card'
+              onClick={() => navigate('/passkey-flow')}
+            >
+              <h3>Passkey (WebAuthn)</h3>
+              <p>パスワードレスな認証がどう動いているかをざっくり追体験</p>
+            </button>
 
-          <button
-            className='card'
-            onClick={() => navigate('/magic-flow')}
-          >
-            <h2>Magic Link</h2>
-            <p>メールのワンタイムリンクでログインする仕組みを理解する</p>
-          </button>
-          <div style={{ marginTop: 12 }}>
+            <button
+              className='card'
+              onClick={() => navigate('/magic-flow')}
+            >
+              <h3>Magic Link</h3>
+              <p>メールのワンタイムリンクでログインする仕組みを理解する</p>
+            </button>
+          </div>
+        </section>
+
+        <section className='section'>
+          <h2 className='section-title'>比較</h2>
+          <div className='card-grid'>
             <button
               className='card'
               onClick={() => navigate('/compare')}
             >
-              Compare Flows
+              <h3>Compare Flows</h3>
+              <p>各認証フローを並べて比較する</p>
             </button>
           </div>
-        </div>
+        </section>
       </main>
     </div>
   );
