@@ -224,6 +224,6 @@
   filter: drop-shadow(0 0 8px rgba(196, 181, 253, 0.8));
 }
 
-.clickable:active .stepCircle {
-  transform: scale(0.95);
+.clickable:active {
+  opacity: 0.8;
 }
