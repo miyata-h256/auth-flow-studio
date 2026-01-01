@@ -1,7 +1,5 @@
 import styles from './styles/FlowPane.module.css';
 
-// ↓この3つは、あなたの既存コンポーネントに合わせてパスを直してね
-// 例: "../flows/OidcFlow" など
 import OidcFlow from '../flows/oidc/OidcFlow';
 import PasskeyFlow from '../flows/passkey/PasskeyFlow';
 import MagicFlow from '../flows/magic/MagicFlow';
