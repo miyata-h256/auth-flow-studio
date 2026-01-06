@@ -1,16 +1,61 @@
-# React + Vite
+# Auth Flow Studio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+各種ログイン方式の「裏側」で何が起きているかを体感するためのミニアプリです。
 
-Currently, two official plugins are available:
+## 概要
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Auth Flow Studio は、現代の認証フローをステップごとにインタラクティブに可視化し、その仕組みを理解するための学習ツールです。
 
-## React Compiler
+## 対応している認証フロー
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### 🔐 OIDC Code Flow
 
-## Expanding the ESLint configuration
+OAuth2 / OpenID Connect の典型的な認証フローをステップごとに可視化します。
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### 🔑 Passkey (WebAuthn)
+
+パスワードレスな認証がどのように動作しているかをざっくり追体験できます。
+
+### ✉️ Magic Link
+
+メールのワンタイムリンクでログインする仕組みを理解できます。
+
+## 技術スタック
+
+- **React** 19 - UI フレームワーク
+- **Vite** 7 - ビルドツール
+- **React Router** - ルーティング
+
+## セットアップ
+
+```bash
+# 依存関係のインストール
+pnpm install
+
+# 開発サーバーの起動
+pnpm dev
+
+# 本番ビルド
+pnpm build
+
+# ビルド結果のプレビュー
+pnpm preview
+```
+
+## プロジェクト構成
+
+```
+src/
+├── components/     # 共通UIコンポーネント
+├── flows/          # 各認証フローの実装
+│   ├── magic/      # Magic Link フロー
+│   ├── oidc/       # OIDC Code フロー
+│   └── passkey/    # Passkey フロー
+├── hooks/          # カスタムフック
+├── pages/          # ページコンポーネント
+└── utils/          # ユーティリティ関数
+```
+
+## ライセンス
+
+MIT
