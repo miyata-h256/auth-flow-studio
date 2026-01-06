@@ -36,7 +36,7 @@ const STEP_LABELS = [
   'ログイン完了',
 ];
 
-export default function PasskeyFlow({ onStepSelect }) {
+export default function PasskeyFlow({ onStepSelect, interactive = false }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -121,6 +121,7 @@ export default function PasskeyFlow({ onStepSelect }) {
       <PasskeyFlowSvg
         activeStep={step + 1}
         onStepClick={onStepSelect}
+        interactive={interactive}
       />
 
       {screens[step]}
