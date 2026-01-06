@@ -18,18 +18,21 @@ export default function FlowPane({ flowId, side, onStepSelect }) {
         <OidcFlow
           side={side}
           onStepSelect={onStepSelect}
+          interactive={true}
         />
       )}
       {flowId === 'passkey' && (
         <PasskeyFlow
           side={side}
           onStepSelect={onStepSelect}
+          interactive={true}
         />
       )}
       {flowId === 'magic' && (
         <MagicFlow
           side={side}
           onStepSelect={onStepSelect}
+          interactive={true}
         />
       )}
     </div>

@@ -26,7 +26,7 @@ const STEP_LABELS = [
   'App: ログイン完了',
 ];
 
-export default function OidcFlow({ onStepSelect }) {
+export default function OidcFlow({ onStepSelect, interactive = false }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -89,6 +89,7 @@ export default function OidcFlow({ onStepSelect }) {
       <OidcFlowSvg
         activeStep={step + 1}
         onStepClick={onStepSelect}
+        interactive={interactive}
       />
 
       <div

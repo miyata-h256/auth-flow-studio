@@ -43,7 +43,7 @@ const STEP_LABELS = [
   '⑰ ログイン完了',
 ];
 
-export default function MagicFlow({ onStepSelect }) {
+export default function MagicFlow({ onStepSelect, interactive = false }) {
   const navigate = useNavigate();
   const handleBack = () => navigate('/home');
   const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
@@ -155,6 +155,7 @@ export default function MagicFlow({ onStepSelect }) {
       <MagicFlowSvg
         activeStep={step + 1}
         onStepClick={onStepSelect}
+        interactive={interactive}
       />
 
       {screens[step]}
