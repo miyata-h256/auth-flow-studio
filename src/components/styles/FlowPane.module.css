@@ -4,3 +4,10 @@
   min-height: 0;
   flex: 1;
 }
+
+/* FlowSvgを大きく表示 - SVGの幅を明示的に指定 */
+.pane svg {
+  width: 100%;
+  height: auto;
+  min-width: 500px;
+}

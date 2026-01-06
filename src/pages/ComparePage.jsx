@@ -46,6 +46,16 @@ export default function ComparePage() {
     getStepData(flowOptions[2]?.id ?? flowOptions[0].id, 1)
   );
 
+  // ステップクリック時のハンドラ（左側）
+  const handleLeftStepClick = (stepData) => {
+    setLeftSelectedStep(stepData);
+  };
+
+  // ステップクリック時のハンドラ（右側）
+  const handleRightStepClick = (stepData) => {
+    setRightSelectedStep(stepData);
+  };
+
   return (
     <div className={styles.page}>
       <header className={styles.header}>
@@ -92,8 +102,8 @@ export default function ComparePage() {
 
             <FlowPane
               flowId={leftFlowId}
-              side='left'
-              onStepSelect={(step) => setLeftSelectedStep(step)}
+              activeStep={leftSelectedStep?.id ?? 1}
+              onStepClick={handleLeftStepClick}
             />
           </div>
 
@@ -107,8 +117,8 @@ export default function ComparePage() {
 
             <FlowPane
               flowId={rightFlowId}
-              side='right'
-              onStepSelect={(step) => setRightSelectedStep(step)}
+              activeStep={rightSelectedStep?.id ?? 1}
+              onStepClick={handleRightStepClick}
             />
           </div>
         </section>

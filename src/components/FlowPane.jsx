@@ -1,37 +1,39 @@
 import styles from './styles/FlowPane.module.css';
 
-import OidcFlow from '../flows/oidc/OidcFlow';
-import PasskeyFlow from '../flows/passkey/PasskeyFlow';
-import MagicFlow from '../flows/magic/MagicFlow';
+// FlowSvgコンポーネントを直接インポート
+import OidcFlowSvg from '../flows/oidc/OidcFlowSvg';
+import PasskeyFlowSvg from '../flows/passkey/PasskeyFlowSvg';
+import MagicFlowSvg from '../flows/magic/MagicFlowSvg';
 
 /**
- * onStepSelect: クリックされたステップ情報を親に渡す
- * side: "left" | "right"（将来、差分色などに使える）
+ * FlowPane - Compare画面用のフロー図表示コンポーネント
+ *
+ * props:
+ *  - flowId: 'oidc' | 'passkey' | 'magic'
+ *  - activeStep: 現在アクティブなステップ番号（ハイライト表示用）
+ *  - onStepClick: ステップクリック時のコールバック
  */
-export default function FlowPane({ flowId, side, onStepSelect }) {
+export default function FlowPane({ flowId, activeStep, onStepClick }) {
   return (
     <div className={styles.pane}>
-      {/* ここで「ステップクリックイベント」を拾えるようにするのが肝。
-          既存のフロー側で onStepSelect を受け取れるなら渡す。
-          受け取れないなら、まずは FlowPane をただ表示だけにする。 */}
       {flowId === 'oidc' && (
-        <OidcFlow
-          side={side}
-          onStepSelect={onStepSelect}
+        <OidcFlowSvg
+          activeStep={activeStep}
+          onStepClick={onStepClick}
           interactive={true}
         />
       )}
       {flowId === 'passkey' && (
-        <PasskeyFlow
-          side={side}
-          onStepSelect={onStepSelect}
+        <PasskeyFlowSvg
+          activeStep={activeStep}
+          onStepClick={onStepClick}
           interactive={true}
         />
       )}
       {flowId === 'magic' && (
-        <MagicFlow
-          side={side}
-          onStepSelect={onStepSelect}
+        <MagicFlowSvg
+          activeStep={activeStep}
+          onStepClick={onStepClick}
           interactive={true}
         />
       )}
