@@ -4,6 +4,23 @@ import FlowPane from '../components/FlowPane';
 import StepDetailPanel from '../components/StepDetailPanel';
 import styles from './styles/ComparePage.module.css';
 
+// 各フローのステップデータをインポート
+import { OIDC_STEPS } from '../flows/oidc/oidcSteps';
+import { PASSKEY_STEPS } from '../flows/passkey/passkeySteps';
+import { MAGIC_STEPS } from '../flows/magic/magicSteps';
+
+// フローIDからステップデータを取得するヘルパー
+const getStepData = (flowId, stepId) => {
+  const stepsMap = {
+    oidc: OIDC_STEPS,
+    passkey: PASSKEY_STEPS,
+    magic: MAGIC_STEPS,
+  };
+  const steps = stepsMap[flowId];
+  if (!steps || !steps[stepId]) return null;
+  return { ...steps[stepId], flowType: flowId };
+};
+
 export default function ComparePage() {
   const flowOptions = useMemo(
     () => [
@@ -21,8 +38,13 @@ export default function ComparePage() {
   );
 
   // 「どのステップがクリックされたか」を左右それぞれ持つ
-  const [leftSelectedStep, setLeftSelectedStep] = useState(null);
-  const [rightSelectedStep, setRightSelectedStep] = useState(null);
+  // 初期値としてStep 1を設定
+  const [leftSelectedStep, setLeftSelectedStep] = useState(() =>
+    getStepData(flowOptions[0].id, 1)
+  );
+  const [rightSelectedStep, setRightSelectedStep] = useState(() =>
+    getStepData(flowOptions[2]?.id ?? flowOptions[0].id, 1)
+  );
 
   return (
     <div className={styles.page}>
@@ -41,7 +63,7 @@ export default function ComparePage() {
             value={leftFlowId}
             onChange={(v) => {
               setLeftFlowId(v);
-              setLeftSelectedStep(null);
+              setLeftSelectedStep(getStepData(v, 1));
             }}
           />
           <div className={styles.vs}>VS</div>
@@ -51,7 +73,7 @@ export default function ComparePage() {
             value={rightFlowId}
             onChange={(v) => {
               setRightFlowId(v);
-              setRightSelectedStep(null);
+              setRightSelectedStep(getStepData(v, 1));
             }}
           />
         </div>
