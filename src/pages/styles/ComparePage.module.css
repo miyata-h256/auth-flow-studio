@@ -123,7 +123,6 @@
 /* 超大画面: さらに広く */
 @media (min-width: 2200px) {
   .main {
-    grid-template-columns: 1fr 420px;
     gap: 16px;
     padding: 16px;
   }
