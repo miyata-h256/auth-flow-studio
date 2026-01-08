@@ -1,6 +1,7 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { buildAuthRequest } from '../../../utils/oidcMock';
 import { StepProps } from '../../../types';
 import styles from '../styles/StepAutorizationCodeRequest.module.css';
@@ -8,11 +9,12 @@ import styles from '../styles/StepAutorizationCodeRequest.module.css';
 const authReq = buildAuthRequest();
 
 export default function StepAuthorizationCodeRequest({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Authorization Code Request'>
+            <ActionPanel title={t.oidcStepUI.authCodeRequest}>
                 <p>
-                    クライアントが認可サーバーに対して Authorization Code を要求します。
+                    {t.oidcStepUI.authCodeRequestDesc}
                 </p>
                 <div
                     style={{
@@ -22,7 +24,7 @@ export default function StepAuthorizationCodeRequest({ onNext, onPrev }: StepPro
                         alignItems: 'center',
                     }}
                 >
-                    <h4>送信されるパラメータ（一部）</h4>
+                    <h4>{t.stepUI.sentParameters}</h4>
                     <pre className={styles['code-block']}>
                         {`
               {
@@ -40,22 +42,22 @@ export default function StepAuthorizationCodeRequest({ onNext, onPrev }: StepPro
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>ブラウザは認可エンドポイントへリダイレクトされます。</li>
+                    <li>{t.oidcStepUI.browserRedirect}</li>
                     <li>
-                        リクエストには <code>response_type=code</code> 等が含まれます。
+                        {t.oidcStepUI.requestContains}
                     </li>
                 </ul>
             </ExplanationPanel>

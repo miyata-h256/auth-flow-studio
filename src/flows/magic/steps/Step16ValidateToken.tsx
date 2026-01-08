@@ -3,19 +3,22 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 16: API internal
  * hash(token)一致確認 / 期限確認 / used=false確認
  */
 export default function Step16ValidateToken({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='トークン検証'>
-                <p>Auth API内部でトークンの検証を行います。</p>
+            <ActionPanel title={t.magicStepUI.validateToken}>
+                <p>{t.magicStepUI.validateTokenDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>検証チェックリスト</p>
+                    <p>{t.magicStepUI.verificationChecklist}</p>
                     <ul
                         style={{
                             listStyle: 'none',
@@ -27,20 +30,20 @@ export default function Step16ValidateToken({ onNext, onPrev }: StepProps) {
                     >
                         <li style={{ marginBottom: 8 }}>
                             <span style={{ color: '#6ee7b7', marginRight: 8 }}>✓</span>
-                            hash(token) がstoredHashと一致
+                            {t.magicStepUI.hashMatch}
                         </li>
                         <li style={{ marginBottom: 8 }}>
                             <span style={{ color: '#6ee7b7', marginRight: 8 }}>✓</span>
-                            expiresAt が現在時刻より後（有効期限内）
+                            {t.magicStepUI.expiresAtValid}
                         </li>
                         <li style={{ marginBottom: 8 }}>
                             <span style={{ color: '#6ee7b7', marginRight: 8 }}>✓</span>
-                            used = false（未使用）
+                            {t.magicStepUI.usedFalse}
                         </li>
                     </ul>
                     <div style={{ marginTop: 12 }}>
                         <span className={`${styles['status-badge']} ${styles['success']}`}>
-                            ✓ 検証成功
+                            ✓ {t.magicStepUI.verificationSuccess}
                         </span>
                     </div>
                 </div>
@@ -50,33 +53,21 @@ export default function Step16ValidateToken({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        <strong>hash一致確認:</strong>{' '}
-                        受け取ったtokenをハッシュ化し、DBのハッシュと比較。
-                    </li>
-                    <li>
-                        <strong>期限確認:</strong> トークンの有効期限が切れていないか確認。
-                    </li>
-                    <li>
-                        <strong>used確認:</strong>{' '}
-                        ワンタイム性を保証するため、未使用であることを確認。
-                    </li>
-                    <li>
-                        検証成功後、<code>used=true</code> に更新して再利用を防止します。
-                    </li>
+                    <li>{t.magicStepUI.apiValidatesToken}</li>
+                    <li>{t.magicStepUI.tokenInvalidated}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

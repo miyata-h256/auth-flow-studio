@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
+import { I18nProvider } from './i18n';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -11,8 +12,10 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
     <StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
+        <I18nProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </I18nProvider>
     </StrictMode>
 );

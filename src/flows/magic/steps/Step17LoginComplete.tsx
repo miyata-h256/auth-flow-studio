@@ -3,21 +3,22 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 17: ログイン完了
  * セッション/JWT発行 → ログイン状態
  */
 export default function Step17LoginComplete({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ログイン完了'>
-                <p>
-                    トークン検証が成功し、セッション/JWTが発行されてログインが完了しました。
-                </p>
+            <ActionPanel title={t.magicStepUI.loginComplete}>
+                <p>{t.magicStepUI.loginCompleteDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>ログイン状態（サンプル）</p>
+                    <p>{t.magicStepUI.loginStateSample}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -38,7 +39,7 @@ export default function Step17LoginComplete({ email, onNext, onPrev }: MagicStep
                     </pre>
                     <div style={{ marginTop: 12 }}>
                         <span className={`${styles['status-badge']} ${styles['success']}`}>
-                            ✓ ログイン完了
+                            ✓ {t.magicStepUI.loginComplete}
                         </span>
                     </div>
                 </div>
@@ -48,31 +49,21 @@ export default function Step17LoginComplete({ email, onNext, onPrev }: MagicStep
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        トップに戻る
+                        {t.magicStepUI.goHome}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        検証成功後、APIはToken Storeの <code>used=true</code>{' '}
-                        に更新して再利用を防止。
-                    </li>
-                    <li>
-                        セッションCookieまたはJWTが発行され、ユーザーはログイン状態になります。
-                    </li>
-                    <li>以降のリクエストはこのセッション/JWTで認証されます。</li>
-                    <li>
-                        Magic
-                        Linkは「メールを受信できること」が認証要素となるパスワードレス認証です。
-                    </li>
+                    <li>{t.magicStepUI.magicLinkComplete}</li>
+                    <li>{t.magicStepUI.noPasswordEmail}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

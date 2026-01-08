@@ -3,21 +3,23 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 4: DB → API
  * userId / user status を返す
  */
 export default function Step4UserResponse({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     const mockUserId = 'usr_' + btoa(email || '').slice(0, 8);
 
     return (
         <Layout>
-            <ActionPanel title='ユーザー情報レスポンス'>
-                <p>DBからユーザーIDとステータスが返されます。</p>
+            <ActionPanel title={t.magicStepUI.userResponse}>
+                <p>{t.magicStepUI.userResponseDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>DBレスポンス</p>
+                    <p>{t.magicStepUI.dbResponse}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -37,22 +39,22 @@ export default function Step4UserResponse({ email, onNext, onPrev }: MagicStepPr
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>ユーザーのIDとステータスがAPIに返されます。</li>
-                    <li>このuserIdはワンタイムトークンと紐付けられます。</li>
-                    <li>ユーザーがブロックされている場合はここでエラーを返すことも。</li>
+                    <li>{t.magicStepUI.dbReturnsUser}</li>
+                    <li>{t.magicStepUI.existingUser}</li>
+                    <li>{t.magicStepUI.errorNotFound}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

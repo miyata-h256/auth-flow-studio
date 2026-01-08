@@ -2,18 +2,19 @@ import type { MagicStepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 1: User → Frontend
  * メール入力 & 送信ボタンをクリック
  */
 export default function Step1EmailInput({ email, setEmail, onNext }: MagicStepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='① メールアドレス入力'>
-                <p>
-                    ユーザーはログイン用のメールアドレスを入力し、送信ボタンを押します。
-                </p>
+            <ActionPanel title={`① ${t.magicStepUI.emailInput}`}>
+                <p>{t.magicStepUI.emailInputDesc}</p>
 
                 <div className='mock-box'>
                     <input
@@ -26,18 +27,16 @@ export default function Step1EmailInput({ email, setEmail, onNext }: MagicStepPr
                         className='primary-button'
                         onClick={onNext}
                     >
-                        Magic Link を送信
+                        {t.stepUI.sendMagicLink}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>ユーザーがメールアドレスを入力して「送信」をクリックします。</li>
-                    <li>このステップはフロントエンドで行われます。</li>
-                    <li>
-                        次のステップで、フロントエンドからAPIへリクエストが送信されます。
-                    </li>
+                    <li>{t.magicStepUI.userEntersEmail}</li>
+                    <li>{t.magicStepUI.frontendAction}</li>
+                    <li>{t.magicStepUI.nextStepApiCall}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

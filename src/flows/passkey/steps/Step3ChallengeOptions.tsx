@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step3ChallengeOptions({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 3: チャレンジ・オプションの受信'>
-                <p>
-                    バックエンドがフロントエンドに{' '}
-                    <strong>PublicKeyCredentialRequestOptions</strong> を返します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 3: ${t.passkeyStepUI.challengeOptions}`}>
+                <p>{t.passkeyStepUIDetail.backendReturnsOptions}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>受信するオプション</h4>
+                    <h4>{t.passkeyStepUIDetail.receivedOptions}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -41,30 +41,22 @@ export default function Step3ChallengeOptions({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        バックエンドが生成した <strong>challenge</strong>{' '}
-                        がフロントエンドに送られます。
-                    </li>
-                    <li>
-                        <strong>challenge</strong> は一時的で、署名検証時に使われます。
-                    </li>
-                    <li>
-                        オプションに <strong>allowCredentials</strong> が含まれる場合、
-                        ユーザーの登録済みデバイスを限定できます。
-                    </li>
+                    <li>{t.passkeyStepUIDetail.challengeSentToFrontend}</li>
+                    <li>{t.passkeyStepUIDetail.challengeUsedForSignature}</li>
+                    <li>{t.passkeyStepUIDetail.allowCredentialsLimit}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

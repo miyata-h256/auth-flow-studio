@@ -1,0 +1,64 @@
+// src/components/AppHeader.tsx
+// アプリケーションヘッダーコンポーネント
+
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useI18n } from '../i18n';
+import styles from './styles/AppHeader.module.css';
+
+/**
+ * アプリケーションヘッダーコンポーネント
+ * 
+ * グローバルナビゲーションと設定へのアクセスを提供
+ */
+export default function AppHeader(): React.ReactElement {
+    const navigate = useNavigate();
+    const { language, t } = useI18n();
+
+    return (
+        <header className={styles.header}>
+            <div className={styles.left}>
+                <NavLink
+                    to='/home'
+                    className={styles.logo}
+                >
+                    <span className={styles.logoIcon}>🔐</span>
+                    <span>{t.common.appName}</span>
+                </NavLink>
+
+                <nav className={styles.nav}>
+                    <NavLink
+                        to='/home'
+                        className={({ isActive }) =>
+                            `${styles.navLink} ${isActive ? styles.active : ''}`
+                        }
+                    >
+                        {t.common.home}
+                    </NavLink>
+                    <NavLink
+                        to='/compare'
+                        className={({ isActive }) =>
+                            `${styles.navLink} ${isActive ? styles.active : ''}`
+                        }
+                    >
+                        {t.home.compare}
+                    </NavLink>
+                </nav>
+            </div>
+
+            <div className={styles.right}>
+                <span className={styles.languageIndicator}>
+                    {language.toUpperCase()}
+                </span>
+                <button
+                    type='button'
+                    className={styles.settingsButton}
+                    onClick={() => navigate('/settings')}
+                    aria-label={t.common.settings}
+                >
+                    <span className={styles.settingsIcon}>⚙️</span>
+                    <span>{t.common.settings}</span>
+                </button>
+            </div>
+        </header>
+    );
+}

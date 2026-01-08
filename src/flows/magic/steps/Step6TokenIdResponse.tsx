@@ -3,21 +3,23 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 6: Token Store → API
  * tokenId を返す
  */
 export default function Step6TokenIdResponse({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     const mockTokenId = 'tid_x7k9m2p4';
 
     return (
         <Layout>
-            <ActionPanel title='トークンID発行'>
-                <p>Token StoreからトークンIDが返されます。</p>
+            <ActionPanel title={t.magicStepUI.tokenIdResponse}>
+                <p>{t.magicStepUI.tokenIdResponseDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>Token Storeレスポンス</p>
+                    <p>{t.magicStepUI.tokenStoreResponse}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -35,24 +37,21 @@ export default function Step6TokenIdResponse({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        <code>tokenId</code> はMagic Linkの一部として使われます。
-                    </li>
-                    <li>実際のトークン値（RAW_TOKEN）はメールリンクに埋め込まれます。</li>
-                    <li>検証時には tokenId で DB を引き、hash を比較します。</li>
+                    <li>{t.magicStepUI.tokenStoredSuccess}</li>
+                    <li>{t.magicStepUI.recordIdentifiable}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

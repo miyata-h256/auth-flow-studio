@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step12SessionToken({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 12: セッショントークン返却'>
-                <p>
-                    すべての検証に成功しました。バックエンドがセッショントークン（JWT
-                    など） をフロントエンドに返します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 12: ${t.passkeyStepUI.sessionToken}`}>
+                <p>{t.passkeyStepUIDetail.allVerificationsPassed}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>返却されるトークン</h4>
+                    <h4>{t.passkeyStepUIDetail.returnedToken}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -36,24 +36,22 @@ export default function Step12SessionToken({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>認証が成功し、ユーザーが確定されました。</li>
-                    <li>セッショントークンがフロントエンドに返されます。</li>
-                    <li>
-                        以降のリクエストでこのトークンを使い、認証状態を保つことができます。
-                    </li>
+                    <li>{t.passkeyStepUI.sessionGenerated}</li>
+                    <li>{t.passkeyStepUIDetail.sessionTokenReturned}</li>
+                    <li>{t.passkeyStepUIDetail.tokenUsedForAuthState}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

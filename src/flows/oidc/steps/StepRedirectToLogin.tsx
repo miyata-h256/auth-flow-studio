@@ -1,37 +1,38 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { StepProps } from '../../../types';
 
 export default function StepRedirectToLogin({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Redirect to Login Page'>
+            <ActionPanel title={t.oidcStepUI.redirectToLogin}>
                 <p>
-                    ユーザーのブラウザはログインページへリダイレクトされ、認証が要求されます。
+                    {t.oidcStepUI.redirectToLoginDesc}
                 </p>
                 <div style={{ marginTop: 12 }}>
                     <button
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>リダイレクト先は認可サーバーのログイン画面です。</li>
+                    <li>{t.oidcStepUI.userNotLoggedIn}</li>
                     <li>
-                        ログイン後、認可サーバーはクライアントのリダイレクト URI
-                        に戻します。
+                        {t.oidcStepUI.serverRecordsConsent}
                     </li>
                 </ul>
             </ExplanationPanel>

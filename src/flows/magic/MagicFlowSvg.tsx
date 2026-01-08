@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles/MagicFlowSvg.module.css';
 import { MAGIC_STEPS } from './magicSteps';
 import type { FlowStepWithType } from '../../types';
+import { useTranslation } from '../../i18n';
 
 /**
  * MagicFlowSvg コンポーネントのProps
@@ -37,6 +38,8 @@ export default function MagicFlowSvg({
     onStepClick,
     interactive = false,
 }: MagicFlowSvgProps): React.ReactElement {
+    const t = useTranslation();
+
     // ステップノードクリック時のハンドラ（interactiveがtrueの場合のみ有効）
     const handleStepClick = interactive
         ? (e: React.MouseEvent<SVGGElement> | React.KeyboardEvent<SVGGElement>) => {
@@ -430,7 +433,7 @@ export default function MagicFlowSvg({
                         x={X.U + 30}
                         y='95'
                     >
-                        ① メールアドレス入力
+                        {t.magicFlowSvg.noteEmailInput}
                     </text>
                 </g>
 
@@ -454,7 +457,7 @@ export default function MagicFlowSvg({
                         y={stepY[1] - 10}
                         className={styles.arrowLabel}
                     >
-                        メール入力 & 送信
+                        {t.magicFlowSvg.emailInputAndSend}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -512,7 +515,7 @@ export default function MagicFlowSvg({
                         y={stepY[3] - 10}
                         className={styles.arrowLabel}
                     >
-                        ユーザー検索/作成
+                        {t.magicFlowSvg.userLookupCreate}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -566,7 +569,7 @@ export default function MagicFlowSvg({
                         x={X.API + 80}
                         y='260'
                     >
-                        ② ワンタイムトークン発行（短命）
+                        {t.magicFlowSvg.noteOneTimeToken}
                     </text>
                 </g>
 
@@ -590,7 +593,7 @@ export default function MagicFlowSvg({
                         y={stepY[5] - 10}
                         className={styles.arrowLabel}
                     >
-                        create magic_token (hash保存)
+                        {t.magicFlowSvg.createMagicToken}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -644,7 +647,7 @@ export default function MagicFlowSvg({
                         x={X.API + 70}
                         y='350'
                     >
-                        ③ メール送信（リンク埋め込み）
+                        {t.magicFlowSvg.noteSendEmail}
                     </text>
                 </g>
 
@@ -726,7 +729,7 @@ export default function MagicFlowSvg({
                         y={stepY[9] - 10}
                         className={styles.arrowLabel}
                     >
-                        200 OK "メールを確認してください"
+                        {t.magicFlowSvg.checkYourEmail}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -755,7 +758,7 @@ export default function MagicFlowSvg({
                         y={stepY[10] - 10}
                         className={styles.arrowLabel}
                     >
-                        "メールを確認してね"
+                        {t.magicFlowSvg.checkEmailMessage}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -780,7 +783,7 @@ export default function MagicFlowSvg({
                         x={X.U + 65}
                         y='510'
                     >
-                        ④ ユーザーがメールを開いてリンクを押す
+                        {t.magicFlowSvg.noteUserOpensEmail}
                     </text>
                 </g>
 
@@ -804,7 +807,7 @@ export default function MagicFlowSvg({
                         y={stepY[11] - 10}
                         className={styles.arrowLabel}
                     >
-                        メール閲覧
+                        {t.magicFlowSvg.readEmail}
                     </text>
                     <polygon
                         className={styles.arrowHead}
@@ -858,7 +861,7 @@ export default function MagicFlowSvg({
                         x={X.FE + 80}
                         y='590'
                     >
-                        ⑤ トークン検証してログイン確定
+                        {t.magicFlowSvg.noteTokenVerify}
                     </text>
                 </g>
 
@@ -983,14 +986,14 @@ export default function MagicFlowSvg({
                         y={stepY[16] - 4}
                         className={styles.arrowLabel}
                     >
-                        hash(token)一致確認
+                        {t.magicFlowSvg.hashVerify}
                     </text>
                     <text
                         x={X.API + 90}
                         y={stepY[16] + 10}
                         className={styles.arrowLabel}
                     >
-                        期限確認 / used=false確認
+                        {t.magicFlowSvg.expiryUsedCheck}
                     </text>
                 </g>
 

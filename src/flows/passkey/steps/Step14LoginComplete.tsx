@@ -2,21 +2,22 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 // 固定のサンプル日時を使用（レンダリングごとに変わらないように）
 const SAMPLE_LOGIN_TIME = '2025-12-26T12:00:00.000Z';
 
 export default function Step14LoginComplete({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 14: ログイン完了'>
-                <p>
-                    パスキー認証フローが完了し、ユーザーが ログインした状態になります。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 14: ${t.passkeyStepUI.loginComplete}`}>
+                <p>{t.passkeyStepUIDetail.passkeyFlowComplete}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>ログイン完了状態</h4>
+                    <h4>{t.passkeyStepUIDetail.loginCompleteState}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -40,28 +41,23 @@ export default function Step14LoginComplete({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        トップに戻る
+                        {t.passkeyStepUI.goHome}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このフロー全体の流れ'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        <strong>パスワードは一度も送信されていません。</strong>
-                    </li>
-                    <li>秘密鍵は端末から出ません —署名のみが送られます。</li>
-                    <li>公開鍵暗号により、非常に安全な認証が実現されています。</li>
-                    <li>
-                        複数のセキュリティチェック (チャレンジ検証、署名検証、signCount
-                        チェック) により、スプーフィング攻撃が防止されます。
-                    </li>
+                    <li><strong>{t.passkeyStepUIDetail.noPasswordSent}</strong></li>
+                    <li>{t.passkeyStepUIDetail.privateKeyInDevice}</li>
+                    <li>{t.passkeyStepUIDetail.publicKeyCrypto}</li>
+                    <li>{t.passkeyStepUIDetail.multipleSecurityChecks}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

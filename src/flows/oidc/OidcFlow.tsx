@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep';
+import { useTranslation } from '../../i18n';
 
 import StepIndicator from '../../components/StepIndicator';
 
@@ -16,21 +17,23 @@ import StepRedirectToLogin from './steps/StepRedirectToLogin';
 import StepValidateAuthorizationCode from './steps/StepValidateAuthorizationCode';
 import { FlowProps } from '../../types';
 
-const STEP_LABELS: string[] = [
-    'User: OIDCログイン開始',
-    'Authorization Code Request: 認可コード要求',
-    'Redirect to Login: ログイン画面へリダイレクト',
-    'Provider: ログイン / 同意',
-    'Redirect: Code 受け取り',
-    'Token Request: トークン要求',
-    'Validate Authorization Code: 認可コード検証',
-    'Token Response: Token取得',
-    'App: ログイン完了',
-];
-
 export default function OidcFlow({ onStepSelect, interactive = false }: FlowProps) {
     const navigate = useNavigate();
+    const t = useTranslation();
     const handleBack = () => navigate('/home');
+
+    const STEP_LABELS: string[] = [
+        `User: ${t.oidc.steps[1].label}`,
+        `Authorization Code Request: ${t.oidc.steps[2].label}`,
+        `Redirect to Login: ${t.oidc.steps[3].label}`,
+        `Provider: ${t.oidc.steps[4].label}`,
+        `Redirect: ${t.oidc.steps[5].label}`,
+        `Token Request: ${t.oidc.steps[6].label}`,
+        `Validate Authorization Code: ${t.oidc.steps[7].label}`,
+        `Token Response: ${t.oidc.steps[8].label}`,
+        `App: ${t.oidc.steps[9].label}`,
+    ];
+
     const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
     const screens = [
@@ -74,16 +77,16 @@ export default function OidcFlow({ onStepSelect, interactive = false }: FlowProp
             <header className={styles['flow-header']}>
                 <div></div>
                 <div>
-                    <h1>OIDC Code Flow</h1>
+                    <h1>{t.oidc.title}</h1>
                     <p className={styles['flow-subtitle']}>
-                        OAuth2 / OIDC の典型的なコードフローを、画面と裏側の動きで追体験
+                        {t.oidc.subtitle}
                     </p>
                 </div>
                 <button
                     className='reset-button'
                     onClick={reset}
                 >
-                    リセット
+                    {t.common.back}
                 </button>
             </header>
 

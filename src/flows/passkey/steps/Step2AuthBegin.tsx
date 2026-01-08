@@ -2,19 +2,21 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step2AuthBegin({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 2: 認証開始リクエスト'>
+            <ActionPanel title={`${t.stepUI.stepN} 2: ${t.passkeyStepUI.authBegin}`}>
                 <p>
-                    フロントエンドがバックエンドに
-                    <code>POST /webauthn/authenticate/begin</code> リクエストを送ります。
+                    {t.passkeyStepUI.authBeginDesc}
                 </p>
 
                 <div className={styles['mock-box']}>
-                    <h4>リクエスト内容</h4>
+                    <h4>{t.stepUI.requestContent}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -33,24 +35,22 @@ export default function Step2AuthBegin({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>バックエンドで認証セッションが開始されます。</li>
-                    <li>
-                        認証に必要な <strong>challenge</strong> が生成されます。
-                    </li>
-                    <li>このリクエストはまだユーザー識別情報を含みません。</li>
+                    <li>{t.passkeyStepUI.backendStartsSession}</li>
+                    <li>{t.passkeyStepUI.challengeGenerated}</li>
+                    <li>{t.passkeyStepUI.noUserIdYet}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

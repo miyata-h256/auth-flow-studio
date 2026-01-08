@@ -3,12 +3,14 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 12: User → Frontend
  * GET /magic/callback?token=RAW_TOKEN&rid=tokenId
  */
 export default function Step12ClickLink({ link, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     // リンクからパラメータを抽出
     const url =
         link || 'https://app.example.com/magic/callback?token=abc123&rid=tid_xyz';
@@ -18,8 +20,8 @@ export default function Step12ClickLink({ link, onNext, onPrev }: MagicStepProps
 
     return (
         <Layout>
-            <ActionPanel title='Magic Linkクリック'>
-                <p>ユーザーがメール内のMagic Linkをクリックします。</p>
+            <ActionPanel title={t.magicStepUI.clickLink}>
+                <p>{t.magicStepUI.clickLinkDesc}</p>
 
                 <div className={styles['mock-box']}>
                     <div className={styles['endpoint-display']}>
@@ -47,29 +49,22 @@ export default function Step12ClickLink({ link, onNext, onPrev }: MagicStepProps
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>ブラウザがMagic LinkのURLに遷移します。</li>
-                    <li>
-                        <code>token</code> はワンタイムの生トークン値。
-                    </li>
-                    <li>
-                        <code>rid</code> はToken StoreのレコードIDで、検証時に使用します。
-                    </li>
-                    <li>
-                        フロントエンドはこれを受け取ってAPIに検証リクエストを送ります。
-                    </li>
+                    <li>{t.magicStepUI.userClicksLink}</li>
+                    <li>{t.magicStepUI.browserOpensCallback}</li>
+                    <li>{t.magicStepUI.frontendExtractsToken}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

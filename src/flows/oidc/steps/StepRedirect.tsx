@@ -1,16 +1,18 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { buildRedirectUrl } from '../../../utils/oidcMock';
 import { StepProps } from '../../../types';
 
 const redirectUrl = buildRedirectUrl();
 
 export default function StepRedirect({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Redirect Back to Client'>
-                <p>Provider は Authorization Code を付与してクライアントに戻します。</p>
+            <ActionPanel title={t.oidcStepUI.redirectWithCode}>
+                <p>{t.oidcStepUI.redirectWithCodeDesc}</p>
 
                 <div className='mock-box'>
                     <p style={{ marginBottom: 4 }}>ブラウザの URL（擬似）</p>
@@ -22,26 +24,25 @@ export default function StepRedirect({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        Token 交換へ進む →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>
                         クエリには <code>code</code> と <code>state</code>{' '}
                         が含まれています。
                     </li>
                     <li>
-                        クライアントは受け取った <code>state</code>{' '}
-                        が最初に送ったものと一致するか確認します。
+                        {t.oidcStepUI.clientValidatesState}
                     </li>
                     <li>一致しなければ CSRF 攻撃の疑いがあり、処理を中断します。</li>
                 </ul>

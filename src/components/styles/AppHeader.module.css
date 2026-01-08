@@ -1,0 +1,128 @@
+/* src/components/styles/AppHeader.module.css */
+/* アプリケーションヘッダーのスタイル */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid #1f2937;
+  backdrop-filter: blur(8px);
+}
+
+.left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #f3f4f6;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.logo:hover {
+  color: #3b82f6;
+}
+
+.logoIcon {
+  font-size: 24px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink {
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #9ca3af;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.navLink:hover {
+  color: #e5e7eb;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navLink.active {
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.settingsButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-size: 14px;
+  color: #9ca3af;
+  background: transparent;
+  border: 1px solid #374151;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settingsButton:hover {
+  color: #e5e7eb;
+  border-color: #4b5563;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.settingsIcon {
+  font-size: 16px;
+}
+
+.languageIndicator {
+  padding: 4px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #9ca3af;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 4px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+  .header {
+    padding: 10px 16px;
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .logo span {
+    display: none;
+  }
+
+  .settingsButton span {
+    display: none;
+  }
+
+  .settingsButton {
+    padding: 8px;
+  }
+}

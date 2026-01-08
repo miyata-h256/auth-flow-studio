@@ -3,26 +3,27 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 9: API → Frontend
- * 200 OK "メールを確認してください"
+ * 200 OK "Please check your email"
  */
 export default function Step9ApiResponse({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='APIレスポンス'>
-                <p>Auth APIからフロントエンドに成功レスポンスが返されます。</p>
+            <ActionPanel title={t.magicStepUI.apiResponse}>
+                <p>{t.magicStepUI.apiResponseDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>APIレスポンス</p>
+                    <p>{t.magicStepUI.apiResponse}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
                                 status: 200,
-                                message: 'メールを確認してください',
-                                // セキュリティのため、メールが存在するかどうかは明かさない
-                                hint: '※ユーザー存在有無に関わらず同じレスポンス',
+                                message: t.magicStepUI.checkYourEmail,
                             },
                             null,
                             2
@@ -35,26 +36,21 @@ export default function Step9ApiResponse({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        セキュリティ上、メールアドレスの存在有無を漏らさないよう、常に同じレスポンスを返します。
-                    </li>
-                    <li>
-                        「メールが登録されていません」などと返すと、攻撃者にユーザー情報を漏らしてしまいます。
-                    </li>
-                    <li>これは「ユーザー列挙攻撃」対策として重要です。</li>
+                    <li>{t.magicStepUI.apiReturnsSuccess}</li>
+                    <li>{t.magicStepUI.showCheckEmailMessage}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

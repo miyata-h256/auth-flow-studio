@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step10VerifySignature({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 10: 署名検証'>
-                <p>
-                    バックエンドが登録済みの <strong>公開鍵</strong> を使って
-                    署名を検証します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 10: ${t.passkeyStepUI.verifySignature}`}>
+                <p>{t.passkeyStepUIDetail.backendVerifiesWithPublicKey}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>検証内容</h4>
+                    <h4>{t.passkeyStepUIDetail.verificationContent}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -35,29 +35,22 @@ export default function Step10VerifySignature({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        登録時に保存した <strong>公開鍵</strong> で署名を検証します。
-                    </li>
-                    <li>
-                        公開鍵と秘密鍵は数学的に関連しており、
-                        公開鍵で検証されたということは秘密鍵で署名されたことの証拠です。
-                    </li>
-                    <li>
-                        <strong>秘密鍵の所有を証明</strong>しているのと同じです。
-                    </li>
+                    <li>{t.passkeyStepUIDetail.backendVerifiesWithPublicKey}</li>
+                    <li>{t.passkeyStepUIDetail.publicKeyPrivateKeyRelated}</li>
+                    <li>{t.passkeyStepUIDetail.verifiedMeansOwnership}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

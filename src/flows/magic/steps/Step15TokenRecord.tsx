@@ -3,21 +3,23 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 15: Token Store → API
  * token record を返す
  */
 export default function Step15TokenRecord({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     const mockUserId = 'usr_' + btoa(email || 'user@example.com').slice(0, 8);
 
     return (
         <Layout>
-            <ActionPanel title='トークンレコード取得'>
-                <p>Token Storeからトークンレコードが返されます。</p>
+            <ActionPanel title={t.magicStepUI.tokenRecord}>
+                <p>{t.magicStepUI.tokenRecordDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>Token Storeレスポンス</p>
+                    <p>{t.magicStepUI.tokenStoreResponse}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -33,7 +35,7 @@ export default function Step15TokenRecord({ email, onNext, onPrev }: MagicStepPr
                     </pre>
                     <div style={{ marginTop: 8 }}>
                         <span className={`${styles['status-badge']} ${styles['pending']}`}>
-                            未使用・有効期限内
+                            {t.magicStepUI.unusedValid}
                         </span>
                     </div>
                 </div>
@@ -43,26 +45,20 @@ export default function Step15TokenRecord({ email, onNext, onPrev }: MagicStepPr
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        レコードにはハッシュ化されたトークン、ユーザーID、有効期限などが含まれます。
-                    </li>
-                    <li>
-                        <code>used: false</code> はまだ使用されていないことを示します。
-                    </li>
-                    <li>次のステップでAPIがこのレコードを検証します。</li>
+                    <li>{t.magicStepUI.tokenStoreReturns}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

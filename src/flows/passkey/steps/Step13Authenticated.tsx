@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step13Authenticated({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 13: 認証状態確立'>
-                <p>
-                    フロントエンドがセッショントークンを保存し、
-                    ユーザーが認証状態にあることを確認します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 13: ${t.passkeyStepUI.authenticated}`}>
+                <p>{t.passkeyStepUIDetail.frontendSavesToStorage}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>フロントエンドの状態</h4>
+                    <h4>{t.passkeyStepUIDetail.frontendState}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -33,29 +33,22 @@ export default function Step13Authenticated({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        フロントエンドがセッショントークンをローカルストレージなどに保存します。
-                    </li>
-                    <li>
-                        今後のすべてのリクエストにこのトークンを含めることで、
-                        認証状態を保つことができます。
-                    </li>
-                    <li>
-                        ページをリロードしても、トークンを使って認証状態が復元されます。
-                    </li>
+                    <li>{t.passkeyStepUI.frontendSavesSession}</li>
+                    <li>{t.passkeyStepUIDetail.subsequentRequests}</li>
+                    <li>{t.passkeyStepUIDetail.pageReloadRestoresAuth}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

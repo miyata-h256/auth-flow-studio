@@ -3,12 +3,14 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 7: API → Email Service
  * Send email with Magic Link
  */
 export default function Step7SendEmail({ email, setLink, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     const mockToken = btoa(JSON.stringify({ email, ts: 1735128000000 })).slice(
         0,
         24
@@ -23,19 +25,17 @@ export default function Step7SendEmail({ email, setLink, onNext, onPrev }: Magic
 
     return (
         <Layout>
-            <ActionPanel title='③ メール送信'>
-                <p>
-                    Auth APIがEmail ServiceにMagic Linkを含むメールの送信を依頼します。
-                </p>
+            <ActionPanel title={`③ ${t.magicStepUI.sendEmail}`}>
+                <p>{t.magicStepUI.sendEmailDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>メール送信リクエスト</p>
+                    <p>{t.magicStepUI.emailSendRequest}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
                                 to: email,
-                                subject: 'ログインリンク',
-                                body: `以下のリンクをクリックしてログインしてください:\n${magicLink}`,
+                                subject: t.magicStepUI.loginLink,
+                                body: `${t.magicStepUI.clickLinkToLogin}:\n${magicLink}`,
                             },
                             null,
                             2
@@ -48,22 +48,21 @@ export default function Step7SendEmail({ email, setLink, onNext, onPrev }: Magic
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={handleNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>Email ServiceはSMTP、Amazon SES、SendGridなどで実装されます。</li>
-                    <li>Magic LinkにはRAW_TOKENとtokenId（rid）の両方が含まれます。</li>
-                    <li>セキュリティのため、リンクはHTTPSである必要があります。</li>
+                    <li>{t.magicStepUI.apiRequestsEmail}</li>
+                    <li>{t.magicStepUI.linkContains}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

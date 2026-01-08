@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step11CheckSignCount({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 11: signCount チェック'>
-                <p>
-                    バックエンドがオーセンティケーターの <strong>signCount</strong> を
-                    確認し、複製品でないことを検証します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 11: ${t.passkeyStepUI.checkSignCount}`}>
+                <p>{t.passkeyStepUIDetail.backendChecksSignCount}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>検証内容</h4>
+                    <h4>{t.passkeyStepUIDetail.verificationContent}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -35,29 +35,22 @@ export default function Step11CheckSignCount({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        各オーセンティケーターは <strong>signCount</strong>
-                        （署名回数）を記録します。
-                    </li>
-                    <li>
-                        サーバが保存した signCount より大きければ、正規のデバイスです。
-                    </li>
-                    <li>
-                        signCount が前回以下なら、デバイスが複製された可能性があります。
-                    </li>
+                    <li>{t.passkeyStepUIDetail.eachAuthRecordsSignCount}</li>
+                    <li>{t.passkeyStepUIDetail.greaterThanStoredOk}</li>
+                    <li>{t.passkeyStepUIDetail.lessOrEqualMayBeCloned}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>
