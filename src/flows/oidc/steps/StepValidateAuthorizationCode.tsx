@@ -1,37 +1,40 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { StepProps } from '../../../types';
 
 export default function StepValidateAuthorizationCode({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Validate Authorization Code + Client Credentials'>
+            <ActionPanel title={t.oidcStepUI.validateCode}>
                 <p>
-                    クライアント（またはバックエンド）は受け取った認可コードとクライアント資格情報を検証します。
+                    {t.oidcStepUI.validateCodeDesc}
                 </p>
                 <div style={{ marginTop: 12 }}>
                     <button
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>
-                        サーバー側でクライアント認証（client_secret 等）を確認します。
+                        {t.oidcStepUI.serverValidatesCode}
                     </li>
-                    <li>正当であればアクセストークンを発行します。</li>
+                    <li>{t.oidcStepUI.serverValidatesCodeDetails}</li>
+                    <li>{t.oidcStepUI.serverIssuesTokens}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

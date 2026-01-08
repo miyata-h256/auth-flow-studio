@@ -1,15 +1,17 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { StepProps } from '../../../types';
 import styles from '../styles/StepSuccess.module.css';
 
 export default function StepSuccess({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='App Session'>
+            <ActionPanel title={t.oidcStepUI.loginComplete}>
                 <p>
-                    アプリケーション側では、ここで初めて「ログイン済みユーザー」として扱われます。
+                    {t.oidcStepUI.loginCompleteDesc}
                 </p>
 
                 <div className={styles['mock-box']}>
@@ -35,21 +37,21 @@ export default function StepSuccess({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        トップに戻る
+                        {t.oidcStepUI.goHome}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>
-                        アプリはセッションや Cookie を発行してユーザー状態を保持します。
+                        {t.oidcStepUI.clientCreatesSession}
                     </li>
                     <li>
                         以降のリクエストでは Access Token が API 呼び出しなどに使われます。

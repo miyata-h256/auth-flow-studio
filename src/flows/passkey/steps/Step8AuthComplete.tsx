@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step8AuthComplete({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 8: 認証完了リクエスト'>
-                <p>
-                    フロントエンドが Assertion をバックエンドに送信し、
-                    <code>POST /webauthn/authenticate/complete</code> を実行します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 8: ${t.passkeyStepUI.authComplete}`}>
+                <p>{t.passkeyStepUIDetail.frontendSendsAssertion}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>リクエスト内容</h4>
+                    <h4>{t.passkeyStepUIDetail.requestContent}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -41,22 +41,22 @@ export default function Step8AuthComplete({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>フロントエンドが Assertion をバックエンドに送ります。</li>
-                    <li>バックエンドはこれから署名を検証し、ユーザーを認証します。</li>
-                    <li>クライアント側の処理はここでほぼ完了です。</li>
+                    <li>{t.passkeyStepUI.frontendPostsAssertion}</li>
+                    <li>{t.passkeyStepUIDetail.backendVerifiesAndAuth}</li>
+                    <li>{t.passkeyStepUIDetail.clientProcessingComplete}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

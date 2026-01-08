@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep';
+import { useTranslation } from '../../i18n';
 import StepIndicator from '../../components/StepIndicator';
 
 import Step1EmailInput from './steps/Step1EmailInput';
@@ -24,29 +25,31 @@ import styles from '../styles/Flow.module.css';
 import MagicFlowSvg from './MagicFlowSvg';
 import type { FlowProps } from '../../types';
 
-const STEP_LABELS = [
-    '① メールアドレス入力',
-    '② Magic Link リクエスト',
-    '③ ユーザー検索/作成',
-    '④ ユーザー情報レスポンス',
-    '⑤ ワンタイムトークン発行',
-    '⑥ トークンID発行',
-    '⑦ メール送信',
-    '⑧ メール送信受付',
-    '⑨ APIレスポンス',
-    '⑩ メール確認案内',
-    '⑪ メールを開く',
-    '⑫ Magic Linkクリック',
-    '⑬ トークン検証リクエスト',
-    '⑭ トークン検索',
-    '⑮ トークンレコード取得',
-    '⑯ トークン検証',
-    '⑰ ログイン完了',
-];
-
 export default function MagicFlow({ onStepSelect, interactive = false }: FlowProps): React.ReactElement {
     const navigate = useNavigate();
+    const t = useTranslation();
     const handleBack = () => navigate('/home');
+
+    const STEP_LABELS = [
+        `① ${t.magic.steps[1].label}`,
+        `② ${t.magic.steps[2].label}`,
+        `③ ${t.magic.steps[3].label}`,
+        `④ ${t.magic.steps[4].label}`,
+        `⑤ ${t.magic.steps[5].label}`,
+        `⑥ ${t.magic.steps[6].label}`,
+        `⑦ ${t.magic.steps[7].label}`,
+        `⑧ ${t.magic.steps[8].label}`,
+        `⑨ ${t.magic.steps[9].label}`,
+        `⑩ ${t.magic.steps[10].label}`,
+        `⑪ ${t.magic.steps[11].label}`,
+        `⑫ ${t.magic.steps[12].label}`,
+        `⑬ ${t.magic.steps[13].label}`,
+        `⑭ ${t.magic.steps[14].label}`,
+        `⑮ ${t.magic.steps[15].label}`,
+        `⑯ ${t.magic.steps[16].label}`,
+        `⑰ ${t.magic.steps[17].label}`,
+    ];
+
     const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
     const [email, setEmail] = useState('user@example.com');
     const [link, setLink] = useState('');
@@ -156,16 +159,16 @@ export default function MagicFlow({ onStepSelect, interactive = false }: FlowPro
             <header className={styles['flow-header']}>
                 <div></div>
                 <div>
-                    <h1>Magic Link Login</h1>
+                    <h1>{t.magic.title}</h1>
                     <p className={styles['flow-subtitle']}>
-                        メールのワンタイムリンクでログインするフローを、擬似的に追体験
+                        {t.magic.subtitle}
                     </p>
                 </div>
                 <button
                     className='reset-button'
                     onClick={reset}
                 >
-                    リセット
+                    {t.common.back}
                 </button>
             </header>
 

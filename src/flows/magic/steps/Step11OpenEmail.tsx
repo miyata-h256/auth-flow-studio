@@ -2,16 +2,19 @@ import type { MagicStepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 11: User → Email Service
  * メール閲覧
  */
 export default function Step11OpenEmail({ link, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='④ メールを開く'>
-                <p>ユーザーがメールボックスを開き、Magic Linkのメールを確認します。</p>
+            <ActionPanel title={`④ ${t.magicStepUI.openEmail}`}>
+                <p>{t.magicStepUI.openEmailDesc}</p>
 
                 <div className='mock-box'>
                     <div
@@ -30,15 +33,15 @@ export default function Step11OpenEmail({ link, onNext, onPrev }: MagicStepProps
                             }}
                         >
                             <div style={{ color: '#64748b', fontSize: 12 }}>
-                                From: noreply@app.example.com
+                                From: {t.magicStepUI.emailFrom}
                             </div>
                             <div style={{ color: '#e5e7eb', fontWeight: 600 }}>
-                                件名: あなたのログインリンク
+                                {t.magicStepUI.emailSubject}
                             </div>
                         </div>
                         <div style={{ color: '#cbd5e1', fontSize: 14, lineHeight: 1.6 }}>
-                            <p>こんにちは、</p>
-                            <p>以下のリンクをクリックしてログインしてください：</p>
+                            <p>{t.magicStepUI.emailGreeting}</p>
+                            <p>{t.magicStepUI.emailClickLink}</p>
                             <div
                                 style={{
                                     background: '#1e293b',
@@ -54,7 +57,7 @@ export default function Step11OpenEmail({ link, onNext, onPrev }: MagicStepProps
                                     'https://app.example.com/magic/callback?token=...&rid=...'}
                             </div>
                             <p style={{ marginTop: 12, color: '#94a3b8', fontSize: 12 }}>
-                                ※ このリンクは15分間有効です。
+                                ※ {t.magicStepUI.linkValidTime}
                             </p>
                         </div>
                     </div>
@@ -65,24 +68,21 @@ export default function Step11OpenEmail({ link, onNext, onPrev }: MagicStepProps
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        リンクをクリック →
+                        {t.magicStepUI.clickLink} →
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        ユーザーはメールアプリ（Gmail、Outlookなど）でメールを開きます。
-                    </li>
-                    <li>メールにはMagic Linkと有効期限の案内が含まれています。</li>
-                    <li>次のステップでリンクをクリックします。</li>
+                    <li>{t.magicStepUI.userOpensEmail}</li>
+                    <li>{t.magicStepUI.emailContainsLink}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

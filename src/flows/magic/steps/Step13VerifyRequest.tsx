@@ -3,12 +3,14 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 13: Frontend → API
  * POST /auth/magic-link/verify { rid, token }
  */
 export default function Step13VerifyRequest({ link, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     // リンクからパラメータを抽出
     let token = 'abc123...';
     let rid = 'tid_xyz';
@@ -25,8 +27,8 @@ export default function Step13VerifyRequest({ link, onNext, onPrev }: MagicStepP
 
     return (
         <Layout>
-            <ActionPanel title='⑤ トークン検証リクエスト'>
-                <p>フロントエンドからAuth APIにトークン検証リクエストを送信します。</p>
+            <ActionPanel title={`⑤ ${t.magicStepUI.verifyRequest}`}>
+                <p>{t.magicStepUI.verifyRequestDesc}</p>
 
                 <div className={styles['mock-box']}>
                     <div className={styles['endpoint-display']}>
@@ -54,25 +56,21 @@ export default function Step13VerifyRequest({ link, onNext, onPrev }: MagicStepP
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        フロントエンドはURLパラメータから取得した <code>rid</code> と{' '}
-                        <code>token</code> をAPIに送信します。
-                    </li>
-                    <li>APIはこれを使ってToken Storeから該当レコードを検索します。</li>
-                    <li>トークンの検証が成功すれば、ログインが確定します。</li>
+                    <li>{t.magicStepUI.frontendExtractsToken}</li>
+                    <li>{t.magicStepUI.sendsVerification}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

@@ -3,19 +3,22 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 3: API → DB
  * email でユーザー検索/作成
  */
 export default function Step3UserLookup({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ユーザー検索/作成'>
-                <p>Auth APIはUser DBでメールアドレスからユーザーを検索します。</p>
+            <ActionPanel title={t.magicStepUI.userLookup}>
+                <p>{t.magicStepUI.userLookupDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>DBクエリ（イメージ）</p>
+                    <p>{t.magicStepUI.dbQuery}</p>
                     <pre className={styles['code-block']}>
                         {`SELECT * FROM users 
 WHERE email = '${email}'
@@ -32,27 +35,21 @@ RETURNING id`}
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        Magic
-                        Linkでは、ユーザーが存在しなければ新規登録を兼ねることが多いです。
-                    </li>
-                    <li>
-                        メールアドレスの正当性はリンクをクリックすることで検証されます。
-                    </li>
-                    <li>この段階ではまだ認証は完了していません。</li>
+                    <li>{t.magicStepUI.apiSearchesUser}</li>
+                    <li>{t.magicStepUI.newUserMayCreate}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

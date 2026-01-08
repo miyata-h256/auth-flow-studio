@@ -1,6 +1,7 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { issueTokens } from '../../../utils/oidcMock';
 import { decodeJwt } from '../../../utils/jwtDecode';
 import { StepProps } from '../../../types';
@@ -10,15 +11,16 @@ const tokens = issueTokens();
 const decodedIdToken = decodeJwt(tokens.idToken);
 
 export default function StepTokenResponse({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Token Endpoint'>
+            <ActionPanel title={t.oidcStepUI.tokenResponse}>
                 <p>
-                    Authentication ServerからアクセストークンとIDトークンが返されます。
+                    {t.oidcStepUI.tokenResponseDesc}
                 </p>
 
                 <div style={{ marginTop: 16 }}>
-                    <h4>レスポンス（サンプル）</h4>
+                    <h4>{t.oidcStepUI.tokenDetails}</h4>
                     <div className={styles['mock-box']}>
                         <code className={styles['code-block']}>
                             {JSON.stringify(
@@ -39,22 +41,22 @@ export default function StepTokenResponse({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        ログイン完了へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <p>
-                    クライアントは ID Token の署名・aud・iss・nonce などを検証します。
+                    {t.oidcStepUI.clientValidatesIdToken}
                 </p>
-                <p>ペイロードのイメージ:</p>
+                <p>{t.oidcStepUI.clientExtractsUser}</p>
                 <pre className={styles['code-block']}>
                     {JSON.stringify(decodedIdToken, null, 2)}
                 </pre>

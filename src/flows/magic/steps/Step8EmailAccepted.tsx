@@ -3,19 +3,22 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 8: Email Service → API
  * accepted レスポンス
  */
 export default function Step8EmailAccepted({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='メール送信受付'>
-                <p>Email Serviceがメール送信を受け付けました。</p>
+            <ActionPanel title={t.magicStepUI.emailAccepted}>
+                <p>{t.magicStepUI.emailAcceptedDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>Email Serviceレスポンス</p>
+                    <p>{t.magicStepUI.emailServiceResponse}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -39,22 +42,21 @@ export default function Step8EmailAccepted({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>「accepted」はメールがキューに入ったことを意味します。</li>
-                    <li>実際の配信はEmail Serviceが非同期で行います。</li>
-                    <li>配信失敗時はバウンス通知などで別途処理します。</li>
+                    <li>{t.magicStepUI.emailServiceAccepts}</li>
+                    <li>{t.magicStepUI.asyncDelivery}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

@@ -2,16 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step6AuthenticationOK({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 6: 認証成功'>
-                <p>ユーザーが生体認証に成功しました。</p>
+            <ActionPanel title={`${t.stepUI.stepN} 6: ${t.passkeyStepUI.authOk}`}>
+                <p>{t.passkeyStepUIDetail.userBiometricSuccess}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>認証ステータス</h4>
+                    <h4>{t.passkeyStepUIDetail.authStatus}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -29,25 +32,22 @@ export default function Step6AuthenticationOK({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>デバイスは認証を確認しました。</li>
-                    <li>秘密鍵を使ってチャレンジに署名する準備ができました。</li>
-                    <li>
-                        <strong>秘密鍵はデバイスから出ません</strong>—
-                        デバイス内で署名が生成されます。
-                    </li>
+                    <li>{t.passkeyStepUIDetail.deviceConfirmedAuth}</li>
+                    <li>{t.passkeyStepUIDetail.readyToSign}</li>
+                    <li>{t.passkeyStepUIDetail.privateKeyNeverLeaves}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

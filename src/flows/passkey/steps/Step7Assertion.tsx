@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step7Assertion({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 7: Assertion（主張）の返却'>
-                <p>
-                    オーセンティケーターがチャレンジに署名した <strong>Assertion</strong>{' '}
-                    をフロントエンドに返します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 7: ${t.passkeyStepUI.assertion}`}>
+                <p>{t.passkeyStepUIDetail.authenticatorReturnsAssertion}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>返却される Assertion</h4>
+                    <h4>{t.passkeyStepUIDetail.returnedAssertion}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -37,30 +37,23 @@ export default function Step7Assertion({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        <strong>signature</strong>: チャレンジに対する秘密鍵での署名
-                    </li>
-                    <li>
-                        <strong>authenticatorData</strong>: デバイス側の認証情報
-                    </li>
-                    <li>
-                        <strong>clientDataJSON</strong>: クライアント側の情報（origin,
-                        challenge など）
-                    </li>
-                    <li>この Assertion がサーバでの署名検証に使われます。</li>
+                    <li>{t.passkeyStepUIDetail.signatureWithPrivateKey}</li>
+                    <li>{t.passkeyStepUIDetail.authenticatorDataDesc}</li>
+                    <li>{t.passkeyStepUIDetail.clientDataJsonDesc}</li>
+                    <li>{t.passkeyStepUIDetail.assertionUsedForVerification}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

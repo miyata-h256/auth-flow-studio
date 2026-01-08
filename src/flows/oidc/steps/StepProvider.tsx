@@ -1,16 +1,17 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { StepProps } from '../../../types';
 import styles from '../styles/StepProvider.module.css';
 
 export default function StepProvider({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Authorization Server (Provider)'>
+            <ActionPanel title={t.oidcStepUI.providerLogin}>
                 <p>
-                    ここは Google や Azure AD
-                    などの認可サーバー側の画面をイメージしています。
+                    {t.oidcStepUI.providerLoginDesc}
                 </p>
 
                 <div className={styles['mock-provider-login-form']}>
@@ -28,7 +29,7 @@ export default function StepProvider({ onNext, onPrev }: StepProps) {
                         className='primary-button'
                         onClick={onNext}
                     >
-                        ログイン & 同意する
+                        {t.oidc.steps[4].label}
                     </button>
                 </div>
 
@@ -37,20 +38,19 @@ export default function StepProvider({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 前のステップへ
+                        {t.stepUI.back}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>
-                        ユーザーは Provider で認証されます（ID/Password や MFA など）。
+                        {t.oidcStepUI.userEntersCreds}
                     </li>
-                    <li>クライアントが要求した scope に対して、ユーザーが同意します。</li>
+                    <li>{t.oidcStepUI.serverValidates}</li>
                     <li>
-                        同意後、Authorization Code を付与して <code>redirect_uri</code>{' '}
-                        にリダイレクトします。
+                        {t.oidcStepUI.serverGeneratesCode}
                     </li>
                 </ul>
             </ExplanationPanel>

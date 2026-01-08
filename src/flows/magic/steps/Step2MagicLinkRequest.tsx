@@ -3,16 +3,19 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 2: Frontend → API
  * POST /auth/magic-link/request { email, clientInfo }
  */
 export default function Step2MagicLinkRequest({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='Magic Link リクエスト'>
-                <p>フロントエンドからAuth APIへMagic Linkリクエストを送信します。</p>
+            <ActionPanel title={t.magicStepUI.magicLinkRequest}>
+                <p>{t.magicStepUI.magicLinkRequestDesc}</p>
 
                 <div className={styles['mock-box']}>
                     <div className={styles['endpoint-display']}>
@@ -43,28 +46,22 @@ export default function Step2MagicLinkRequest({ email, onNext, onPrev }: MagicSt
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        フロントエンドはAuth APIの <code>/auth/magic-link/request</code>{' '}
-                        エンドポイントを呼び出します。
-                    </li>
-                    <li>
-                        <code>clientInfo</code>{' '}
-                        にはセキュリティ目的でユーザーエージェントやIPなどを含めることがあります。
-                    </li>
-                    <li>APIはこれを受け取ってユーザー検索・トークン発行を行います。</li>
+                    <li>{t.magicStepUI.frontendCallsApi}</li>
+                    <li>{t.magicStepUI.clientInfoSecurity}</li>
+                    <li>{t.magicStepUI.apiProcesses}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

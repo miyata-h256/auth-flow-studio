@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 import type { FlowStep, FlowStepWithType } from '../types';
+import { useTranslation } from '../i18n';
 import FlowPicker from '../components/FlowPicker';
 import FlowPane, { type FlowId } from '../components/FlowPane';
 import StepDetailPanel from '../components/StepDetailPanel';
@@ -32,14 +33,16 @@ const getStepData = (flowId: FlowId, stepId: number): StepDataWithFlowType | nul
 };
 
 export default function ComparePage(): React.ReactElement {
+    const t = useTranslation();
+
     const flowOptions = useMemo<FlowOption[]>(
         () => [
-            { id: 'oidc', label: 'OIDC / Authorization Code' },
-            { id: 'passkey', label: 'Passkey' },
-            { id: 'magic', label: 'Magic Link' },
+            { id: 'oidc', label: t.flowNames.oidc },
+            { id: 'passkey', label: t.flowNames.passkey },
+            { id: 'magic', label: t.flowNames.magic },
             // ここに増やしていく（pkce, implicit, etc）
         ],
-        []
+        [t]
     );
 
     const [leftFlowId, setLeftFlowId] = useState<FlowId>(flowOptions[0].id);
@@ -74,15 +77,15 @@ export default function ComparePage(): React.ReactElement {
         <div className={styles.page}>
             <header className={styles.header}>
                 <div className={styles.titleRow}>
-                    <h1 className={styles.title}>Flow Compare</h1>
+                    <h1 className={styles.title}>{t.compare.title}</h1>
                     <p className={styles.subtitle}>
-                        2つの認証フローを並べて、差を"目で"理解する
+                        {t.compare.subtitle}
                     </p>
                 </div>
 
                 <div className={styles.pickers}>
                     <FlowPicker
-                        label='Flow A'
+                        label={t.compare.flowA}
                         options={flowOptions}
                         value={leftFlowId}
                         onChange={(v) => {
@@ -92,7 +95,7 @@ export default function ComparePage(): React.ReactElement {
                     />
                     <div className={styles.vs}>VS</div>
                     <FlowPicker
-                        label='Flow B'
+                        label={t.compare.flowB}
                         options={flowOptions}
                         value={rightFlowId}
                         onChange={(v) => {

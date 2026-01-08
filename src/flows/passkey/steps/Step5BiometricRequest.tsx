@@ -2,42 +2,43 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 
 export default function Step5BiometricRequest({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 5: 生体認証リクエスト'>
-                <p>オーセンティケーター（デバイス）がユーザーに生体認証を求めます。</p>
+            <ActionPanel title={`${t.stepUI.stepN} 5: ${t.passkeyStepUI.biometricRequest}`}>
+                <p>{t.passkeyStepUI.biometricRequestDesc}</p>
 
                 <div className='mock-box'>
-                    <p>📱 生体認証ダイアログが表示されます</p>
+                    <p>📱 {t.passkeyStepUIDetail.biometricDialogShown}</p>
                     <p style={{ marginTop: 8, fontSize: 12, color: '#666' }}>
-                        例: Touch ID / Face ID / Windows Hello
+                        {t.passkeyStepUIDetail.biometricExample}
                     </p>
                     <button
                         className='secondary-button'
                         style={{ marginTop: 12 }}
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         style={{ marginTop: 12 }}
                         onClick={onNext}
                     >
-                        認証を実行
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        デバイスのセキュアなハードウェアが起動します（Touch ID など）。
-                    </li>
-                    <li>ユーザーは生体認証またはデバイス PIN を入力します。</li>
-                    <li>認証失敗時は、ここで処理が止まります。</li>
+                    <li>{t.passkeyStepUIDetail.deviceSecureHardware}</li>
+                    <li>{t.passkeyStepUIDetail.userEntersBiometricOrPin}</li>
+                    <li>{t.passkeyStepUIDetail.authFailsHere}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

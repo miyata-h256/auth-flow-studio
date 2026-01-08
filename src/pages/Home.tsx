@@ -1,57 +1,59 @@
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from '../i18n';
 import './styles/Home.css';
 
 export default function Home(): React.ReactElement {
     const navigate = useNavigate();
+    const t = useTranslation();
 
     return (
         <div className='app-root'>
             <header className='app-header'>
-                <h1>Auth Flow Studio</h1>
+                <h1>{t.home.title}</h1>
                 <p className='app-subtitle'>
-                    各種ログイン方式の「裏側」で何が起きているかを体感するためのミニアプリ
+                    {t.home.subtitle}
                 </p>
             </header>
 
             <main className='app-main'>
                 <section className='section'>
-                    <h2 className='section-title'>認証フロー</h2>
+                    <h2 className='section-title'>{t.home.authFlows}</h2>
                     <div className='card-grid'>
                         <button
                             className='card'
                             onClick={() => navigate('/oidc-flow')}
                         >
-                            <h3>OIDC Code Flow</h3>
-                            <p>OAuth2 / OIDC の典型的な認証フローをステップごとに可視化</p>
+                            <h3>{t.home.oidcTitle}</h3>
+                            <p>{t.home.oidcDescription}</p>
                         </button>
 
                         <button
                             className='card'
                             onClick={() => navigate('/passkey-flow')}
                         >
-                            <h3>Passkey (WebAuthn)</h3>
-                            <p>パスワードレスな認証がどう動いているかをざっくり追体験</p>
+                            <h3>{t.home.passkeyTitle}</h3>
+                            <p>{t.home.passkeyDescription}</p>
                         </button>
 
                         <button
                             className='card'
                             onClick={() => navigate('/magic-flow')}
                         >
-                            <h3>Magic Link</h3>
-                            <p>メールのワンタイムリンクでログインする仕組みを理解する</p>
+                            <h3>{t.home.magicLinkTitle}</h3>
+                            <p>{t.home.magicLinkDescription}</p>
                         </button>
                     </div>
                 </section>
 
                 <section className='section'>
-                    <h2 className='section-title'>比較</h2>
+                    <h2 className='section-title'>{t.home.compare}</h2>
                     <div className='card-grid'>
                         <button
                             className='card'
                             onClick={() => navigate('/compare')}
                         >
-                            <h3>Compare Flows</h3>
-                            <p>各認証フローを並べて比較する</p>
+                            <h3>{t.home.compareTitle}</h3>
+                            <p>{t.home.compareDescription}</p>
                         </button>
                     </div>
                 </section>

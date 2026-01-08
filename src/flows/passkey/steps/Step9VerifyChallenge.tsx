@@ -2,19 +2,19 @@ import type { StepProps } from '../../../types';
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import styles from '../styles/PasskeyFlow.module.css';
 
 export default function Step9VerifyChallenge({ onNext, onPrev }: StepProps) {
+    const t = useTranslation();
+
     return (
         <Layout>
-            <ActionPanel title='ステップ 9: チャレンジ検証'>
-                <p>
-                    バックエンドが <strong>clientDataJSON</strong> 内のチャレンジが
-                    自分が送ったものと一致するか確認します。
-                </p>
+            <ActionPanel title={`${t.stepUI.stepN} 9: ${t.passkeyStepUI.verifyChallenge}`}>
+                <p>{t.passkeyStepUIDetail.backendVerifiesChallenge}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>検証内容</h4>
+                    <h4>{t.passkeyStepUIDetail.verificationContent}</h4>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -34,24 +34,22 @@ export default function Step9VerifyChallenge({ onNext, onPrev }: StepProps) {
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='このステップで起こること'>
+            <ExplanationPanel title={t.stepUI.whatHappens}>
                 <ul>
-                    <li>
-                        <strong>Replay 攻撃を防止</strong>します。
-                    </li>
-                    <li>チャレンジが一致しない場合、認証は失敗します。</li>
-                    <li>チャレンジは通常 1 回限りで、複数回使用はできません。</li>
+                    <li>{t.passkeyStepUIDetail.preventsReplayAttack}</li>
+                    <li>{t.passkeyStepUIDetail.challengeMismatchFails}</li>
+                    <li>{t.passkeyStepUIDetail.challengeOneTimeOnly}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

@@ -1,4 +1,5 @@
 import type { FlowStep } from '../types';
+import { useTranslation } from '../i18n';
 import styles from './styles/StepDetailPanel.module.css';
 
 interface StepDetailPanelProps {
@@ -7,12 +8,14 @@ interface StepDetailPanelProps {
 }
 
 export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
+    const t = useTranslation();
+
     return (
         <div className={styles.wrap}>
             <div className={styles.header}>
-                <div className={styles.title}>Step Details</div>
+                <div className={styles.title}>{t.compare.stepDetails}</div>
                 <div className={styles.hint}>
-                    フロー上のステップ（番号サークル）をクリックすると詳細が出ます
+                    {t.compare.stepDetailsHint}
                 </div>
             </div>
 
@@ -22,7 +25,7 @@ export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
                     {left ? (
                         <StepDetail step={left} />
                     ) : (
-                        <div className={styles.empty}>未選択</div>
+                        <div className={styles.empty}>{t.compare.notSelected}</div>
                     )}
                 </div>
 
@@ -31,7 +34,7 @@ export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
                     {right ? (
                         <StepDetail step={right} />
                     ) : (
-                        <div className={styles.empty}>未選択</div>
+                        <div className={styles.empty}>{t.compare.notSelected}</div>
                     )}
                 </div>
             </div>
@@ -91,7 +94,7 @@ function StepDetail({ step }: StepDetailProps) {
             {/* ペイロード */}
             {step.payload && (
                 <div className={styles.payloadSection}>
-                    <div className={styles.payloadLabel}>Payload / Response:</div>
+                    <div className={styles.payloadLabel}>Payload / Response</div>
                     <pre className={styles.payload}>
                         {JSON.stringify(step.payload, null, 2)}
                     </pre>
@@ -100,19 +103,3 @@ function StepDetail({ step }: StepDetailProps) {
         </div>
     );
 }
-
-// 旧バージョン: JSON.stringify でダンプ表示（互換性のため残しておく）
-// 現在は使用されていないが、デバッグ用に残す場合は以下のコメントを解除
-/*
-interface StepDumpProps {
-  step: FlowStep;
-}
-
-function StepDump({ step }: StepDumpProps) {
-  return (
-    <pre style={{ margin: 0, whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}>
-      {JSON.stringify(step, null, 2)}
-    </pre>
-  );
-}
-*/

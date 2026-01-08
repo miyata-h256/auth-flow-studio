@@ -3,22 +3,24 @@ import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
 import styles from '../styles/Steps.module.css';
+import { useTranslation } from '../../../i18n';
 
 /**
  * Step 5: API → Token Store
  * create magic_token (hash 保存)
  */
 export default function Step5CreateToken({ email, onNext, onPrev }: MagicStepProps) {
+    const t = useTranslation();
     const mockUserId = 'usr_' + btoa(email || '').slice(0, 8);
     const mockNonce = 'nonce_a1b2c3d4';
 
     return (
         <Layout>
-            <ActionPanel title='② ワンタイムトークン発行'>
-                <p>Auth APIがToken Storeにワンタイムトークンを作成します。</p>
+            <ActionPanel title={`② ${t.magicStepUI.createToken}`}>
+                <p>{t.magicStepUI.createTokenDesc}</p>
 
                 <div className={styles['mock-box']}>
-                    <p>トークン作成リクエスト</p>
+                    <p>{t.magicStepUI.tokenCreateRequest}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -39,29 +41,22 @@ export default function Step5CreateToken({ email, onNext, onPrev }: MagicStepPro
                         className='secondary-button'
                         onClick={onPrev}
                     >
-                        ← 戻る
+                        {t.stepUI.back}
                     </button>{' '}
                     <button
                         className='primary-button'
                         onClick={onNext}
                     >
-                        次へ →
+                        {t.stepUI.next}
                     </button>
                 </div>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>
-                        トークンは生成後、<strong>ハッシュ化して</strong>
-                        保存します（平文は保存しない）。
-                    </li>
-                    <li>有効期限は通常15分〜1時間程度の短時間。</li>
-                    <li>
-                        <code>used=false</code>{' '}
-                        は使用済みかどうかのフラグで、ワンタイム性を保証します。
-                    </li>
-                    <li>Token Store は DB や Redis などで実装されます。</li>
+                    <li>{t.magicStepUI.apiGeneratesToken}</li>
+                    <li>{t.magicStepUI.tokenStored}</li>
+                    <li>{t.magicStepUI.expirationSet}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

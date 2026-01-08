@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useFlowStep } from '../../hooks/useFlowStep';
+import { useTranslation } from '../../i18n';
 import StepIndicator from '../../components/StepIndicator';
 
 import Step1LoginClick from './steps/Step1LoginClick';
@@ -20,26 +21,28 @@ import styles from '../styles/Flow.module.css';
 import PasskeyFlowSvg from './PasskeyFlowSvg';
 import type { FlowProps } from '../../types';
 
-const STEP_LABELS = [
-    'ログインクリック',
-    '認証開始',
-    'チャレンジ',
-    'credentials.get',
-    '生体認証',
-    '認証確認',
-    'Assertion',
-    '認証送信',
-    'チャレンジ検証',
-    '署名検証',
-    'signCount確認',
-    'トークン返却',
-    '認証確立',
-    'ログイン完了',
-];
-
 export default function PasskeyFlow({ onStepSelect, interactive = false }: FlowProps) {
     const navigate = useNavigate();
+    const t = useTranslation();
     const handleBack = () => navigate('/home');
+
+    const STEP_LABELS = [
+        t.passkey.steps[1].label,
+        t.passkey.steps[2].label,
+        t.passkey.steps[3].label,
+        t.passkey.steps[4].label,
+        t.passkey.steps[5].label,
+        t.passkey.steps[6].label,
+        t.passkey.steps[7].label,
+        t.passkey.steps[8].label,
+        t.passkey.steps[9].label,
+        t.passkey.steps[10].label,
+        t.passkey.steps[11].label,
+        t.passkey.steps[12].label,
+        t.passkey.steps[13].label,
+        t.passkey.steps[14].label,
+    ];
+
     const { step, next, prev, reset } = useFlowStep(STEP_LABELS.length);
 
     const screens = [
@@ -106,16 +109,16 @@ export default function PasskeyFlow({ onStepSelect, interactive = false }: FlowP
             <header className={styles['flow-header']}>
                 <div></div>
                 <div>
-                    <h1>Passkey (WebAuthn)</h1>
+                    <h1>{t.passkey.title}</h1>
                     <p className={styles['flow-subtitle']}>
-                        公開鍵暗号をベースにしたパスワードレス認証の流れをざっくり理解する
+                        {t.passkey.subtitle}
                     </p>
                 </div>
                 <button
                     className='reset-button'
                     onClick={reset}
                 >
-                    リセット
+                    {t.common.back}
                 </button>
             </header>
 

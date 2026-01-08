@@ -1,32 +1,34 @@
 import Layout from '../../../components/Layout';
 import ActionPanel from '../../../components/ActionPanel';
 import ExplanationPanel from '../../../components/ExplanationPanel';
+import { useTranslation } from '../../../i18n';
 import { StepProps } from '../../../types';
 
 export default function StepClient({ onNext }: StepProps) {
+    const t = useTranslation();
     return (
         <Layout>
-            <ActionPanel title='Client Application'>
-                <p>ユーザーはクライアントアプリから「OIDCでログイン」を開始します。</p>
+            <ActionPanel title={t.oidcStepUI.clientApp}>
+                <p>{t.oidcStepUI.clientAppDesc}</p>
                 <button
                     className='primary-button'
                     onClick={onNext}
                 >
-                    Login with OIDC
+                    {t.stepUI.loginWithOidc}
                 </button>
             </ActionPanel>
 
-            <ExplanationPanel title='Behind the Scenes'>
+            <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>クライアントは Authorization Request を組み立てます。</li>
                     <li>
-                        <code>state</code> は CSRF 対策用のランダム値。
+                        <code>state</code> {t.oidcStepUI.stateForCsrf}
                     </li>
                     <li>
-                        <code>nonce</code> は ID Token を後で検証するための一時値。
+                        <code>nonce</code> {t.oidcStepUI.nonceForIdToken}
                     </li>
                     <li>
-                        これらはフロントの画面からは見えませんが、重要な安全装置です。
+                        {t.oidcStepUI.invisibleSafety}
                     </li>
                 </ul>
             </ExplanationPanel>
