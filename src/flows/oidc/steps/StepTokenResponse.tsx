@@ -19,21 +19,19 @@ export default function StepTokenResponse({ onNext, onPrev }: StepProps) {
                     {t.oidcStepUI.tokenResponseDesc}
                 </p>
 
-                <div style={{ marginTop: 16 }}>
+                <div className={styles['mock-box']}>
                     <h4>{t.oidcStepUI.tokenDetails}</h4>
-                    <div className={styles['mock-box']}>
-                        <code className={styles['code-block']}>
-                            {JSON.stringify(
-                                {
-                                    access_token: tokens.accessToken,
-                                    id_token: `${tokens.idToken.slice(0, 40)}...`,
-                                    refresh_token: tokens.refreshToken,
-                                },
-                                null,
-                                2
-                            )}
-                        </code>
-                    </div>
+                    <pre className={styles['code-block']}>
+                        {JSON.stringify(
+                            {
+                                access_token: tokens.accessToken,
+                                id_token: `${tokens.idToken.slice(0, 40)}...`,
+                                refresh_token: tokens.refreshToken,
+                            },
+                            null,
+                            2
+                        )}
+                    </pre>
                 </div>
 
                 <div style={{ marginTop: 12 }}>

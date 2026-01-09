@@ -4,7 +4,7 @@ import ExplanationPanel from '../../../components/ExplanationPanel';
 import { useTranslation } from '../../../i18n';
 import { buildAuthRequest } from '../../../utils/oidcMock';
 import { StepProps } from '../../../types';
-import styles from '../styles/StepAutorizationCodeRequest.module.css';
+import styles from '../styles/StepAuthorizationCodeRequest.module.css';
 
 const authReq = buildAuthRequest();
 
@@ -16,27 +16,32 @@ export default function StepAuthorizationCodeRequest({ onNext, onPrev }: StepPro
                 <p>
                     {t.oidcStepUI.authCodeRequestDesc}
                 </p>
-                <div
-                    style={{
-                        marginTop: 16,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <h4>{t.stepUI.sentParameters}</h4>
+
+                <div className={styles['mock-box']}>
+                    <div className={styles['endpoint-display']}>
+                        <span className={`${styles['method-badge']} ${styles['get']}`}>
+                            GET
+                        </span>
+                        <span className={styles['endpoint-url']}>
+                            /authorize
+                        </span>
+                    </div>
                     <pre className={styles['code-block']}>
-                        {`
-              {
-                response_type=code,
-                client_id=${authReq.client_id},
-                redirect_uri=${authReq.redirect_uri},
-                scope=${authReq.scope},
-                state=${authReq.state},
-                nonce=${authReq.nonce}
-              }`}
+                        {JSON.stringify(
+                            {
+                                response_type: 'code',
+                                client_id: authReq.client_id,
+                                redirect_uri: authReq.redirect_uri,
+                                scope: authReq.scope,
+                                state: authReq.state,
+                                nonce: authReq.nonce,
+                            },
+                            null,
+                            2
+                        )}
                     </pre>
                 </div>
+
                 <div style={{ marginTop: 12 }}>
                     <button
                         className='secondary-button'

@@ -20,8 +20,15 @@ export default function StepTokenRequest({ onNext, onPrev }: StepProps) {
                 </p>
 
                 <div className={styles['mock-box']}>
-                    <p>POST /token</p>
-                    <code className={styles['code-block']}>
+                    <div className={styles['endpoint-display']}>
+                        <span className={`${styles['method-badge']} ${styles['post']}`}>
+                            POST
+                        </span>
+                        <span className={styles['endpoint-url']}>
+                            /token
+                        </span>
+                    </div>
+                    <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
                                 grant_type: 'authorization_code',
@@ -32,7 +39,7 @@ export default function StepTokenRequest({ onNext, onPrev }: StepProps) {
                             null,
                             2
                         )}
-                    </code>
+                    </pre>
                 </div>
 
                 <div style={{ marginTop: 12 }}>

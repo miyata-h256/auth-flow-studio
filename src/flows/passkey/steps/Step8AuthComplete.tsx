@@ -14,12 +14,17 @@ export default function Step8AuthComplete({ onNext, onPrev }: StepProps) {
                 <p>{t.passkeyStepUIDetail.frontendSendsAssertion}</p>
 
                 <div className={styles['mock-box']}>
-                    <h4>{t.passkeyStepUIDetail.requestContent}</h4>
+                    <div className={styles['endpoint-display']}>
+                        <span className={`${styles['method-badge']} ${styles['post']}`}>
+                            POST
+                        </span>
+                        <span className={styles['endpoint-url']}>
+                            /webauthn/authenticate/complete
+                        </span>
+                    </div>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
-                                method: 'POST',
-                                endpoint: '/webauthn/authenticate/complete',
                                 body: {
                                     id: 'credentialId123...',
                                     rawId: 'Y3JlZGVudGlhbElkMTIz...',

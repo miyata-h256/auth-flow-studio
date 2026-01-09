@@ -16,12 +16,17 @@ export default function Step2AuthBegin({ onNext, onPrev }: StepProps) {
                 </p>
 
                 <div className={styles['mock-box']}>
-                    <h4>{t.stepUI.requestContent}</h4>
+                    <div className={styles['endpoint-display']}>
+                        <span className={`${styles['method-badge']} ${styles['post']}`}>
+                            POST
+                        </span>
+                        <span className={styles['endpoint-url']}>
+                            /webauthn/authenticate/begin
+                        </span>
+                    </div>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
-                                method: 'POST',
-                                endpoint: '/webauthn/authenticate/begin',
                                 headers: { 'Content-Type': 'application/json' },
                             },
                             null,

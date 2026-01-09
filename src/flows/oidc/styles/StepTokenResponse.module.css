@@ -1,10 +1,33 @@
-.mock-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 .code-block {
   display: block;
   text-align: left;
-  white-space: pre-wrap; /* 改行を維持しつつ折り返し可能 */
+  white-space: pre-wrap;
+  word-break: break-all;
+  background: #1e1b4b;
+  padding: 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #c4b5fd;
+  border: 1px solid #4c1d95;
+}
+
+.mock-box {
+  background: #1f1a2e;
+  border: 1px solid #7c3aed;
+  border-radius: 8px;
+  padding: 16px;
+  margin-top: 12px;
+}
+
+.mock-box p {
+  margin: 0 0 8px 0;
+  color: #e5e7eb;
+  font-weight: 600;
+}
+
+.mock-box h4 {
+  margin: 0 0 8px 0;
+  color: #e5e7eb;
+  font-weight: 600;
+  font-size: 14px;
 }
