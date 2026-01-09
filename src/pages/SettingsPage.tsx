@@ -17,6 +17,26 @@ const ANIMATION_STORAGE_KEY = 'auth-flow-studio-animation';
 const THEME_STORAGE_KEY = 'auth-flow-studio-theme';
 
 /**
+ * テーマをDOMに適用する関数
+ */
+function applyTheme(theme: Theme) {
+    if (theme === 'system') {
+        // システム設定を検出
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+    } else {
+        document.documentElement.setAttribute('data-theme', theme);
+    }
+}
+
+/**
+ * アニメーション設定をDOMに適用する関数
+ */
+function applyAnimation(enabled: boolean) {
+    document.documentElement.setAttribute('data-animation', String(enabled));
+}
+
+/**
  * 設定ページコンポーネント
  */
 export default function SettingsPage(): React.ReactElement {
@@ -61,6 +81,8 @@ export default function SettingsPage(): React.ReactElement {
             } catch {
                 // localStorage が使えない環境
             }
+            // テーマをDOMに適用
+            applyTheme(newTheme);
             showNotification(t.settings.saveSuccess);
         },
         [t.settings.saveSuccess]
@@ -75,6 +97,8 @@ export default function SettingsPage(): React.ReactElement {
             } catch {
                 // localStorage が使えない環境
             }
+            // アニメーション設定をDOMに適用
+            applyAnimation(enabled);
             showNotification(t.settings.saveSuccess);
         },
         [t.settings.saveSuccess]
@@ -94,6 +118,22 @@ export default function SettingsPage(): React.ReactElement {
             return () => clearTimeout(timer);
         }
     }, [notification]);
+
+    // 初期テーマとアニメーションを適用
+    useEffect(() => {
+        applyTheme(theme);
+        applyAnimation(animationEnabled);
+    }, []);
+
+    // システムテーマ変更を監視
+    useEffect(() => {
+        if (theme === 'system') {
+            const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const handler = () => applyTheme('system');
+            mediaQuery.addEventListener('change', handler);
+            return () => mediaQuery.removeEventListener('change', handler);
+        }
+    }, [theme]);
 
     return (
         <div className={styles.page}>

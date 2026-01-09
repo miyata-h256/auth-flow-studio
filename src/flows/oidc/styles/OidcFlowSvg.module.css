@@ -42,7 +42,8 @@
 
 .arrowGroup {
   opacity: 0.4;
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition: opacity var(--transition-duration) var(--transition-timing),
+    transform var(--transition-duration) var(--transition-timing);
 }
 
 .arrow {
@@ -50,12 +51,13 @@
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: stroke-width 0.25s ease, stroke 0.25s ease;
+  transition: stroke-width var(--transition-duration) var(--transition-timing),
+    stroke var(--transition-duration) var(--transition-timing);
 }
 
 .arrowHead {
   fill: #7c3aed;
-  transition: fill 0.25s ease;
+  transition: fill var(--transition-duration) var(--transition-timing);
 }
 
 /* ========================= */
@@ -82,6 +84,7 @@
   stroke-width: 3;
   stroke-dasharray: 8 4;
   animation: arrowFlowRight 5s linear infinite;
+  animation-play-state: var(--animation-play-state);
   filter: drop-shadow(0 0 6px #c084fc);
 }
 
@@ -109,6 +112,7 @@
   stroke-width: 3;
   stroke-dasharray: 8 4;
   animation: arrowFlowLeft 5s linear infinite;
+  animation-play-state: var(--animation-play-state);
   filter: drop-shadow(0 0 6px #c084fc);
 }
 
@@ -124,7 +128,9 @@
   opacity: 0.6;
   transform-origin: center;
   transform-box: fill-box;
-  transition: opacity 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+  transition: opacity var(--transition-duration) var(--transition-timing),
+    transform var(--transition-duration) var(--transition-timing),
+    filter var(--transition-duration) var(--transition-timing);
 }
 
 .stepGroupActive {
@@ -169,6 +175,7 @@
 .arrowLoopUp .arrow {
   stroke-dasharray: 10 6;
   animation: arrowFlowRightLoop 5s linear infinite;
+  animation-play-state: var(--animation-play-state);
   stroke: #c4b5fd;
   stroke-width: 3;
   filter: drop-shadow(0 0 6px #c084fc);
@@ -199,6 +206,7 @@
   filter: drop-shadow(0 0 6px #c084fc);
   stroke-dasharray: 10 6;
   animation: arrowFlowLeftLoop 5s linear infinite;
+  animation-play-state: var(--animation-play-state);
 }
 
 .arrowLoopDown .arrowHead {

@@ -3,6 +3,25 @@
     sans-serif;
   color: #9ca3af;
   background-color: #0f172a;
+
+  /* アニメーション制御用変数 */
+  --transition-duration: 0.25s;
+  --transition-timing: ease;
+  --animation-play-state: running;
+}
+
+/* アニメーション無効化 */
+[data-animation='false'] {
+  --transition-duration: 0s;
+  --animation-play-state: paused;
+}
+
+/* prefers-reduced-motionを尊重 */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-duration: 0s;
+    --animation-play-state: paused;
+  }
 }
 
 body {
@@ -32,6 +51,7 @@ button {
   font-size: 12px;
   padding: 6px 12px;
   cursor: pointer;
+  transition: all var(--transition-duration) var(--transition-timing);
 }
 
 .primary-button {
