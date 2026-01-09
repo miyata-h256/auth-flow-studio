@@ -15,7 +15,7 @@ export default function StepProvider({ onNext, onPrev }: StepProps) {
                 </p>
 
                 <div className={styles['mock-provider-login-form']}>
-                    <p style={{ marginBottom: 8 }}>ログインフォーム（擬似）</p>
+                    <p style={{ marginBottom: 8 }}>{t.oidcStepUI.mockLoginForm}</p>
                     <input
                         className={styles['mock-email-input']}
                         placeholder='email@example.com'

@@ -15,7 +15,7 @@ export default function StepRedirect({ onNext, onPrev }: StepProps) {
                 <p>{t.oidcStepUI.redirectWithCodeDesc}</p>
 
                 <div className='mock-box'>
-                    <p style={{ marginBottom: 4 }}>ブラウザの URL（擬似）</p>
+                    <p style={{ marginBottom: 4 }}>{t.oidcStepUI.mockBrowserUrl}</p>
                     <code className='code-block'>{redirectUrl}</code>
                 </div>
 
@@ -38,13 +38,12 @@ export default function StepRedirect({ onNext, onPrev }: StepProps) {
             <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
                     <li>
-                        クエリには <code>code</code> と <code>state</code>{' '}
-                        が含まれています。
+                        {t.oidcStepUI.queryContainsCodeState}
                     </li>
                     <li>
                         {t.oidcStepUI.clientValidatesState}
                     </li>
-                    <li>一致しなければ CSRF 攻撃の疑いがあり、処理を中断します。</li>
+                    <li>{t.oidcStepUI.csrfMismatchAbort}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

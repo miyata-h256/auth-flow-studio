@@ -20,7 +20,7 @@ export default function StepClient({ onNext }: StepProps) {
 
             <ExplanationPanel title={t.stepUI.behindTheScenes}>
                 <ul>
-                    <li>クライアントは Authorization Request を組み立てます。</li>
+                    <li>{t.oidcStepUI.clientBuildsAuthRequest}</li>
                     <li>
                         <code>state</code> {t.oidcStepUI.stateForCsrf}
                     </li>

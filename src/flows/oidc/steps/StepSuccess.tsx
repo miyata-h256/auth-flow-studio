@@ -15,7 +15,7 @@ export default function StepSuccess({ onNext, onPrev }: StepProps) {
                 </p>
 
                 <div className={styles['mock-box']}>
-                    <p>ログイン状態（サンプル）</p>
+                    <p>{t.oidcStepUI.mockLoginStatus}</p>
                     <pre className={styles['code-block']}>
                         {JSON.stringify(
                             {
@@ -54,9 +54,9 @@ export default function StepSuccess({ onNext, onPrev }: StepProps) {
                         {t.oidcStepUI.clientCreatesSession}
                     </li>
                     <li>
-                        以降のリクエストでは Access Token が API 呼び出しなどに使われます。
+                        {t.oidcStepUI.accessTokenUsedForApi}
                     </li>
-                    <li>ここまでが OIDC Code Flow の大まかな流れです。</li>
+                    <li>{t.oidcStepUI.oidcFlowComplete}</li>
                 </ul>
             </ExplanationPanel>
         </Layout>

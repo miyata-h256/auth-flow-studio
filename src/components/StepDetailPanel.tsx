@@ -1,10 +1,28 @@
-import type { FlowStep } from '../types';
+import type { FlowStepWithType } from '../types';
+import type { FlowId } from './FlowPane';
 import { useTranslation } from '../i18n';
+import type { TranslationKeys } from '../i18n/types';
 import styles from './styles/StepDetailPanel.module.css';
 
 interface StepDetailPanelProps {
-    left: FlowStep | null;
-    right: FlowStep | null;
+    left: FlowStepWithType | null;
+    right: FlowStepWithType | null;
+}
+
+/**
+ * flowTypeに基づいてi18nからステップの翻訳を取得
+ */
+function getStepTranslation(
+    t: TranslationKeys,
+    flowType: FlowId,
+    stepId: number
+): { label: string; description: string; detail: string } | null {
+    const flowSteps = {
+        oidc: t.oidc.steps,
+        passkey: t.passkey.steps,
+        magic: t.magic.steps,
+    };
+    return flowSteps[flowType]?.[stepId] ?? null;
 }
 
 export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
@@ -23,7 +41,7 @@ export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
                 <div className={styles.card}>
                     <div className={styles.cardTitle}>A</div>
                     {left ? (
-                        <StepDetail step={left} />
+                        <StepDetail step={left} translation={getStepTranslation(t, left.flowType as FlowId, left.id)} />
                     ) : (
                         <div className={styles.empty}>{t.compare.notSelected}</div>
                     )}
@@ -32,7 +50,7 @@ export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
                 <div className={styles.card}>
                     <div className={styles.cardTitle}>B</div>
                     {right ? (
-                        <StepDetail step={right} />
+                        <StepDetail step={right} translation={getStepTranslation(t, right.flowType as FlowId, right.id)} />
                     ) : (
                         <div className={styles.empty}>{t.compare.notSelected}</div>
                     )}
@@ -43,19 +61,26 @@ export default function StepDetailPanel({ left, right }: StepDetailPanelProps) {
 }
 
 interface StepDetailProps {
-    step: FlowStep;
+    step: FlowStepWithType;
+    translation: { label: string; description: string; detail: string } | null;
 }
 
 /**
  * ステップ詳細を見やすく表示するコンポーネント
+ * i18nから取得した翻訳を使用して表示
  */
-function StepDetail({ step }: StepDetailProps) {
+function StepDetail({ step, translation }: StepDetailProps) {
+    // 翻訳があればそれを使用、なければ元のステップデータにフォールバック
+    const label = translation?.label ?? step.label;
+    const description = translation?.description ?? step.description;
+    const detail = translation?.detail ?? step.detail;
+
     return (
         <div className={styles.stepDetail}>
             {/* ヘッダー：ステップ番号とラベル */}
             <div className={styles.stepHeader}>
                 <span className={styles.stepNumber}>Step {step.id}</span>
-                <span className={styles.stepLabel}>{step.label}</span>
+                <span className={styles.stepLabel}>{label}</span>
             </div>
 
             {/* フロー方向（from → to） */}
@@ -68,14 +93,14 @@ function StepDetail({ step }: StepDetailProps) {
             )}
 
             {/* 説明 */}
-            {step.description && (
-                <p className={styles.stepDescription}>{step.description}</p>
+            {description && (
+                <p className={styles.stepDescription}>{description}</p>
             )}
 
             {/* 詳細テキスト */}
-            {step.detail && (
+            {detail && (
                 <div className={styles.stepDetailText}>
-                    {step.detail.split('\n').map((line, i) => (
+                    {detail.split('\n').map((line, i) => (
                         <p key={i}>{line}</p>
                     ))}
                 </div>

@@ -164,6 +164,14 @@ export interface TranslationKeys {
         clientExtractsUser: string;
         clientCreatesSession: string;
         goHome: string;
+        clientBuildsAuthRequest: string;
+        mockLoginForm: string;
+        mockBrowserUrl: string;
+        queryContainsCodeState: string;
+        csrfMismatchAbort: string;
+        mockLoginStatus: string;
+        accessTokenUsedForApi: string;
+        oidcFlowComplete: string;
     };
 
     // PasskeyステップUI
