@@ -46,6 +46,9 @@
 }
 
 .navLink {
+  display: flex;
+  align-items: center;
+  gap: 6px;
   padding: 8px 12px;
   font-size: 14px;
   color: #9ca3af;
@@ -62,6 +65,15 @@
 .navLink.active {
   color: #3b82f6;
   background: rgba(59, 130, 246, 0.1);
+}
+
+.navIcon {
+  font-size: 16px;
+  flex-shrink: 0;
+}
+
+.navText {
+  white-space: nowrap;
 }
 
 .right {
@@ -104,25 +116,94 @@
   border-radius: 4px;
 }
 
-/* モバイル対応 */
+/* タブレット対応 */
 @media (max-width: 768px) {
   .header {
     padding: 10px 16px;
   }
 
+  .logo {
+    font-size: 16px;
+  }
+
+  .logoIcon {
+    font-size: 20px;
+  }
+
   .nav {
-    display: none;
+    gap: 4px;
   }
 
-  .logo span {
-    display: none;
-  }
-
-  .settingsButton span {
-    display: none;
+  .navLink {
+    padding: 6px 10px;
+    font-size: 13px;
   }
 
   .settingsButton {
-    padding: 8px;
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
+  .languageIndicator {
+    padding: 3px 6px;
+    font-size: 11px;
+  }
+}
+
+/* スマートフォン対応 */
+@media (max-width: 480px) {
+  .header {
+    padding: 8px 12px;
+    gap: 8px;
+  }
+
+  .left {
+    gap: 8px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  .logo {
+    display: none;
+  }
+
+  .nav {
+    gap: 4px;
+  }
+
+  .navLink {
+    padding: 6px 8px;
+    gap: 0;
+  }
+
+  .navText {
+    display: none;
+  }
+
+  .navIcon {
+    font-size: 18px;
+  }
+
+  .right {
+    gap: 8px;
+    flex-shrink: 0;
+  }
+
+  .languageIndicator {
+    padding: 2px 4px;
+    font-size: 10px;
+  }
+
+  .settingsButton {
+    padding: 6px 8px;
+    gap: 4px;
+  }
+
+  .settingsButton span:last-child {
+    display: none;
+  }
+
+  .settingsIcon {
+    font-size: 18px;
   }
 }

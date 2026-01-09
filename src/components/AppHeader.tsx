@@ -32,7 +32,8 @@ export default function AppHeader(): React.ReactElement {
                             `${styles.navLink} ${isActive ? styles.active : ''}`
                         }
                     >
-                        {t.common.home}
+                        <span className={styles.navIcon}>🏠</span>
+                        <span className={styles.navText}>{t.common.home}</span>
                     </NavLink>
                     <NavLink
                         to='/compare'
@@ -40,7 +41,8 @@ export default function AppHeader(): React.ReactElement {
                             `${styles.navLink} ${isActive ? styles.active : ''}`
                         }
                     >
-                        {t.home.compare}
+                        <span className={styles.navIcon}>⚖️</span>
+                        <span className={styles.navText}>{t.home.compare}</span>
                     </NavLink>
                 </nav>
             </div>
