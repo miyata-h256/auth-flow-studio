@@ -25,3 +25,4 @@ dist-ssr
 
 mermaid_auth_flow/*.md
 schema/migration/*.sql
+schema/migration/*.md
