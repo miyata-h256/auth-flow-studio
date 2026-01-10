@@ -2,6 +2,7 @@
 // アプリケーションヘッダーコンポーネント
 
 import { NavLink, useNavigate } from 'react-router-dom';
+import { FaGithub } from 'react-icons/fa';
 import { useI18n } from '../i18n';
 import styles from './styles/AppHeader.module.css';
 
@@ -48,6 +49,15 @@ export default function AppHeader(): React.ReactElement {
             </div>
 
             <div className={styles.right}>
+                <a
+                    href='https://github.com/miyata-h256/auth-flow-studio'
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    className={styles.githubLink}
+                    aria-label='GitHub Repository'
+                >
+                    <FaGithub className={styles.githubIcon} />
+                </a>
                 <span className={styles.languageIndicator}>
                     {language.toUpperCase()}
                 </span>

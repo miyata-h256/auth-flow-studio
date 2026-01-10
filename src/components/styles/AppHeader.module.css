@@ -106,6 +106,21 @@
   font-size: 16px;
 }
 
+.githubLink {
+  display: flex;
+  align-items: center;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+
+.githubLink:hover {
+  color: #e5e7eb;
+}
+
+.githubIcon {
+  font-size: 20px;
+}
+
 .languageIndicator {
   padding: 4px 8px;
   font-size: 12px;
@@ -187,6 +202,10 @@
   .right {
     gap: 8px;
     flex-shrink: 0;
+  }
+
+  .githubIcon {
+    font-size: 18px;
   }
 
   .languageIndicator {
