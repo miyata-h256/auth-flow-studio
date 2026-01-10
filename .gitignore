@@ -24,3 +24,4 @@ dist-ssr
 *.sw?
 
 mermaid_auth_flow/*.md
+schema/*.sql
