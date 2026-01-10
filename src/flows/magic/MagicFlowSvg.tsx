@@ -1017,6 +1017,33 @@ export default function MagicFlowSvg({
                     />
                 </g>
 
+                {/* Step 17: API → User (Login Complete) */}
+                <g
+                    data-step-arrow='17'
+                    className={`${styles.arrowGroup} ${activeStep === 17 ? styles.arrowLeftActive : ''
+                        }`}
+                >
+                    <line
+                        className={styles.arrow}
+                        x1={X.API - 15}
+                        y1={stepY[16] + 35}
+                        x2={X.U + 15}
+                        y2={stepY[16] + 35}
+                    />
+                    <text
+                        x={(X.U + X.API) / 2}
+                        y={stepY[16] + 25}
+                        className={styles.arrowLabel}
+                    >
+                        Login Complete
+                    </text>
+                    <polygon
+                        className={styles.arrowHead}
+                        points={`${X.U},${stepY[16] + 35} ${X.U + 14},${stepY[16] + 31
+                            } ${X.U + 12},${stepY[16] + 35} ${X.U + 14},${stepY[16] + 39}`}
+                    />
+                </g>
+
                 {/* ====================================================================== */}
                 {/* ステップ番号のサークル                                                */}
                 {/* ====================================================================== */}
@@ -1484,13 +1511,13 @@ export default function MagicFlowSvg({
                 >
                     <circle
                         className={styles.stepCircle}
-                        cx={X.FE}
+                        cx={X.API}
                         cy={stepY[16] + 35}
                         r='12'
                     />
                     <text
                         className={styles.stepLabel}
-                        x={X.FE}
+                        x={X.API}
                         y={stepY[16] + 35}
                     >
                         17

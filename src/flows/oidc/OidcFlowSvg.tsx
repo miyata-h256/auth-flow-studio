@@ -505,6 +505,33 @@ export default function OidcFlowSvg({
                     />
                 </g>
 
+                {/* Step 9: Client → User (Login Complete) */}
+                <g
+                    data-step-arrow='9'
+                    className={`${styles.arrowGroup} ${activeStep === 9 ? styles.arrowLeftActive : ''
+                        }`}
+                >
+                    <line
+                        className={styles.arrow}
+                        x1={X.CLIENT - 15}
+                        y1={stepY[8] + 40}
+                        x2={X.USER + 15}
+                        y2={stepY[8] + 40}
+                    />
+                    <text
+                        x={(X.USER + X.CLIENT) / 2}
+                        y={stepY[8] + 30}
+                        className={styles.arrowLabel}
+                    >
+                        Login Complete
+                    </text>
+                    <polygon
+                        className={styles.arrowHead}
+                        points={`${X.USER},${stepY[8] + 40} ${X.USER + 24},${stepY[8] + 36
+                            } ${X.USER + 22},${stepY[8] + 40} ${X.USER + 24},${stepY[8] + 44}`}
+                    />
+                </g>
+
                 {/* ====================================================================== */}
                 {/* ステップノード（番号サークル）                                          */}
                 {/* ====================================================================== */}
