@@ -28,7 +28,7 @@ const LANGUAGE_STORAGE_KEY = 'auth-flow-studio-language';
 /**
  * デフォルト言語
  */
-const DEFAULT_LANGUAGE: Language = 'en';
+const DEFAULT_LANGUAGE: Language = 'ja';
 
 /**
  * ブラウザの言語設定を取得
