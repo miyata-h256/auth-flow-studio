@@ -88,6 +88,7 @@ export default function ComparePage(): React.ReactElement {
                         label={t.compare.flowA}
                         options={flowOptions}
                         value={leftFlowId}
+                        disabledOptions={[rightFlowId]}
                         onChange={(v) => {
                             setLeftFlowId(v as FlowId);
                             setLeftSelectedStep(getStepData(v as FlowId, 1));
@@ -98,6 +99,7 @@ export default function ComparePage(): React.ReactElement {
                         label={t.compare.flowB}
                         options={flowOptions}
                         value={rightFlowId}
+                        disabledOptions={[leftFlowId]}
                         onChange={(v) => {
                             setRightFlowId(v as FlowId);
                             setRightSelectedStep(getStepData(v as FlowId, 1));

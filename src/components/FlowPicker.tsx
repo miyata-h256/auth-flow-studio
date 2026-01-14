@@ -10,9 +10,10 @@ interface FlowPickerProps {
     options: FlowOption[];
     value: string;
     onChange?: (value: string) => void;
+    disabledOptions?: string[]; // 非活性にするオプションのID配列
 }
 
-export default function FlowPicker({ label, options, value, onChange }: FlowPickerProps) {
+export default function FlowPicker({ label, options, value, onChange, disabledOptions = [] }: FlowPickerProps) {
     return (
         <div className={styles.wrap}>
             <div className={styles.label}>{label}</div>
@@ -25,6 +26,7 @@ export default function FlowPicker({ label, options, value, onChange }: FlowPick
                     <option
                         key={opt.id}
                         value={opt.id}
+                        disabled={disabledOptions.includes(opt.id)}
                     >
                         {opt.label}
                     </option>
