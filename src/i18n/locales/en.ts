@@ -29,6 +29,8 @@ export const en: TranslationKeys = {
         subtitle: 'A mini app to experience what happens behind the scenes of various login methods',
         authFlows: 'Authentication Flows',
         compare: 'Compare',
+        securityCompare: 'Security Compare',
+        securityCompareDescription: 'Compare same-family auth flows (basic vs enhanced) and understand security enhancement benefits',
         oidcTitle: 'OIDC Code Flow',
         oidcDescription: 'Visualize the typical OAuth2/OIDC authentication flow step by step',
         passkeyTitle: 'Passkey (WebAuthn)',
@@ -711,5 +713,418 @@ Logged in securely with just email, no password needed.`,
         readEmail: 'Read email',
         hashVerify: 'hash(token) match confirmation',
         expiryUsedCheck: 'Check expiry / used=false',
+    },
+
+    // Security Compare Page
+    securityCompare: {
+        title: 'Security Compare',
+        subtitle: 'Compare same-family auth flows and understand the benefits of security enhancements',
+        basicVersion: 'Basic',
+        enhancedVersion: 'Enhanced',
+        vs: 'VS',
+        recommendedScenarios: 'Recommended Scenarios',
+        recommendation: 'Recommendation',
+        summary: 'Summary',
+        addedSecurityFeatures: 'Added Security Features',
+        featuresAdded: ' security feature(s) added',
+        modifiedSteps: 'Modified Steps',
+        stepsModified: ' will be modified and enhanced',
+        tradeoff: 'Trade-off',
+        tradeoffDescription: 'Implementation complexity increases, but security is significantly improved. Using the enhanced version in production is recommended.',
+        stepsEnhanced: ' are enhanced',
+        step: 'Step',
+        modificationDetails: 'Step Modification Details',
+        basicBehavior: 'Basic',
+        enhancedBehavior: 'Enhanced',
+        standardProcessing: 'Standard processing',
+        benefits: 'Benefits',
+        mitigatedAttacks: 'Mitigated Attacks',
+        implementationComplexity: 'Implementation Complexity',
+        complexityLevels: {
+            easy: 'Easy',
+            normal: 'Normal',
+            moderate: 'Moderate',
+            complex: 'Complex',
+            veryComplex: 'Very Complex',
+        },
+        noEnhancementsInBasic: 'No additional security features in basic version.',
+        featuresCount: '',
+    },
+
+    // Security Enhancements
+    securityEnhancements: {
+        pkce: {
+            name: 'PKCE (Proof Key for Code Exchange)',
+            shortDescription: 'Prevents authorization code interception attacks',
+            description: `PKCE uses code_verifier and code_challenge in the authorization code flow to prevent attackers who intercept the authorization code from obtaining tokens.
+It is essential for environments where client_secret cannot be safely stored, such as mobile apps and SPAs.`,
+            benefits: [
+                'Prevents Authorization Code Interception Attack',
+                'Eliminates need for client_secret',
+                'Safe for mobile apps and SPAs',
+                'Required in OAuth 2.1',
+            ],
+            mitigates: [
+                'Authorization Code Interception Attack',
+                'Code Injection Attack',
+            ],
+        },
+        deviceBinding: {
+            name: 'Device Binding',
+            shortDescription: 'Only allow authentication on the requesting device',
+            description: `Ensures authentication can only be completed on the device (browser) that requested the Magic Link.
+Opening the link on a different device will fail authentication.
+Implemented using fingerprint, cookie, or session ID.`,
+            benefits: [
+                'Prevents phishing email forwarding attacks',
+                'Prevents link misuse on different devices',
+                'Prevents authentication on unintended devices',
+            ],
+            mitigates: [
+                'Link Forwarding Attack',
+                'Email Interception',
+                'Session Hijacking',
+            ],
+        },
+        shortTtl: {
+            name: 'Short TTL (Time to Live)',
+            shortDescription: 'Shorten token expiration time',
+            description: `Sets a short expiration time for Magic Link tokens (e.g., 5 minutes).
+This reduces the risk of abuse when emails are delayed or discovered later by attackers.`,
+            benefits: [
+                'Shortens effective time for delayed attacks',
+                'Reduces attack risk from abandoned emails',
+                'Limits replay attack window',
+            ],
+            mitigates: [
+                'Delayed Email Attack',
+                'Replay Attack',
+                'Stale Token Attack',
+            ],
+        },
+        antiPhishing: {
+            name: 'Anti-Phishing Measures',
+            shortDescription: 'Anti-phishing features',
+            description: `Includes user-recognizable information (security phrase, image, or one-time code) in the email to help distinguish from phishing emails.`,
+            benefits: [
+                'Easier identification of phishing emails',
+                'Improved user security awareness',
+                'Better resistance to brand impersonation attacks',
+            ],
+            mitigates: [
+                'Phishing Attack',
+                'Brand Impersonation',
+                'Lookalike Domain Attack',
+            ],
+        },
+        attestation: {
+            name: 'Attestation Verification',
+            shortDescription: 'Verify authenticator trustworthiness',
+            description: `Verifies Authenticator Attestation during Passkey registration to only allow registration from trusted authenticators (YubiKey, TPM, etc.).
+Useful for applying security policies in enterprise environments.`,
+            benefits: [
+                'Only allow trusted authenticators',
+                'Enable security policy enforcement',
+                'Exclude software authenticators',
+                'Compliance requirements support',
+            ],
+            mitigates: [
+                'Weak Authenticator Attack',
+                'Software Authenticator Spoofing',
+            ],
+        },
+        devicePolicy: {
+            name: 'Device Policy Enforcement',
+            shortDescription: 'Apply device policies',
+            description: `Checks the device's security status during authentication and only allows access from policy-compliant devices.
+Can verify OS updates, screen lock settings, encryption status, etc.`,
+            benefits: [
+                'Only allow devices meeting security standards',
+                'Exclude jailbroken/rooted devices',
+                'Apply enterprise security policies',
+            ],
+            mitigates: [
+                'Compromised Device Attack',
+                'Jailbreak/Root Attack',
+                'Outdated System Vulnerability',
+            ],
+        },
+        stepUpAuth: {
+            name: 'Step-up Authentication',
+            shortDescription: 'Additional authentication for high-risk operations',
+            description: `Requires additional authentication (re-authentication, different auth factor) when performing high-risk operations such as large transactions or security setting changes.
+A type of risk-based authentication.`,
+            benefits: [
+                'Enhanced protection for high-risk operations',
+                'Reduced damage during session hijacking',
+                'Improved user verification reliability',
+                'Compliance with regulations (PSD2, etc.)',
+            ],
+            mitigates: [
+                'Session Hijacking',
+                'Privilege Escalation',
+                'Transaction Fraud',
+            ],
+        },
+    },
+
+    // Flow Variants
+    flowVariants: {
+        'oidc-basic': {
+            name: 'OIDC Basic',
+            subtitle: 'Standard authorization code flow',
+            useCases: [
+                'Server-side applications (can safely store client_secret)',
+                'When legacy system compatibility is required',
+            ],
+        },
+        'oidc-pkce': {
+            name: 'OIDC + PKCE',
+            subtitle: 'Authorization code protection with PKCE extension',
+            useCases: [
+                'SPA (Single Page Application)',
+                'Mobile apps',
+                'All new OAuth/OIDC implementations (OAuth 2.1 compliant)',
+            ],
+        },
+        'magic-basic': {
+            name: 'Magic Link Basic',
+            subtitle: 'Standard email link authentication',
+            useCases: [
+                'When simple authentication is needed',
+                'Low-risk applications',
+            ],
+        },
+        'magic-enhanced': {
+            name: 'Magic Link Enhanced',
+            subtitle: 'Security-enhanced email link authentication',
+            useCases: [
+                'Financial services',
+                'High-sensitivity applications',
+                'Environments where anti-phishing is important',
+            ],
+        },
+        'passkey-basic': {
+            name: 'Passkey Syncable',
+            subtitle: 'Syncable passkeys (iCloud/Google, etc.)',
+            useCases: [
+                'Consumer-facing applications',
+                'When cross-device convenience is important',
+                'Passwordless authentication adoption',
+            ],
+        },
+        'passkey-enhanced': {
+            name: 'Passkey Enterprise',
+            subtitle: 'Enterprise security-enhanced version',
+            useCases: [
+                'Enterprise environments',
+                'When high security is required',
+                'Regulatory compliance (PCI-DSS, SOX, etc.)',
+            ],
+        },
+    },
+
+    // Flow Families
+    flowFamilies: {
+        oidc: {
+            name: 'OIDC / OAuth 2.0',
+            description: 'OpenID Connect / OAuth 2.0 based authentication and authorization flow',
+        },
+        magic: {
+            name: 'Magic Link',
+            description: 'Email-based one-time link authentication',
+        },
+        passkey: {
+            name: 'Passkey (WebAuthn)',
+            description: 'FIDO2 / WebAuthn based passwordless authentication',
+        },
+    },
+
+    // Variant Steps - Step modification data for security-enhanced variants
+    variantSteps: {
+        // OIDC + PKCE modifications
+        oidcPkce: {
+            2: {
+                description: 'Client requests authorization code from authorization server (with PKCE)',
+                basicBehavior: 'Authorization request with standard parameters only',
+                enhancedBehavior: 'Add code_challenge and code_challenge_method',
+                detail: `Client redirects to the authorization server's /authorize endpoint.
+
+【PKCE Extension】
+Generate the following before request:
+- code_verifier: Random string of 43-128 characters
+- code_challenge: SHA256 hash of code_verifier (Base64URL)
+
+The request includes the following parameters:
+- response_type=code
+- client_id
+- redirect_uri
+- scope (openid, profile, email, etc.)
+- state (CSRF protection)
+- nonce (replay attack protection)
+- code_challenge (PKCE challenge) ← Added
+- code_challenge_method=S256 ← Added`,
+            },
+            6: {
+                description: 'Client exchanges authorization code for tokens (with PKCE verification)',
+                basicBehavior: 'Authenticate with client_secret',
+                enhancedBehavior: 'Use code_verifier for PKCE verification',
+                detail: `Client sends a POST request to the authorization server's token endpoint.
+
+【PKCE Extension】
+By including code_verifier in the request,
+the client proves it is the same client that requested the authorization code.
+
+Server-side verification:
+1. Hash the code_verifier with SHA256
+2. Compare with the code_challenge from the authorization request
+3. Issue tokens if they match, reject if they don't
+
+This prevents attackers who intercept the authorization code
+from obtaining tokens because they don't know the code_verifier.`,
+            },
+        },
+        // Magic Link Enhanced modifications
+        magicEnhanced: {
+            5: {
+                description: 'Associate device information when generating token',
+                basicBehavior: 'Store token only',
+                enhancedBehavior: 'Store token + associated device information',
+                detail: `【Device Binding Extension】
+When generating the token, the device information of the request origin is also saved.
+
+Saved information:
+- Browser fingerprint
+- Session ID
+- User-Agent
+- IP address (optional)
+
+This allows later verification that the device opening the Magic Link
+is the same device that requested it.`,
+            },
+            7: {
+                description: 'Send email with security phrase',
+                basicBehavior: 'Simple email with link only',
+                enhancedBehavior: 'Email containing security phrase/image',
+                detail: `【Anti-Phishing Extension】
+Include user-specific security information in the email.
+
+Included information:
+- Security phrase set by the user
+- Security image
+- Timestamp of the login request
+- Approximate location of the request origin
+
+Users can click the link after confirming this information is correct,
+helping them identify phishing emails.`,
+            },
+            13: {
+                description: 'Token verification + device matching',
+                basicBehavior: 'Only verify token validity',
+                enhancedBehavior: 'Token + device information matching',
+                detail: `【Device Binding Extension】
+In addition to token verification, device information matching is performed.
+
+Verification items:
+1. Token validity (exists, unused, not expired)
+2. Device fingerprint matching
+3. Session ID matching
+
+Authentication succeeds only when all match.
+Opening the link on a different device will be rejected.`,
+            },
+            16: {
+                description: 'Strict token verification',
+                basicBehavior: 'Expiration 15-60 minutes',
+                enhancedBehavior: 'Expiration 5 minutes (Short TTL)',
+                detail: `【Short TTL Extension】
+Strictly check the token expiration time.
+
+Normal Magic Link: Expiration 15-60 minutes
+Enhanced version: Expiration 5 minutes
+
+Short expiration time provides:
+- Reduced risk of attacks due to email delays
+- Prevention of unauthorized access from abandoned emails
+- Encourages immediate user response`,
+            },
+        },
+        // Passkey Enhanced modifications
+        passkeyEnhanced: {
+            3: {
+                description: 'Challenge generation + Attestation request',
+                basicBehavior: 'attestation: "none" (no verification)',
+                enhancedBehavior: 'attestation: "direct" or "enterprise"',
+                detail: `【Attestation Extension】
+Server includes Attestation request in authentication options.
+
+attestation options:
+- "none": No Attestation required (default)
+- "direct": Direct Attestation from authenticator
+- "enterprise": Enterprise Attestation
+
+Attestation request enables:
+- Verification of authenticator manufacturer/model
+- Matching against trusted authenticator list
+- Application of security policies`,
+            },
+            9: {
+                description: 'Attestation Statement verification',
+                basicBehavior: 'Skip Attestation',
+                enhancedBehavior: 'Verify certificate chain and FIDO Metadata',
+                detail: `【Attestation Extension】
+Server verifies the Attestation Statement.
+
+Verification contents:
+1. Confirm Attestation format (packed, tpm, android-key, etc.)
+2. Certificate chain verification
+3. Authenticator trustworthiness check (FIDO Metadata Service query)
+4. Allow list/deny list matching
+
+In enterprise environments:
+- Allow only specific authenticators (YubiKey, etc.)
+- Reject software authenticators
+etc. policies can be applied.`,
+            },
+            10: {
+                description: 'Device policy verification',
+                basicBehavior: 'No device state check',
+                enhancedBehavior: 'Verify security state including OS/patch/encryption',
+                detail: `【Device Policy Extension】
+After successful authentication, check the device's security state.
+
+Check items:
+- OS/browser version
+- Security patch application status
+- Screen lock setting presence
+- Disk encryption status
+- Jailbreak/root detection
+
+In case of policy violation:
+- Deny access
+- Allow limited access
+- Require additional authentication
+etc. actions are taken.`,
+            },
+            11: {
+                description: 'Step-up authentication decision',
+                basicBehavior: 'Immediate access upon authentication success',
+                enhancedBehavior: 'Risk-based decision on additional authentication requirement',
+                detail: `【Step-up Authentication Extension】
+Risk-based decision on whether additional authentication is required.
+
+Decision factors:
+- Sensitivity of the accessed resource
+- Authentication level of current session
+- Time elapsed since last authentication
+- Detection of abnormal access patterns
+
+Examples where Step-up is needed:
+- Large transactions (exceeding amount threshold)
+- Security setting changes
+- Access to sensitive information
+- Access from a new device`,
+            },
+        },
     },
 };

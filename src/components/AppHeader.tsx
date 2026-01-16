@@ -45,6 +45,15 @@ export default function AppHeader(): React.ReactElement {
                         <span className={styles.navIcon}>⚖️</span>
                         <span className={styles.navText}>{t.home.compare}</span>
                     </NavLink>
+                    <NavLink
+                        to='/security-compare'
+                        className={({ isActive }) =>
+                            `${styles.navLink} ${isActive ? styles.active : ''}`
+                        }
+                    >
+                        <span className={styles.navIcon}>🛡️</span>
+                        <span className={styles.navText}>{t.home.securityCompare || 'セキュリティ比較'}</span>
+                    </NavLink>
                 </nav>
             </div>
 

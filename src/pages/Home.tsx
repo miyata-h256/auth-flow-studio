@@ -55,6 +55,13 @@ export default function Home(): React.ReactElement {
                             <h3>{t.home.compareTitle}</h3>
                             <p>{t.home.compareDescription}</p>
                         </button>
+                        <button
+                            className='card card--security'
+                            onClick={() => navigate('/security-compare')}
+                        >
+                            <h3>🛡️ {t.home.securityCompare || 'セキュリティ比較'}</h3>
+                            <p>{t.home.securityCompareDescription || '同系統の認証フロー（基本版 vs 強化版）を比較し、セキュリティ強化機能のメリットを理解する'}</p>
+                        </button>
                     </div>
                 </section>
             </main>

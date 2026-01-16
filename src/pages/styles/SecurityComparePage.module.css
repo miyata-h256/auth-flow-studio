@@ -1,0 +1,385 @@
+/* SecurityComparePage.module.css */
+/* セキュリティ比較ページのスタイル */
+
+.page {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0f1419 0%, #1a252f 100%);
+  color: #e7e9ea;
+}
+
+/* ヘッダー */
+.header {
+  padding: 2rem 3rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.titleArea {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+  background: linear-gradient(135deg, #60a5fa, #34d399);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #8b98a5;
+  margin: 0;
+}
+
+/* ファミリータブ */
+.familyTabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.75rem;
+}
+
+.familyTab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #8b98a5;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  font-size: 0.95rem;
+}
+
+.familyTab:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #e7e9ea;
+  transform: translateY(-2px);
+}
+
+.familyTab.active {
+  background: linear-gradient(
+    135deg,
+    rgba(96, 165, 250, 0.2),
+    rgba(52, 211, 153, 0.2)
+  );
+  border-color: rgba(96, 165, 250, 0.4);
+  color: #e7e9ea;
+}
+
+.familyIcon {
+  font-size: 1.2rem;
+}
+
+.familyName {
+  font-weight: 500;
+}
+
+/* メインコンテンツ */
+.main {
+  padding: 2rem 3rem;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* 比較ヘッダー */
+.comparisonHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.variantHeader {
+  flex: 1;
+  max-width: 400px;
+  text-align: center;
+}
+
+.variantBadge {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.variantBadge[data-type='basic'] {
+  background: rgba(139, 152, 165, 0.2);
+  color: #8b98a5;
+}
+
+.variantBadge[data-type='enhanced'] {
+  background: linear-gradient(
+    135deg,
+    rgba(52, 211, 153, 0.3),
+    rgba(96, 165, 250, 0.3)
+  );
+  color: #34d399;
+}
+
+.variantName {
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin: 0.25rem 0;
+  color: #e7e9ea;
+}
+
+.variantSubtitle {
+  font-size: 0.9rem;
+  color: #8b98a5;
+  margin: 0;
+}
+
+.vsIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.vsText {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #6b7280;
+}
+
+.arrow {
+  font-size: 1.5rem;
+  color: #34d399;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(3px);
+  }
+}
+
+/* フロー比較 */
+.flowComparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+
+.flowColumn {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1rem;
+  overflow: hidden;
+  min-height: 400px;
+}
+
+.flowColumn[data-enhanced='true'] {
+  border-color: rgba(52, 211, 153, 0.3);
+  box-shadow: 0 0 30px rgba(52, 211, 153, 0.1);
+}
+
+.enhancedOverlay {
+  position: relative;
+}
+
+.modifiedStepsHint {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(52, 211, 153, 0.2);
+  border: 1px solid rgba(52, 211, 153, 0.4);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  color: #34d399;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.hintIcon {
+  font-size: 1rem;
+}
+
+/* セクション共通 */
+.detailSection,
+.useCaseSection,
+.summarySection {
+  margin-bottom: 2.5rem;
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #e7e9ea;
+}
+
+/* 使用シナリオ比較 */
+.useCaseComparison {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.useCaseColumn {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+}
+
+.useCaseColumn[data-enhanced='true'] {
+  border-color: rgba(52, 211, 153, 0.3);
+  background: linear-gradient(
+    135deg,
+    rgba(52, 211, 153, 0.05) 0%,
+    rgba(96, 165, 250, 0.05) 100%
+  );
+}
+
+.useCaseTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: #e7e9ea;
+}
+
+.useCaseList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+}
+
+.useCaseItem {
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+  color: #8b98a5;
+  font-size: 0.9rem;
+}
+
+.useCaseItem::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: #34d399;
+}
+
+.recommendation {
+  font-size: 0.9rem;
+  color: #f59e0b;
+}
+
+.recommendation[data-level='high'] {
+  color: #34d399;
+}
+
+/* サマリーセクション */
+.summaryCard {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.summaryItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+}
+
+.summaryIcon {
+  font-size: 1.5rem;
+}
+
+.summaryItem strong {
+  display: block;
+  color: #e7e9ea;
+  margin-bottom: 0.25rem;
+}
+
+.summaryItem p {
+  margin: 0;
+  color: #8b98a5;
+  font-size: 0.9rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 1024px) {
+  .flowComparison,
+  .useCaseComparison {
+    grid-template-columns: 1fr;
+  }
+
+  .comparisonHeader {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .vsIndicator {
+    flex-direction: row;
+  }
+
+  .arrow {
+    transform: rotate(90deg);
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 0.5;
+      transform: rotate(90deg) translateX(0);
+    }
+    50% {
+      opacity: 1;
+      transform: rotate(90deg) translateX(3px);
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    padding: 1.5rem 1rem;
+  }
+
+  .main {
+    padding: 1.5rem 1rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .familyTabs {
+    flex-wrap: wrap;
+  }
+
+  .familyTab {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
+}

@@ -5,6 +5,7 @@ import PasskeyFlow from './flows/passkey/PasskeyFlow';
 import MagicFlow from './flows/magic/MagicFlow';
 import NotFound from './pages/NotFound';
 import ComparePage from './pages/ComparePage';
+import SecurityComparePage from './pages/SecurityComparePage';
 import SettingsPage from './pages/SettingsPage';
 import AppHeader from './components/AppHeader';
 
@@ -41,6 +42,10 @@ export default function App(): React.ReactElement {
                 <Route
                     path='/compare'
                     element={<ComparePage />}
+                />
+                <Route
+                    path='/security-compare'
+                    element={<SecurityComparePage />}
                 />
                 <Route
                     path='/settings'

@@ -29,6 +29,8 @@ export const ja: TranslationKeys = {
         subtitle: '各種ログイン方式の「裏側」で何が起きているかを体感するためのミニアプリ',
         authFlows: '認証フロー',
         compare: '比較',
+        securityCompare: 'セキュリティ比較',
+        securityCompareDescription: '同系統の認証フロー（基本版 vs 強化版）を比較し、セキュリティ強化機能のメリットを理解する',
         oidcTitle: 'OIDC Code Flow',
         oidcDescription: 'OAuth2 / OIDC の典型的な認証フローをステップごとに可視化',
         passkeyTitle: 'Passkey (WebAuthn)',
@@ -729,5 +731,425 @@ Auth Flowからのメールを探します。`,
         readEmail: 'メール閲覧',
         hashVerify: 'hash(token)一致確認',
         expiryUsedCheck: '期限確認 / used=false確認',
+    },
+
+    // セキュリティ比較ページ
+    securityCompare: {
+        title: 'セキュリティ比較',
+        subtitle: '同系統の認証フローを比較し、セキュリティ強化機能のメリットを理解する',
+        basicVersion: '基本版',
+        enhancedVersion: '強化版',
+        vs: 'VS',
+        recommendedScenarios: '推奨される使用シナリオ',
+        recommendation: '推奨度',
+        summary: 'まとめ',
+        addedSecurityFeatures: '追加されるセキュリティ機能',
+        featuresAdded: '件の強化機能が追加されます',
+        modifiedSteps: '変更されるステップ',
+        stepsModified: 'が変更・強化されます',
+        tradeoff: 'トレードオフ',
+        tradeoffDescription: '実装の複雑さは増しますが、セキュリティが大幅に向上します。本番環境では強化版の使用を推奨します。',
+        stepsEnhanced: 'が強化されています',
+        step: 'ステップ',
+        modificationDetails: '変更されるステップの詳細',
+        basicBehavior: '基本版',
+        enhancedBehavior: '強化版',
+        standardProcessing: '標準の処理',
+        benefits: 'メリット',
+        mitigatedAttacks: '防げる攻撃',
+        implementationComplexity: '実装難易度',
+        complexityLevels: {
+            easy: '簡単',
+            normal: '普通',
+            moderate: 'やや複雑',
+            complex: '複雑',
+            veryComplex: '非常に複雑',
+        },
+        noEnhancementsInBasic: '基本バージョンには追加のセキュリティ機能はありません。',
+        featuresCount: '件',
+    },
+
+    // セキュリティ強化機能
+    securityEnhancements: {
+        pkce: {
+            name: 'PKCE (Proof Key for Code Exchange)',
+            shortDescription: '認可コード横取り攻撃を防ぐ',
+            description: `PKCEは、認可コードフローにおいてcode_verifierとcode_challengeを使用し、
+認可コードを傍受した攻撃者がトークンを取得することを防ぎます。
+特にモバイルアプリやSPAなど、client_secretを安全に保持できない環境で必須です。`,
+            benefits: [
+                '認可コード横取り攻撃（Authorization Code Interception）を防止',
+                'client_secretが不要になる',
+                'モバイルアプリ・SPAでも安全に使用可能',
+                'OAuth 2.1では必須要件',
+            ],
+            mitigates: [
+                '認可コード横取り攻撃',
+                'コードインジェクション攻撃',
+            ],
+        },
+        deviceBinding: {
+            name: 'Device Binding',
+            shortDescription: 'リンクを要求したデバイスでのみ認証を許可',
+            description: `Magic Linkを要求したデバイス（ブラウザ）でのみ認証を完了できるようにします。
+別のデバイスでリンクを開いても認証は失敗します。
+Fingerprint、Cookie、またはセッションIDを使用して実装します。`,
+            benefits: [
+                'フィッシングメールの転送攻撃を防止',
+                '別デバイスでのリンク悪用を防止',
+                'ユーザーの意図しないデバイスでの認証を防止',
+            ],
+            mitigates: [
+                'リンク転送攻撃',
+                'メール傍受',
+                'セッションハイジャック',
+            ],
+        },
+        shortTtl: {
+            name: 'Short TTL (Time to Live)',
+            shortDescription: 'トークンの有効期限を短縮',
+            description: `Magic Linkトークンの有効期限を短く設定します（例：5分）。
+これにより、メールが遅延して届いた場合や、後からメールを発見した攻撃者による
+悪用のリスクを軽減します。`,
+            benefits: [
+                '遅延攻撃の有効時間を短縮',
+                '放置されたメールからの攻撃リスクを軽減',
+                'リプレイ攻撃の有効期間を限定',
+            ],
+            mitigates: [
+                '遅延メール攻撃',
+                'リプレイ攻撃',
+                '古いトークン攻撃',
+            ],
+        },
+        antiPhishing: {
+            name: 'Anti-Phishing Measures',
+            shortDescription: 'フィッシング対策機能',
+            description: `ユーザーが認識できる情報（セキュリティフレーズ、画像、または
+ワンタイムコード）をメールに含めることで、フィッシングメールとの
+区別を容易にします。`,
+            benefits: [
+                'フィッシングメールの識別が容易に',
+                'ユーザーのセキュリティ意識向上',
+                'ブランド偽装攻撃への耐性向上',
+            ],
+            mitigates: [
+                'フィッシング攻撃',
+                'ブランド偽装',
+                '類似ドメイン攻撃',
+            ],
+        },
+        attestation: {
+            name: 'Attestation Verification',
+            shortDescription: '認証器の信頼性を検証',
+            description: `Passkey登録時にAuthenticator Attestationを検証し、
+信頼できる認証器（YubiKey、TPM等）からの登録のみを許可します。
+企業環境でのセキュリティポリシー適用に有用です。`,
+            benefits: [
+                '信頼できる認証器のみを許可',
+                'セキュリティポリシーの適用が可能',
+                'ソフトウェア認証器を排除可能',
+                'コンプライアンス要件への対応',
+            ],
+            mitigates: [
+                '弱い認証器攻撃',
+                'ソフトウェア認証器のなりすまし',
+            ],
+        },
+        devicePolicy: {
+            name: 'Device Policy Enforcement',
+            shortDescription: 'デバイスポリシーの適用',
+            description: `認証時にデバイスのセキュリティ状態を確認し、
+ポリシーに準拠したデバイスのみからのアクセスを許可します。
+OS更新、画面ロック設定、暗号化状態などを検証できます。`,
+            benefits: [
+                'セキュリティ基準を満たすデバイスのみ許可',
+                'ジェイルブレイク/ルート化デバイスを排除',
+                '企業セキュリティポリシーの適用',
+            ],
+            mitigates: [
+                '侵害されたデバイス攻撃',
+                'ジェイルブレイク/ルート攻撃',
+                '古いシステムの脆弱性',
+            ],
+        },
+        stepUpAuth: {
+            name: 'Step-up Authentication',
+            shortDescription: '高リスク操作時の追加認証',
+            description: `高額決済やセキュリティ設定変更など、リスクの高い操作を行う際に
+追加の認証（再認証、別の認証要素）を要求します。
+リスクベース認証の一種です。`,
+            benefits: [
+                '高リスク操作の保護強化',
+                'セッションハイジャック時の被害軽減',
+                'ユーザー検証の確実性向上',
+                '規制要件（PSD2等）への対応',
+            ],
+            mitigates: [
+                'セッションハイジャック',
+                '権限昇格',
+                '取引詐欺',
+            ],
+        },
+    },
+
+    // フローバリアント
+    flowVariants: {
+        'oidc-basic': {
+            name: 'OIDC Basic',
+            subtitle: '標準的な認可コードフロー',
+            useCases: [
+                'サーバーサイドアプリケーション（client_secretを安全に保持可能）',
+                'レガシーシステムとの互換性が必要な場合',
+            ],
+        },
+        'oidc-pkce': {
+            name: 'OIDC + PKCE',
+            subtitle: 'PKCE拡張による認可コード保護',
+            useCases: [
+                'SPA（シングルページアプリケーション）',
+                'モバイルアプリ',
+                'すべての新規OAuth/OIDC実装（OAuth 2.1準拠）',
+            ],
+        },
+        'magic-basic': {
+            name: 'Magic Link Basic',
+            subtitle: '標準的なメールリンク認証',
+            useCases: [
+                'シンプルな認証が必要な場合',
+                '低リスクのアプリケーション',
+            ],
+        },
+        'magic-enhanced': {
+            name: 'Magic Link Enhanced',
+            subtitle: 'セキュリティ強化版メールリンク認証',
+            useCases: [
+                '金融サービス',
+                '機密性の高いアプリケーション',
+                'フィッシング対策が重要な環境',
+            ],
+        },
+        'passkey-basic': {
+            name: 'Passkey Syncable',
+            subtitle: '同期可能なパスキー（iCloud/Google等）',
+            useCases: [
+                'コンシューマー向けアプリケーション',
+                'デバイス間の利便性が重要な場合',
+                'パスワードレス認証の導入',
+            ],
+        },
+        'passkey-enhanced': {
+            name: 'Passkey Enterprise',
+            subtitle: 'エンタープライズ向けセキュリティ強化版',
+            useCases: [
+                'エンタープライズ環境',
+                '高セキュリティが要求される場合',
+                '規制要件への対応（PCI-DSS, SOX等）',
+            ],
+        },
+    },
+
+    // フローファミリー
+    flowFamilies: {
+        oidc: {
+            name: 'OIDC / OAuth 2.0',
+            description: 'OpenID Connect / OAuth 2.0 ベースの認証・認可フロー',
+        },
+        magic: {
+            name: 'Magic Link',
+            description: 'メールベースのワンタイムリンク認証',
+        },
+        passkey: {
+            name: 'Passkey (WebAuthn)',
+            description: 'FIDO2 / WebAuthn ベースのパスワードレス認証',
+        },
+    },
+
+    // バリアントステップ - セキュリティ強化バリアントのステップ修正データ
+    variantSteps: {
+        // OIDC + PKCE の変更ステップ
+        oidcPkce: {
+            2: {
+                description: 'クライアントが認可サーバーに認可コードをリクエスト（PKCE付き）',
+                basicBehavior: '標準パラメータのみで認可リクエスト',
+                enhancedBehavior: 'code_challenge と code_challenge_method を追加',
+                detail: `クライアントは認可サーバーの /authorize エンドポイントにリダイレクトします。
+
+【PKCE拡張】
+リクエスト前に以下を生成：
+- code_verifier: 43〜128文字のランダム文字列
+- code_challenge: code_verifierのSHA256ハッシュ（Base64URL）
+
+リクエストには以下のパラメータが含まれます：
+- response_type=code
+- client_id
+- redirect_uri
+- scope (openid, profile, email など)
+- state (CSRF対策)
+- nonce (リプレイ攻撃対策)
+- code_challenge (PKCEチャレンジ) ← 追加
+- code_challenge_method=S256 ← 追加`,
+            },
+            6: {
+                description: 'クライアントが認可コードをトークンに交換（PKCE検証付き）',
+                basicBehavior: 'client_secret で認証',
+                enhancedBehavior: 'code_verifier を使用してPKCE検証',
+                detail: `クライアントは認可サーバーのトークンエンドポイントに POST リクエストを送信します。
+
+【PKCE拡張】
+リクエストに code_verifier を含めることで、
+認可コードを要求したクライアントであることを証明します。
+
+サーバー側の検証：
+1. code_verifier を SHA256 ハッシュ
+2. 認可リクエスト時の code_challenge と照合
+3. 一致すればトークン発行、不一致なら拒否
+
+これにより、認可コードを傍受した攻撃者は
+code_verifier を知らないためトークンを取得できません。`,
+            },
+        },
+        // Magic Link Enhanced の変更ステップ
+        magicEnhanced: {
+            5: {
+                description: 'トークン生成時にデバイス情報も紐付け',
+                basicBehavior: 'トークンのみを保存',
+                enhancedBehavior: 'トークン＋デバイス情報を紐付けて保存',
+                detail: `【Device Binding 拡張】
+トークン生成時に、リクエスト元のデバイス情報を一緒に保存します。
+
+保存される情報：
+- ブラウザフィンガープリント
+- セッションID
+- User-Agent
+- IPアドレス（オプション）
+
+これにより、Magic Linkを開くデバイスが
+リクエストしたデバイスと同一かを後で検証できます。`,
+            },
+            7: {
+                description: 'セキュリティフレーズ付きメール送信',
+                basicBehavior: 'リンクのみのシンプルなメール',
+                enhancedBehavior: 'セキュリティフレーズ・画像を含むメール',
+                detail: `【Anti-Phishing 拡張】
+メールにユーザー固有のセキュリティ情報を含めます。
+
+含まれる情報：
+- ユーザーが設定したセキュリティフレーズ
+- セキュリティ画像
+- ログイン要求のタイムスタンプ
+- 要求元の大まかな位置情報
+
+ユーザーはこれらの情報が正しいことを確認してから
+リンクをクリックすることで、フィッシングメールを判別できます。`,
+            },
+            13: {
+                description: 'トークン検証＋デバイス照合',
+                basicBehavior: 'トークンの有効性のみ確認',
+                enhancedBehavior: 'トークン＋デバイス情報の照合',
+                detail: `【Device Binding 拡張】
+トークンの検証に加えて、デバイス情報の照合を行います。
+
+検証項目：
+1. トークンの有効性（存在、未使用、未期限切れ）
+2. デバイスフィンガープリントの照合
+3. セッションIDの照合
+
+すべてが一致した場合のみ認証成功となります。
+別のデバイスでリンクを開いた場合は拒否されます。`,
+            },
+            16: {
+                description: '厳格なトークン検証',
+                basicBehavior: '有効期限 15〜60分',
+                enhancedBehavior: '有効期限 5分（Short TTL）',
+                detail: `【Short TTL 拡張】
+トークンの有効期限を厳格にチェックします。
+
+通常のMagic Link: 有効期限 15-60分
+強化版: 有効期限 5分
+
+短い有効期限により：
+- メール遅延による攻撃リスクを軽減
+- 放置されたメールからの不正アクセスを防止
+- ユーザーの即時対応を促進`,
+            },
+        },
+        // Passkey Enhanced の変更ステップ
+        passkeyEnhanced: {
+            3: {
+                description: 'チャレンジ生成＋Attestation要求',
+                basicBehavior: 'attestation: "none"（検証なし）',
+                enhancedBehavior: 'attestation: "direct" または "enterprise"',
+                detail: `【Attestation 拡張】
+サーバーは認証オプションにAttestation要求を含めます。
+
+attestation オプション：
+- "none": Attestation不要（デフォルト）
+- "direct": 認証器からの直接Attestation
+- "enterprise": エンタープライズAttestation
+
+Attestation要求により：
+- 認証器の製造元・モデルを確認
+- 信頼できる認証器リストとの照合
+- セキュリティポリシーの適用が可能`,
+            },
+            9: {
+                description: 'Attestation Statement検証',
+                basicBehavior: 'Attestationをスキップ',
+                enhancedBehavior: '証明書チェーンとFIDO Metadataを検証',
+                detail: `【Attestation 拡張】
+サーバーはAttestation Statementを検証します。
+
+検証内容：
+1. Attestation形式の確認（packed, tpm, android-key等）
+2. 証明書チェーンの検証
+3. 認証器の信頼性確認（FIDO Metadata Service照会）
+4. 許可リスト/拒否リストとの照合
+
+企業環境では：
+- 特定の認証器（YubiKey等）のみを許可
+- ソフトウェア認証器を拒否
+等のポリシーを適用できます。`,
+            },
+            10: {
+                description: 'デバイスポリシー検証',
+                basicBehavior: 'デバイス状態チェックなし',
+                enhancedBehavior: 'OS/パッチ/暗号化等のセキュリティ状態を検証',
+                detail: `【Device Policy 拡張】
+認証成功後、デバイスのセキュリティ状態を確認します。
+
+チェック項目：
+- OS/ブラウザのバージョン
+- セキュリティパッチ適用状況
+- 画面ロック設定の有無
+- ディスク暗号化状態
+- ジェイルブレイク/ルート化検知
+
+ポリシー違反の場合：
+- アクセス拒否
+- 限定的なアクセス許可
+- 追加認証の要求
+等の対応を取ります。`,
+            },
+            11: {
+                description: 'Step-up認証の判定',
+                basicBehavior: '認証成功で即座にアクセス許可',
+                enhancedBehavior: 'リスクベースで追加認証の要否を判定',
+                detail: `【Step-up Authentication 拡張】
+リスクベースで追加認証の要否を判定します。
+
+判定要素：
+- アクセス先のリソースの機密性
+- 現在のセッションの認証レベル
+- 直近の認証からの経過時間
+- 異常なアクセスパターンの検知
+
+Step-upが必要な例：
+- 高額決済（金額閾値超過）
+- セキュリティ設定の変更
+- 機密情報へのアクセス
+- 新しいデバイスからのアクセス`,
+            },
+        },
     },
 };

@@ -1,0 +1,152 @@
+/* StepModificationList.module.css */
+/* ステップ変更一覧のスタイル */
+
+.container {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 1.5rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1.25rem;
+  color: #e7e9ea;
+}
+
+.titleIcon {
+  font-size: 1.2rem;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.item {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  transition: border-color 0.2s ease;
+}
+
+.item:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+}
+
+.itemHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.stepBadge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: 6px;
+  background: linear-gradient(135deg, #3b82f6, #2563eb);
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.enhancementTag {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+.itemContent {
+  padding: 1rem;
+}
+
+.description {
+  margin: 0 0 1rem;
+  color: #8b98a5;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* 差分表示 */
+.diffSection {
+  display: flex;
+  align-items: stretch;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 0.75rem;
+}
+
+.diffBasic,
+.diffEnhanced {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.75rem;
+  border-radius: 6px;
+}
+
+.diffBasic {
+  background: rgba(139, 152, 165, 0.1);
+  border: 1px solid rgba(139, 152, 165, 0.2);
+}
+
+.diffEnhanced {
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+}
+
+.diffLabel {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+
+.diffBasic .diffLabel {
+  color: #8b98a5;
+}
+
+.diffEnhanced .diffLabel {
+  color: #34d399;
+}
+
+.diffValue {
+  font-size: 0.85rem;
+  color: #c9d1d9;
+  line-height: 1.4;
+}
+
+.diffArrow {
+  display: flex;
+  align-items: center;
+  color: #34d399;
+  font-size: 1.25rem;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+  .diffSection {
+    flex-direction: column;
+  }
+
+  .diffArrow {
+    justify-content: center;
+    transform: rotate(90deg);
+  }
+}

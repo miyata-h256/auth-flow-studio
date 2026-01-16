@@ -37,6 +37,8 @@ export interface TranslationKeys {
         subtitle: string;
         authFlows: string;
         compare: string;
+        securityCompare?: string;
+        securityCompareDescription?: string;
         oidcTitle: string;
         oidcDescription: string;
         passkeyTitle: string;
@@ -415,6 +417,90 @@ export interface TranslationKeys {
         hashVerify: string;
         expiryUsedCheck: string;
     };
+
+    // セキュリティ比較ページ
+    securityCompare: {
+        title: string;
+        subtitle: string;
+        basicVersion: string;
+        enhancedVersion: string;
+        vs: string;
+        recommendedScenarios: string;
+        recommendation: string;
+        summary: string;
+        addedSecurityFeatures: string;
+        featuresAdded: string;
+        modifiedSteps: string;
+        stepsModified: string;
+        tradeoff: string;
+        tradeoffDescription: string;
+        stepsEnhanced: string;
+        step: string;
+        modificationDetails: string;
+        basicBehavior: string;
+        enhancedBehavior: string;
+        standardProcessing: string;
+        benefits: string;
+        mitigatedAttacks: string;
+        implementationComplexity: string;
+        complexityLevels: {
+            easy: string;
+            normal: string;
+            moderate: string;
+            complex: string;
+            veryComplex: string;
+        };
+        noEnhancementsInBasic: string;
+        featuresCount: string;
+    };
+
+    // セキュリティ強化機能
+    securityEnhancements: {
+        pkce: SecurityEnhancementTranslation;
+        deviceBinding: SecurityEnhancementTranslation;
+        shortTtl: SecurityEnhancementTranslation;
+        antiPhishing: SecurityEnhancementTranslation;
+        attestation: SecurityEnhancementTranslation;
+        devicePolicy: SecurityEnhancementTranslation;
+        stepUpAuth: SecurityEnhancementTranslation;
+    };
+
+    // フローバリアント
+    flowVariants: {
+        'oidc-basic': FlowVariantTranslation;
+        'oidc-pkce': FlowVariantTranslation;
+        'magic-basic': FlowVariantTranslation;
+        'magic-enhanced': FlowVariantTranslation;
+        'passkey-basic': FlowVariantTranslation;
+        'passkey-enhanced': FlowVariantTranslation;
+    };
+
+    // フローファミリー
+    flowFamilies: {
+        oidc: { name: string; description: string };
+        magic: { name: string; description: string };
+        passkey: { name: string; description: string };
+    };
+
+    // バリアントステップ差分データ
+    variantSteps: {
+        oidcPkce: {
+            2: VariantStepTranslation;
+            6: VariantStepTranslation;
+        };
+        magicEnhanced: {
+            5: VariantStepTranslation;
+            7: VariantStepTranslation;
+            13: VariantStepTranslation;
+            16: VariantStepTranslation;
+        };
+        passkeyEnhanced: {
+            3: VariantStepTranslation;
+            9: VariantStepTranslation;
+            10: VariantStepTranslation;
+            11: VariantStepTranslation;
+        };
+    };
 }
 
 /**
@@ -424,6 +510,36 @@ export interface StepTranslation {
     label: string;
     description: string;
     detail: string;
+}
+
+/**
+ * セキュリティ強化機能の翻訳構造
+ */
+export interface SecurityEnhancementTranslation {
+    name: string;
+    shortDescription: string;
+    description: string;
+    benefits: string[];
+    mitigates: string[];
+}
+
+/**
+ * フローバリアントの翻訳構造
+ */
+export interface FlowVariantTranslation {
+    name: string;
+    subtitle: string;
+    useCases: string[];
+}
+
+/**
+ * バリアントステップの翻訳構造
+ */
+export interface VariantStepTranslation {
+    description: string;
+    detail: string;
+    basicBehavior: string;
+    enhancedBehavior: string;
 }
 
 /**
